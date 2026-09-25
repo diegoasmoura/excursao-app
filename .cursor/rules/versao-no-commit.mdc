@@ -1,0 +1,14 @@
+---
+description: Sobe a versão do app em todo commit
+alwaysApply: true
+---
+
+# Versão a cada commit
+
+Todo commit neste projeto **sobe** o número em `package.json` (`version`).
+
+- Ajuste ou correção: `1.1.0` → `1.1.1`
+- Funcionalidade nova: `1.1.1` → `1.2.0`
+- Mudança grande: `1.2.0` → `2.0.0`
+
+A tela mostra `V` + esse número (Entrar e menu). Não commitar sem ter movido a versão.
