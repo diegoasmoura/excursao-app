@@ -14,6 +14,17 @@ Dados ficam em `database.sqlite`. O Vite encaminha `/api` para a porta 3005.
 
 O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senha ao digitar. **Lembrar neste computador** mantém logado até clicar em **Sair**. Sem isso, fecha o navegador e precisa entrar de novo.
 
+### Instalar no celular (PWA)
+
+O app pode ir para a tela inicial e abrir sozinho, sem a barra do navegador.
+
+1. No computador: `npm run build` e depois `npm run server`.
+2. No celular, na mesma rede, abra `http://IP-DO-COMPUTADOR:3005` (o IP aparece no terminal, ou use o do Mac em Ajustes de rede).
+3. **iPhone:** Compartilhar → **Adicionar à Tela de Início**.
+4. **Android (Chrome):** menu → **Instalar app**. Se o Chrome não oferecer instalar, use o endereço com HTTPS (o Chrome só instala PWA em conexão segura).
+
+Na tela de login, no celular, aparece o botão **Instalar no celular** quando o navegador permite. A lista e o cadastro continuam precisando da API no computador.
+
 ---
 
 ## Para quem é

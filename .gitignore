@@ -12,6 +12,7 @@ database.sqlite
 .env
 dist
 dist-ssr
+dev-dist
 *.local
 
 # Editor directories and files

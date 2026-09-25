@@ -102,18 +102,13 @@ function App() {
     });
   }, [session?.token, authReady]);
 
-  const sendListedTrip = async (event, trip) => {
+  const sendListedTrip = (event, trip) => {
     event.stopPropagation();
     if (!whatsapp) {
       setWhatsappOpen(true);
       return;
     }
     const chat = window.open(tripWhatsappUrl(whatsapp, trip), '_blank');
-    try {
-      await downloadTripPdf(trip);
-    } catch (sendError) {
-      setError(sendError.message || 'Não foi possível gerar a lista.');
-    }
     if (!chat) {
       window.location.assign(tripWhatsappUrl(whatsapp, trip));
     }
@@ -219,6 +214,7 @@ function App() {
   return (
     <AppShell
       view={screen}
+      settingsOpen={whatsappOpen}
       onNavigate={handleNavigate}
       onOpenSettings={() => setWhatsappOpen(true)}
       onLogout={handleLogout}

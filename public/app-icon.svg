@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Excursoes">
+  <rect width="512" height="512" fill="#0F172A"/>
+  <g fill="#F8FAFC">
+    <rect x="118" y="128" width="276" height="52" rx="22"/>
+    <rect x="78" y="172" width="356" height="176" rx="40"/>
+    <circle cx="176" cy="368" r="34"/>
+    <circle cx="336" cy="368" r="34"/>
+  </g>
+  <g fill="#0F172A">
+    <rect x="128" y="196" width="74" height="54" rx="10"/>
+    <rect x="219" y="196" width="74" height="54" rx="10"/>
+    <rect x="310" y="196" width="74" height="54" rx="10"/>
+    <circle cx="176" cy="368" r="15"/>
+    <circle cx="336" cy="368" r="15"/>
+  </g>
+  <rect x="398" y="248" width="30" height="22" rx="6" fill="#F1E0C8"/>
+</svg>

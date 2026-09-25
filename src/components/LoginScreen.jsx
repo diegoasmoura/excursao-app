@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Bus, Eye, EyeOff } from 'lucide-react';
 import { api } from '../lib/api';
 import { getRememberedUsername, saveAuth } from '../lib/auth';
+import InstallPrompt from './InstallPrompt';
 
 export default function LoginScreen({ onLoggedIn }) {
   const remembered = getRememberedUsername();
@@ -86,6 +87,7 @@ export default function LoginScreen({ onLoggedIn }) {
         <button type="submit" className="btn btn-primary login-card__submit" disabled={busy}>
           {busy ? 'Entrando…' : 'Entrar'}
         </button>
+        <InstallPrompt />
       </form>
     </div>
   );

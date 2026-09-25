@@ -18,6 +18,12 @@ export function tripPdfFileName(trip) {
   return `lista-${date}-${placeKey(trip.origin)}-${placeKey(trip.destination)}.pdf`;
 }
 
+function oneLine(value) {
+  return String(value || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function buildPdf(trip, passengers) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
@@ -43,13 +49,15 @@ function buildPdf(trip, passengers) {
   autoTable(doc, {
     startY: 34,
     margin: { left: 10, right: 10, bottom: 14 },
-    head: [['N.', 'Nome', 'Tipo', 'Documento', 'Telefone', 'Pagamento']],
+    tableWidth: 277,
+    head: [['N.', 'Nome', 'Tipo', 'Documento', 'Ref.', 'Telefone', 'Pagamento']],
     body: passengers.map((seat, index) => [
       String(index + 1),
-      (seat.name || '').toLocaleUpperCase('pt-BR'),
-      seat.doc_type || '—',
-      maskDocument(seat.rg, seat.doc_type) || '—',
-      formatPassengerPhone(seat.phone),
+      oneLine(seat.name).toLocaleUpperCase('pt-BR'),
+      oneLine(seat.doc_type) || '—',
+      oneLine(maskDocument(seat.rg, seat.doc_type)) || '—',
+      oneLine(seat.reference_point) || '—',
+      oneLine(formatPassengerPhone(seat.phone)),
       seat.is_paid ? 'Pago' : 'Pendente',
     ]),
     styles: {
@@ -69,19 +77,21 @@ function buildPdf(trip, passengers) {
       fontStyle: 'bold',
       fontSize: 9,
       cellPadding: { top: 3, right: 2, bottom: 3, left: 2 },
+      overflow: 'ellipsize',
     },
     alternateRowStyles: { fillColor: PAPER_ALT },
     bodyStyles: { fillColor: PAPER },
     columnStyles: {
-      0: { cellWidth: 12 },
-      1: { cellWidth: 86 },
-      2: { cellWidth: 24 },
-      3: { cellWidth: 72 },
-      4: { cellWidth: 42 },
-      5: { cellWidth: 28, fontStyle: 'bold' },
+      0: { cellWidth: 11 },
+      1: { cellWidth: 64 },
+      2: { cellWidth: 20 },
+      3: { cellWidth: 46 },
+      4: { cellWidth: 70 },
+      5: { cellWidth: 38 },
+      6: { cellWidth: 28, fontStyle: 'bold' },
     },
     didParseCell: (data) => {
-      if (data.section !== 'body' || data.column.index !== 5) return;
+      if (data.section !== 'body' || data.column.index !== 6) return;
       const paidCell = String(data.cell.raw) === 'Pago';
       data.cell.styles.textColor = paidCell ? PAID : PENDING;
     },
@@ -117,7 +127,7 @@ export function tripWhatsappUrl(phone, trip) {
     '',
     `Estou te enviando a lista da viagem de ${formatTripDate(trip.trip_date)}, ${displayPlace(trip.origin)} - ${displayPlace(trip.destination)}.`,
     '',
-    'O arquivo já baixou. É só anexar nesta conversa.',
+    'Se baixou a lista, é só anexar o PDF nesta conversa.',
     '',
     'Abraço.',
   ].join('\n');

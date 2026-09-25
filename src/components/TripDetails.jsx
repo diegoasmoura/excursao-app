@@ -176,9 +176,9 @@ export default function TripDetails({ trip, highlightPersonId, onBack }) {
     <div className="page-container page-container--trip">
       <div className={`trip-toolbar trip-toolbar--${placeKey(current.origin)}`}>
         <div className="trip-toolbar__line">
-          <button type="button" className="btn btn-secondary trip-toolbar__back" onClick={onBack}>
+          <button type="button" className="btn btn-secondary trip-toolbar__back" onClick={onBack} title="Voltar" aria-label="Voltar">
             <ArrowLeft size={18} aria-hidden />
-            Voltar
+            <span className="trip-toolbar__back-label">Voltar</span>
           </button>
           <TripHighlights
             origin={current.origin}

@@ -23,7 +23,7 @@ export default function WhatsappDialog({ initialPhone = '', onClose, onSaved }) 
   return (
     <div className="confirm-overlay" onClick={onClose}>
       <form
-        className="confirm-dialog"
+        className="confirm-dialog confirm-dialog--settings"
         onClick={(event) => event.stopPropagation()}
         onSubmit={submit}
       >

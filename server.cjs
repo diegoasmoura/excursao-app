@@ -1,4 +1,6 @@
 const crypto = require('crypto');
+const fs = require('fs');
+const os = require('os');
 const { promisify } = require('util');
 const express = require('express');
 const cors = require('cors');
@@ -727,12 +729,29 @@ app.delete('/api/passengers/:id', asyncRoute(async (req, res) => {
   res.json({ success: true });
 }));
 
+const distPath = path.join(__dirname, 'dist');
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+    if (req.path.startsWith('/api')) return next();
+    res.sendFile(path.join(distPath, 'index.html'));
+  });
+}
+
 const PORT = 3005;
 
 setupDatabase()
   .then(() => {
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`Servidor rodando na porta ${PORT} (acessível na rede local)`);
+      const ips = Object.values(os.networkInterfaces())
+        .flat()
+        .filter((item) => item && item.family === 'IPv4' && !item.internal)
+        .map((item) => item.address);
+      for (const ip of ips) {
+        console.log(`  http://${ip}:${PORT}`);
+      }
     });
   })
   .catch((err) => {

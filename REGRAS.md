@@ -10,6 +10,8 @@ O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senh
 
 Barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**.
 
+Dá para **instalar no celular** (PWA): ícone na tela inicial, abre em tela cheia. A API e os dados continuam no computador da casa. No iPhone: Compartilhar → Adicionar à Tela de Início. No Android: Instalar app (Chrome pede conexão segura).
+
 ## Viagem
 
 - Uma viagem = data + rota + vagas.
@@ -71,10 +73,10 @@ Cancelar, clique fora ou Esc fecha. Rótulo + caixa branca em todo campo. O popu
 ## WhatsApp
 
 - Em Viagens, a engrenagem grava **um** número de WhatsApp.
-- **Baixar** gera o PDF daquela viagem. Nome: `lista-25-09-2026-uberlandia-pirapora.pdf`.
-- **Abrir** abre o WhatsApp Web com: Bom dia / Boa tarde / Boa noite, Cumpadre; a lista daquela viagem; e o pedido para anexar o PDF.
+- **Baixar** gera o PDF daquela viagem. Nome: `lista-25-09-2026-uberlandia-pirapora.pdf`. Colunas: N., Nome, Tipo, Documento, Ref., Telefone, Pagamento. Texto em uma linha (sem quebra).
+- **Abrir** só abre o WhatsApp Web. Não baixa o PDF — isso fica em **Baixar**.
+- A mensagem usa Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; e pede para anexar o PDF se ele já tiver sido baixado.
 - Sem o número gravado, o ícone abre a configuração.
-- O ícone baixa o PDF e abre o WhatsApp Web desse número no navegador. O site não consegue colar o arquivo sozinho: a mensagem pede para anexar o PDF baixado.
 
 ## O que não muda sozinho
 
