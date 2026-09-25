@@ -18,12 +18,6 @@ function fold(value) {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
-function personKey(person) {
-  const doc = digits(person.rg);
-  if (doc.length >= 8) return `doc:${doc}`;
-  return `name:${fold(person.name)}|${digits(person.phone)}`;
-}
-
 function openDb() {
   return new Promise((resolve, reject) => {
     const db = new sqlite3.Database(dbPath, (error) => (error ? reject(error) : resolve(db)));
@@ -55,8 +49,11 @@ async function main() {
 
   const incoming = JSON.parse(fs.readFileSync(listPath, 'utf8'));
   const db = await openDb();
-  const existing = await all(db, 'SELECT name, rg, phone FROM people');
-  const seen = new Set(existing.map((person) => personKey(person)));
+  const existing = await all(db, 'SELECT name, rg FROM people');
+  const seenDocs = new Set(
+    existing.map((person) => digits(person.rg)).filter((doc) => doc.length >= 8),
+  );
+  const seenNames = new Set(existing.map((person) => fold(person.name)).filter(Boolean));
 
   let created = 0;
   let skipped = 0;
@@ -66,12 +63,16 @@ async function main() {
     for (const person of incoming) {
       const name = String(person.name || '').trim();
       if (!name) continue;
-      const key = personKey(person);
-      if (seen.has(key)) {
+
+      const doc = digits(person.rg);
+      const already = doc.length >= 8 ? seenDocs.has(doc) : seenNames.has(fold(name));
+      if (already) {
         skipped += 1;
         continue;
       }
+
       await run(
+        db,
         'INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)',
         [
           randomUUID(),
@@ -82,21 +83,25 @@ async function main() {
           person.reference_point || '',
         ],
       );
-      seen.add(key);
+
+      if (doc.length >= 8) seenDocs.add(doc);
+      seenNames.add(fold(name));
       created += 1;
     }
     await run(db, 'COMMIT');
   } catch (error) {
     await run(db, 'ROLLBACK');
     throw error;
-  } finally {
-    db.close();
   }
+
+  const total = await all(db, 'SELECT COUNT(*) AS count FROM people');
+  db.close();
 
   console.log(`Banco: ${dbPath}`);
   console.log(`Na lista: ${incoming.length}`);
   console.log(`Novas pessoas: ${created}`);
-  console.log(`Já estavam: ${skipped}`);
+  console.log(`Já estavam (mesmo documento ou mesmo nome sem documento): ${skipped}`);
+  console.log(`Total no cadastro agora: ${total[0].count}`);
 }
 
 main().catch((error) => {
