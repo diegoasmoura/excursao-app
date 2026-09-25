@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { api } from './api';
-import { displayPlace, formatTripDate, formatTripDateLong, placeKey } from './format';
+import { displayPlace, formatTripDate, formatTripDateLong, placeKey, titleCaseName } from './format';
 import { formatPassengerPhone, maskDocument } from './passengerDisplay';
 
 const NAVY = [15, 23, 42];
@@ -53,10 +53,10 @@ function buildPdf(trip, passengers) {
     head: [['N.', 'Nome', 'Tipo', 'Documento', 'Ref.', 'Telefone', 'Pagamento']],
     body: passengers.map((seat, index) => [
       String(index + 1),
-      oneLine(seat.name).toLocaleUpperCase('pt-BR'),
+      titleCaseName(oneLine(seat.name)),
       oneLine(seat.doc_type) || '—',
       oneLine(maskDocument(seat.rg, seat.doc_type)) || '—',
-      oneLine(seat.reference_point) || '—',
+      titleCaseName(oneLine(seat.reference_point)) || '—',
       oneLine(formatPassengerPhone(seat.phone)),
       seat.is_paid ? 'Pago' : 'Pendente',
     ]),

@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { foldText } from '../lib/format';
+import { foldText, titleCaseName } from '../lib/format';
 import {
   DOC_TYPES,
   documentPlaceholder,
@@ -8,7 +8,7 @@ import {
   maskDocument,
   maskPhone,
 } from '../lib/passengerDisplay';
-import { filterPeopleSuggestions } from '../lib/peopleSuggest';
+import { filterPeopleSuggestions, filterReferenceSuggestions } from '../lib/peopleSuggest';
 
 export const emptyPersonForm = { name: '', phone: '', rg: '', doc_type: 'CPF', reference_point: '' };
 
@@ -22,11 +22,16 @@ export default function PersonForm({
   takenIds,
 }) {
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [refActiveIndex, setRefActiveIndex] = useState(-1);
   const set = (patch) => onChange({ ...value, ...patch });
   const editingOnly = Boolean(value.id && !value.picked);
   const suggestions = useMemo(
     () => (editingOnly ? [] : filterPeopleSuggestions(people, value.name)),
     [editingOnly, people, value.name],
+  );
+  const refSuggestions = useMemo(
+    () => filterReferenceSuggestions(people, value.reference_point),
+    [people, value.reference_point],
   );
   const taken = takenIds instanceof Set ? takenIds : new Set(takenIds || []);
 
@@ -35,11 +40,11 @@ export default function PersonForm({
     onChange({
       ...value,
       id: person.id,
-      name: (person.name || '').toLocaleUpperCase('pt-BR'),
+      name: titleCaseName(person.name),
       phone: maskPhone(person.phone || ''),
       rg: maskDocument(person.rg || '', person.doc_type || inferDocType(person.rg)),
       doc_type: person.doc_type || inferDocType(person.rg),
-      reference_point: person.reference_point || '',
+      reference_point: titleCaseName(person.reference_point),
       picked: true,
       pickedName: person.name,
     });
@@ -47,7 +52,7 @@ export default function PersonForm({
   };
 
   const changeName = (raw) => {
-    const name = raw.toLocaleUpperCase('pt-BR');
+    const name = titleCaseName(raw);
     const patch = { name };
     if (value.picked && foldText(name) !== foldText(value.pickedName)) {
       patch.id = null;
@@ -78,6 +83,41 @@ export default function PersonForm({
     if (event.key === 'Escape') {
       event.preventDefault();
       setActiveIndex(-1);
+    }
+  };
+
+  const pickReference = (label) => {
+    set({ reference_point: titleCaseName(label) });
+    setRefActiveIndex(-1);
+  };
+
+  const changeReference = (raw) => {
+    const trailing = /\s$/.test(raw);
+    const next = titleCaseName(raw);
+    set({ reference_point: trailing && next ? `${next} ` : next });
+    setRefActiveIndex(-1);
+  };
+
+  const onReferenceKeyDown = (event) => {
+    if (!refSuggestions.length) return;
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setRefActiveIndex((current) => (current + 1) % refSuggestions.length);
+      return;
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setRefActiveIndex((current) => (current <= 0 ? refSuggestions.length - 1 : current - 1));
+      return;
+    }
+    if (event.key === 'Enter' && refActiveIndex >= 0) {
+      event.preventDefault();
+      pickReference(refSuggestions[refActiveIndex]);
+      return;
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setRefActiveIndex(-1);
     }
   };
 
@@ -113,7 +153,7 @@ export default function PersonForm({
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => pickPerson(person)}
                 >
-                  <strong>{person.name}</strong>
+                  <strong>{titleCaseName(person.name)}</strong>
                   <span className="person-form__suggest-meta">
                     <span>{already ? 'Já nesta viagem' : formatPassengerPhone(person.phone)}</span>
                     {document ? <span>{document}</span> : null}
@@ -168,10 +208,32 @@ export default function PersonForm({
         <label className="form-label">Ponto de referência</label>
         <input
           className="form-input"
+          autoComplete="off"
+          role="combobox"
+          aria-expanded={refSuggestions.length > 0}
+          aria-controls="person-ref-suggest-list"
+          aria-autocomplete="list"
           placeholder="Ex.: Rodoviária, em frente à praça"
           value={value.reference_point || ''}
-          onChange={(event) => set({ reference_point: event.target.value })}
+          onChange={(event) => changeReference(event.target.value)}
+          onKeyDown={onReferenceKeyDown}
         />
+        {refSuggestions.length > 0 && (
+          <div className="person-form__suggest" id="person-ref-suggest-list">
+            <p className="person-form__suggest-hint">Já usado — escolher para padronizar</p>
+            {refSuggestions.map((label, index) => (
+              <button
+                key={label}
+                type="button"
+                className={`person-form__suggest-item ${index === refActiveIndex ? 'is-active' : ''}`}
+                onMouseDown={(event) => event.preventDefault()}
+                onClick={() => pickReference(label)}
+              >
+                <strong>{titleCaseName(label)}</strong>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
       <div className="confirm-dialog__actions">
         <button type="button" className="btn btn-secondary" onClick={onCancel} disabled={saving}>

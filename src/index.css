@@ -563,8 +563,9 @@ html[data-layout='desktop'] .nav-label--long {
 }
 
 .trips-table .grid-table {
-  min-width: 794px;
+  min-width: 0;
   width: 100%;
+  table-layout: fixed;
 }
 
 .trips-table th,
@@ -572,16 +573,19 @@ html[data-layout='desktop'] .nav-label--long {
   white-space: nowrap;
 }
 
-.trips-table .col-date { width: 102px; }
-.trips-table .col-place { width: 118px; }
-.trips-table .col-occupancy { width: 88px; }
-.trips-table .col-paid { width: 64px; }
-.trips-table .col-icon { width: 64px; }
+.trips-table .col-date { width: 11%; }
+.trips-table .col-weekday { width: 6%; }
+.trips-table .col-place { width: 12%; }
+.trips-table .col-occupancy { width: 9%; }
+.trips-table .col-paid { width: 7%; }
+.trips-table .col-icon { width: 10.75%; }
 
-.trips-table th:nth-child(4),
+.trips-table th:nth-child(2),
+.trips-table td.trips-table__weekday,
 .trips-table th:nth-child(5),
-.trips-table td:nth-child(4),
-.trips-table td:nth-child(5) {
+.trips-table th:nth-child(6),
+.trips-table td:nth-child(5),
+.trips-table td:nth-child(6) {
   text-align: center;
 }
 
@@ -650,10 +654,10 @@ html[data-layout='desktop'] .nav-label--long {
 
 .people-table th:nth-child(8),
 .people-table th:nth-child(9),
-.trips-table th:nth-child(6),
 .trips-table th:nth-child(7),
 .trips-table th:nth-child(8),
-.trips-table th:nth-child(9) {
+.trips-table th:nth-child(9),
+.trips-table th:nth-child(10) {
   text-align: center;
 }
 
@@ -1214,7 +1218,8 @@ html[data-layout='mobile'] .grid-table td {
 }
 
 html[data-layout='mobile'] .trips-table .col-date { width: auto; min-width: 78px; }
-html[data-layout='mobile'] .trips-table .col-place { width: auto; min-width: 84px; }
+html[data-layout='mobile'] .trips-table .col-weekday { width: auto; min-width: 40px; }
+html[data-layout='mobile'] .trips-table .col-place { width: auto; min-width: 72px; }
 html[data-layout='mobile'] .trips-table .col-occupancy { width: auto; min-width: 64px; }
 html[data-layout='mobile'] .trips-table .col-paid { width: auto; min-width: 48px; }
 html[data-layout='mobile'] .people-table .col-icon,
@@ -1456,7 +1461,6 @@ html[data-layout='mobile'] .people-pick {
 
 .person-form__suggest-item strong {
   font-size: 16px;
-  text-transform: uppercase;
   white-space: normal;
   overflow-wrap: anywhere;
 }
@@ -1495,7 +1499,7 @@ html[data-layout='mobile'] .people-pick {
 }
 
 .grid-table td.name-cell {
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .week-dialog__weekday {

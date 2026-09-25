@@ -2,7 +2,14 @@
 
 Painel para o pai controlar as viagens de ônibus. Texto grande, tabelas de grade, poucas telas. Sem preço: só **pago** ou **pendente**.
 
-## Como rodar
+## Como acessar
+
+- Na internet (túnel Cloudflare `dihan-nas`): [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com.br)
+- Na rede da casa: `http://IP-DO-NAS:3005` (hoje o NAS usa `192.168.0.2:3005`)
+
+Login: **Gomoura** / **Gomoura#**. Dá para ver a senha ao digitar. **Lembrar neste computador** mantém logado até **Sair**. Sem isso, fecha o navegador e precisa entrar de novo. Na primeira subida do banco, o Gomoura é criado sozinho.
+
+## Como rodar no Mac
 
 ```bash
 npm install
@@ -10,51 +17,56 @@ npm run server   # API em http://localhost:3005
 npm run dev      # tela em http://localhost:5173
 ```
 
-Dados ficam em `database.sqlite`. O Vite encaminha `/api` para a porta 3005.
+Dados ficam em `database.sqlite`. O Vite encaminha `/api` para a porta 3005. O `.env` e o banco **não** vão para o Git.
 
-### No NAS (Docker)
+## No NAS (Docker)
 
-O GitHub é o meio: o Mac envia o código; o NAS baixa e sobe o container.
-
-No computador, com o repositório já ligado:
-
-```bash
-git remote add origin https://github.com/diegoasmoura/excursao-app.git
-git push -u origin main
-```
-
-No NAS (Container Manager / SSH), na pasta do app:
+Pasta: `/Volume1/docker/dihan/excursao-app`
 
 ```bash
 git clone https://github.com/diegoasmoura/excursao-app.git
 cd excursao-app
 mkdir -p data
-# se quiser levar os cadastros atuais, copie o database.sqlite do Mac para data/database.sqlite
 docker compose up -d --build
 ```
 
-O painel fica em `http://IP-DO-NAS:3005`. O banco fica em `data/database.sqlite` e não sobe no Git. Para atualizar depois: `git pull` e `docker compose up -d --build`.
+O SQLite é compilado na imagem (o binário pronto pedia uma glibc que o NAS não tem). O banco fica em `data/database.sqlite`.
 
-O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senha ao digitar. **Lembrar neste computador** mantém logado até clicar em **Sair**. Sem isso, fecha o navegador e precisa entrar de novo.
+Atualizar:
+
+```bash
+cd /Volume1/docker/dihan/excursao-app
+git pull
+docker compose up -d --build
+docker compose ps
+```
+
+Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
+
+## DNS (Cloudflare)
+
+Túnel **dihan-nas**, rota **Published application**:
+
+- Hostname: `excursao.questlyforms.com.br`
+- Service: `HTTP` → `192.168.0.2:3005` (igual aos outros apps do túnel; não usar `localhost`)
+
+O HTTPS fica no Cloudflare. No celular, com esse endereço, o Chrome deixa **Instalar app**.
 
 ### Instalar no celular (PWA)
 
-O app pode ir para a tela inicial e abrir sozinho, sem a barra do navegador.
-
-1. No computador: `npm run build` e depois `npm run server`.
-2. No celular, na mesma rede, abra `http://IP-DO-COMPUTADOR:3005` (o IP aparece no terminal, ou use o do Mac em Ajustes de rede).
-3. **iPhone:** Compartilhar → **Adicionar à Tela de Início**.
-4. **Android (Chrome):** menu → **Instalar app**. Se o Chrome não oferecer instalar, use o endereço com HTTPS (o Chrome só instala PWA em conexão segura).
-
-Na tela de login, no celular, aparece o botão **Instalar no celular** quando o navegador permite. A lista e o cadastro continuam precisando da API no computador.
+1. Abra `https://excursao.questlyforms.com.br` (ou o IP do NAS na mesma Wi-Fi).
+2. **iPhone:** Compartilhar → **Adicionar à Tela de Início**.
+3. **Android:** menu → **Instalar app**. Na tela de login pode aparecer **Instalar no celular**.
 
 ---
 
 ## Para quem é
 
-Uso interno, uma pessoa na mesa. O leitor é mais velho: botão grande, confirmação no centro, sem jargão.
+Uso interno. Leitor mais velho: botão grande, confirmação no centro, sem jargão.
 
-Na barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**.
+Na barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**. No celular, **Ajustes** fica marcado enquanto o popup está aberto.
+
+O quadro ao lado da barra muda de cor, suave: Viagens (azul-cinza), Pessoas (areia), detalhe da viagem (sálvia), Ajustes (lavanda).
 
 ---
 
@@ -62,102 +74,88 @@ Na barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**.
 
 ### Viagem
 
-Uma viagem é **uma data + uma rota + um número de vagas**. Cria **uma de cada vez** (ida ou volta). Não cria o par sozinho.
+Uma viagem é **uma data + uma rota + um número de vagas**. Nova viagem abre com **45** vagas. A data é escolhida na criação. **Não há dia fixo** para ida ou volta. Trocar a rota não muda a data. Cria **uma de cada vez**. Não cria o par sozinho.
 
-Rotas permitidas:
+Rotas: Uberlândia → Pirapora ou Pirapora → Uberlândia. Um campo só (**Rota**). Mesma cidade nos dois lados não existe.
 
-- Uberlândia → Pirapora (em geral terça)
-- Pirapora → Uberlândia (em geral quinta)
+Alterar ou excluir só muda **aquela** viagem. Excluir pede confirmação no centro. Quem estava sentado **não é apagado**.
 
-Não existe mesma cidade nos dois lados. Origem e destino viram um único campo **Rota**.
+Abas **Próximas** e **Realizadas**. A viagem muda de aba quando a data passa (hoje ainda é próxima).
 
-Alterar ou excluir só muda **aquela** viagem. As outras continuam iguais. Excluir pede confirmação no centro. Quem estava sentado **não é apagado** — continua em Pessoas.
+Colunas: Data, **Dia** (Dom, Seg, Ter, Qua, Qui, Sex, Sáb), Origem, Destino, Lotação (`ocupados / vagas`), Pagos, Baixar, Abrir, Alterar, Excluir. Sem pendentes. Sem preço. A lista pagina: só as linhas que cabem na tela.
 
-A lista tem **Próximas** e **Realizadas**. A viagem muda de aba sozinha quando a data passa (hoje ainda é próxima).
+No desktop, Origem e Destino ficam justas; os ícones de ação têm área maior no celular (dedo).
 
-Colunas da lista: Data, Origem, Destino, Lotação (`ocupados / vagas`), Pagos, Baixar, Abrir, Alterar, Excluir. Sem coluna de pendentes. Sem coluna de preço. A lista pagina sozinha: só entram as linhas que cabem na tela.
-
-Alterar e excluir ficam na lista (ícones com título). Na tela da viagem há **Voltar** para a lista; sem Alterar nem Excluir ali.
-
-Clicar na linha abre os passageiros.
+Alterar e excluir ficam na lista. Na tela da viagem há **Voltar** (no celular, só a seta) na mesma linha da data e da rota. Clicar na linha abre os passageiros.
 
 ### Pessoa (cadastro geral)
 
-Pessoa é cadastro, não “passageiro solto”. Quem entra numa viagem também entra nesta lista. Tirar da viagem **não** apaga o cadastro.
+Pessoa é cadastro. Quem entra numa viagem também entra nesta lista. Tirar da viagem **não** apaga o cadastro.
 
 Campos:
 
-- Nome (obrigatório)
+- Nome (obrigatório) — primeira letra de cada palavra em maiúscula
 - Telefone
 - Tipo de documento: CPF, RG, Certidão ou Outro
-- Número do documento (tipo e número são campos separados)
-- Ponto de referência (linha inteira no formulário; na tabela, **Ref.**)
+- Número (tipo e número separados)
+- Ponto de referência (linha inteira; na tabela, **Ref.**) — mesma máscara do nome. Ao digitar, sugere até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref.
 
-Nova pessoa e Editar abrem o **mesmo popup central**. O nome sai em maiúsculas. Ao digitar, o app sugere até 8 cadastros parecidos (**Já cadastrada — escolher para usar**). Escolher preenche o formulário; na viagem o botão vira **Colocar nesta viagem**. Editar atualiza o cadastro em **todas** as viagens daquela pessoa. Excluir (ícone na lista, confirmação no centro) tira a pessoa da lista e de todas as viagens.
+Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar). Na viagem o botão vira **Colocar nesta viagem**. Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 
 Na tabela de Pessoas:
 
-- **Viagens**: quantas viagens a pessoa está vinculada (próximas e realizadas). Número maior que zero abre o histórico.
-- **Última**: data da mais recente (também a que ainda vai acontecer). Clique abre essa viagem e **destaca** a linha da pessoa.
-- No histórico (popup), clique numa linha abre a viagem com o mesmo destaque. Próximas também aparecem lá.
-- Clicar na linha não abre painel. O número em Viagens abre o histórico; Última abre a viagem.
-- O filtro usa a largura da tabela.
-- No desktop a tabela cabe na tela, sem rolar para o lado. No celular, rola para o lado.
-- A lista pagina: **Anterior** e **Próxima** quando não cabe tudo.
+- **Viagens**: quantas viagens (próximas e realizadas). Número maior que zero abre o histórico.
+- **Última**: data da mais recente (também a que ainda vai acontecer). Clique abre a viagem e **destaca** a pessoa.
+- No desktop a tabela cabe na tela. No celular, rola para o lado. Pagina sozinha.
 
-### Passageiro (pessoa nesta viagem)
+### Passageiro
 
-Dentro da viagem:
+- Busca filtra quem já está sentado. Se não achar, oferece Colocar da lista geral ou cadastrar.
+- Cadastro novo entra como **Pendente**.
+- Tirar tira só desta viagem. Colunas: Nome, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar.
+- Pagamento: **Pago** (verde) ou **Pendente** (âmbar). Sem reais.
+- Não cabe mais gente que as vagas.
 
-- Busca filtra quem já está sentado.
-- Se não achar, mostra a lista geral para **Colocar** ou a opção de cadastrar com o nome digitado.
-- Nova pessoa e Editar: popup no centro, iguais ao de Pessoas. Cadastro novo já entra nesta viagem como **Pendente**.
-- Tirar tira só desta viagem (confirmação no centro).
-- Colunas: Nome, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar. A altura da linha segue a lista de viagens.
-- Pagamento: botão **Pago** (verde) ou **Pendente** (âmbar). Um clique troca. Sem valor em reais.
-- Editar e Tirar na tabela são ícones (lápis e tirar), com título.
+### Popups
 
-Não cabe mais gente que o número de vagas.
+Tudo abre no **centro**. No celular o fundo fica desfocado.
 
-### Popups (padrão da tela)
+- Nova / alterar viagem — Data, Rota, Vagas
+- Nova / editar pessoa — Nome, Telefone, Tipo, Número, Ref.
+- Histórico, excluir viagem, excluir pessoa, tirar da viagem, Ajustes (WhatsApp)
 
-Tudo que cria, altera ou pede confirmação abre no **centro**, com fundo escuro:
+Cancelar, clique fora ou Esc fecha.
 
-- Nova viagem / Alterar viagem — Data, Rota, Vagas
-- Nova pessoa / Editar pessoa — Nome, Telefone, Tipo, Número e Ponto de referência (linha inteira)
-- Histórico de viagens da pessoa
-- Confirmar exclusão de viagem
-- Confirmar “tirar desta viagem”
+### WhatsApp e PDF
 
-Cancelar, clicar fora ou Esc fecha. Os campos usam o mesmo rótulo + caixa branca.
+- Ajustes grava **um** número.
+- **Baixar** gera o PDF (`lista-25-09-2026-uberlandia-pirapora.pdf`). Colunas: N., Nome, Tipo, Documento, Ref., Telefone, Pagamento. Uma linha, sem quebra.
+- **Abrir** só abre o WhatsApp. Não baixa o PDF.
+- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; pede para anexar o PDF se já baixou.
 
 ### Cores das cidades
 
-Nas células De/Para e nas pastilhas do título:
-
-- Uberlândia: azul papel (`#D7E4F4` / `#1A3F7A`)
-- Pirapora: bege papel (`#F1E0C8` / `#6B3A12`)
-
-Data, Lotação e Pagos usam o papel comum (`#F3F1EC`). A linha inteira não pinta. A pessoa destacada (chegou pelo histórico) usa fundo `#F3E6CF`.
+- Uberlândia: `#D7E4F4` / `#1A3F7A`
+- Pirapora: `#F1E0C8` / `#6B3A12`
+- Data, Lotação, Pagos: `#F3F1EC`
+- Pessoa destacada: `#F3E6CF`
 
 ### O que o sistema não faz
 
 - Não cobra, não soma dinheiro, não tem preço.
-- Não muda viagens antigas quando se cria uma nova.
+- Não muda viagens antigas ao criar uma nova.
 - Não apaga pessoa ao excluir viagem ou ao tirar o assento.
-- Ajustes só grava o número de WhatsApp. Não gera a semana inteira na interface (a API antiga de semana ainda existe no servidor, mas a tela não usa).
-- Não cria ida e volta no mesmo clique.
+- Ajustes só grava o WhatsApp.
+- Não cria ida e volta no mesmo clique. Não gera a semana na tela.
 
 ---
 
 ## Dados
 
-Três cadastros principais:
-
-- **people** — nome, telefone, tipo e número do documento, ponto de referência
-- **trips** — data, origem, destino, vagas
+- **people** — nome, telefone, tipo e número, ponto de referência
+- **trips** — data, origem, destino, vagas (padrão 45 nas novas)
 - **passengers** — pessoa + viagem + pago/pendente
-- **users** — administrador (`Gomoura`); a senha fica só em hash
-- **sessions** — token do login, até Sair ou até expirar
+- **users** — administrador (`Gomoura`); senha em hash
+- **sessions** — token até Sair ou expirar
 
-`GET /api/people` devolve `trip_count` (todas as viagens vinculadas), `last_trip_date` e `last_trip_id`.
+`GET /api/people` devolve `trip_count`, `last_trip_date` e `last_trip_id`.

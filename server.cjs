@@ -38,6 +38,19 @@ function get(sql, params = []) {
   });
 }
 
+function titleCaseName(value) {
+  return String(value || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => {
+      const lower = word.toLocaleLowerCase('pt-BR');
+      return lower.charAt(0).toLocaleUpperCase('pt-BR') + lower.slice(1);
+    })
+    .join(' ');
+}
+
 function inferDocType(docStr) {
   const digits = (docStr || '').replace(/\D/g, '');
   if (digits.length === 11 && !/[a-zA-Z]/.test(docStr || '')) return 'CPF';
@@ -148,7 +161,7 @@ async function setupDatabase() {
       origin TEXT NOT NULL,
       destination TEXT NOT NULL,
       trip_date TEXT NOT NULL,
-      capacity INTEGER NOT NULL DEFAULT 40,
+      capacity INTEGER NOT NULL DEFAULT 45,
       price REAL NOT NULL DEFAULT 0.00,
       status TEXT NOT NULL DEFAULT 'upcoming',
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -191,7 +204,7 @@ async function setupDatabase() {
       weekday INTEGER NOT NULL,
       origin TEXT NOT NULL,
       destination TEXT NOT NULL,
-      capacity INTEGER NOT NULL DEFAULT 40,
+      capacity INTEGER NOT NULL DEFAULT 45,
       sort_order INTEGER NOT NULL DEFAULT 0
     )
   `);
@@ -295,8 +308,8 @@ async function setupDatabase() {
       `INSERT INTO schedule_rules (id, weekday, origin, destination, capacity, sort_order)
        VALUES (?, ?, ?, ?, ?, ?), (?, ?, ?, ?, ?, ?)`,
       [
-        uuidv4(), 2, 'Uberlândia', 'Pirapora', 40, 0,
-        uuidv4(), 4, 'Pirapora', 'Uberlândia', 40, 1,
+        uuidv4(), 2, 'Uberlândia', 'Pirapora', 45, 0,
+        uuidv4(), 4, 'Pirapora', 'Uberlândia', 45, 1,
       ],
     );
   }
@@ -429,7 +442,7 @@ app.post('/api/trips', asyncRoute(async (req, res) => {
   const id = uuidv4();
   await run(
     'INSERT INTO trips (id, origin, destination, trip_date, capacity, price) VALUES (?, ?, ?, ?, ?, 0)',
-    [id, origin.trim(), destination.trim(), trip_date, Number(capacity) || 40],
+    [id, origin.trim(), destination.trim(), trip_date, Number(capacity) || 45],
   );
   res.json([await tripWithCount(id)]);
 }));
@@ -440,7 +453,7 @@ app.put('/api/trips/:id', asyncRoute(async (req, res) => {
     return res.status(400).json({ error: 'Origem, destino e data são obrigatórios.' });
   }
   const seats = await get('SELECT COUNT(*) AS count FROM passengers WHERE trip_id = ?', [req.params.id]);
-  const nextCapacity = Number(capacity) || 40;
+  const nextCapacity = Number(capacity) || 45;
   if (seats.count > nextCapacity) {
     return res.status(400).json({ error: 'A lotação não pode ficar menor que o número de pessoas já colocadas.' });
   }
@@ -538,7 +551,7 @@ app.put('/api/schedule', asyncRoute(async (req, res) => {
         Number(rule.weekday),
         rule.origin.trim(),
         rule.destination.trim(),
-        Number(rule.capacity) || 40,
+        Number(rule.capacity) || 45,
         index,
       ],
     );
@@ -618,7 +631,7 @@ app.get('/api/people/:id', asyncRoute(async (req, res) => {
 }));
 
 app.post('/api/people', asyncRoute(async (req, res) => {
-  const name = req.body?.name?.trim();
+  const name = titleCaseName(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
   const id = uuidv4();
   await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -627,20 +640,20 @@ app.post('/api/people', asyncRoute(async (req, res) => {
     req.body.rg || '',
     req.body.phone || '',
     req.body.doc_type || inferDocType(req.body.rg),
-    String(req.body.reference_point || '').trim(),
+    titleCaseName(req.body.reference_point),
   ]);
   res.json(await get('SELECT * FROM people WHERE id = ?', [id]));
 }));
 
 app.put('/api/people/:id', asyncRoute(async (req, res) => {
-  const name = req.body?.name?.trim();
+  const name = titleCaseName(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
   const result = await run('UPDATE people SET name = ?, rg = ?, phone = ?, doc_type = ?, reference_point = ? WHERE id = ?', [
     name,
     req.body.rg || '',
     req.body.phone || '',
     req.body.doc_type || inferDocType(req.body.rg),
-    String(req.body.reference_point || '').trim(),
+    titleCaseName(req.body.reference_point),
     req.params.id,
   ]);
   if (!result.changes) return res.status(404).json({ error: 'Pessoa não encontrada.' });
@@ -682,7 +695,7 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
   const isPaid = req.body?.is_paid ? 1 : 0;
 
   if (!personId) {
-    const name = req.body?.name?.trim();
+    const name = titleCaseName(req.body?.name);
     if (!name) return res.status(400).json({ error: 'Escolha uma pessoa ou informe o nome.' });
     personId = uuidv4();
     await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -691,7 +704,7 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
       req.body.rg || '',
       req.body.phone || '',
       req.body.doc_type || inferDocType(req.body.rg),
-      String(req.body.reference_point || '').trim(),
+      titleCaseName(req.body.reference_point),
     ]);
   } else {
     const person = await get('SELECT id FROM people WHERE id = ?', [personId]);

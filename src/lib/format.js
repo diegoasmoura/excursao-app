@@ -3,6 +3,19 @@ const PLACE_LABELS = {
   pirapora: 'Pirapora',
 };
 
+export function titleCaseName(value) {
+  return String(value || '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .split(' ')
+    .filter(Boolean)
+    .map((word) => {
+      const lower = word.toLocaleLowerCase('pt-BR');
+      return lower.charAt(0).toLocaleUpperCase('pt-BR') + lower.slice(1);
+    })
+    .join(' ');
+}
+
 export function foldText(value) {
   return (value || '')
     .trim()
@@ -67,6 +80,12 @@ export function tripDateKey(dateStr) {
 }
 
 export const WEEKDAYS = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+export const WEEKDAYS_SHORT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+export function formatWeekdayShort(dateStr) {
+  const index = weekdayFromISO(dateStr);
+  return WEEKDAYS_SHORT[index] || '—';
+}
 
 export function weekdayFromISO(dateStr) {
   const [y, m, d] = tripDateKey(dateStr).split('-').map(Number);

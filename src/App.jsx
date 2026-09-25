@@ -15,7 +15,7 @@ import { useFitPageSize } from './hooks/useFitPageSize';
 import { usePagedItems } from './hooks/usePagedItems';
 import { api } from './lib/api';
 import { clearAuth, getStoredAuth } from './lib/auth';
-import { displayPlace, formatTripDate, isUpcomingTrip } from './lib/format';
+import { displayPlace, formatTripDate, formatWeekdayShort, isUpcomingTrip, weekdayFromISO } from './lib/format';
 import { downloadTripPdf, tripWhatsappUrl } from './lib/tripPdf';
 
 function tripCounts(trip) {
@@ -134,6 +134,7 @@ function App() {
     return [...list].sort((a, b) => {
       const countsA = tripCounts(a);
       const countsB = tripCounts(b);
+      if (sort.key === 'weekday') return compareNumber(weekdayFromISO(a.trip_date), weekdayFromISO(b.trip_date), sort.dir);
       if (sort.key === 'origin') return compareText(displayPlace(a.origin), displayPlace(b.origin), sort.dir);
       if (sort.key === 'destination') return compareText(displayPlace(a.destination), displayPlace(b.destination), sort.dir);
       if (sort.key === 'occupancy') return compareNumber(countsA.passengerCount, countsB.passengerCount, sort.dir);
@@ -279,6 +280,7 @@ function App() {
                   <table className="grid-table">
                     <colgroup>
                       <col className="col-date" />
+                      <col className="col-weekday" />
                       <col className="col-place" />
                       <col className="col-place" />
                       <col className="col-occupancy" />
@@ -292,6 +294,9 @@ function App() {
                       <tr>
                         <SortableTh column="date" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                           Data
+                        </SortableTh>
+                        <SortableTh column="weekday" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
+                          Dia
                         </SortableTh>
                         <SortableTh column="origin" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                           Origem
@@ -325,6 +330,7 @@ function App() {
                             tabIndex={0}
                           >
                             <td>{formatTripDate(trip.trip_date)}</td>
+                            <td className="trips-table__weekday">{formatWeekdayShort(trip.trip_date)}</td>
                             <td className={placeCellClass(trip.origin)}>{displayPlace(trip.origin)}</td>
                             <td className={placeCellClass(trip.destination)}>{displayPlace(trip.destination)}</td>
                             <td>

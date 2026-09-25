@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS public.trips (
     origin TEXT NOT NULL,
     destination TEXT NOT NULL,
     trip_date DATE NOT NULL,
-    capacity INTEGER NOT NULL DEFAULT 40,
+    capacity INTEGER NOT NULL DEFAULT 45,
     price DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     status TEXT NOT NULL DEFAULT 'upcoming' CHECK (status IN ('upcoming', 'completed', 'cancelled')),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL

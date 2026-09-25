@@ -6,81 +6,77 @@ Este arquivo é o combinado do produto. O README tem o mesmo texto com o passo a
 
 Painel interno para controlar ônibus Uberlândia ↔ Pirapora. Leitor mais velho: texto grande, poucas telas, confirmação no centro. **Sem preço.** Só pago ou pendente.
 
-O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senha ao digitar. **Lembrar neste computador** mantém logado até clicar em **Sair**. Sem isso, fecha o navegador e precisa entrar de novo.
+Login: `Gomoura` / `Gomoura#`. Na primeira subida do banco o usuário é criado sozinho. **Lembrar neste computador** mantém logado até **Sair**.
 
-Barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**.
+Barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**. No celular, Ajustes fica marcado enquanto o popup está aberto.
 
-Dá para **instalar no celular** (PWA): ícone na tela inicial, abre em tela cheia. No iPhone: Compartilhar → Adicionar à Tela de Início. No Android: Instalar app (Chrome pede conexão segura). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
+Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com.br) (túnel Cloudflare `dihan-nas` → `http://192.168.0.2:3005`). Na rede da casa: `http://IP-DO-NAS:3005`.
+
+PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
+
+O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
 
 ## Viagem
 
-- Uma viagem = data + rota + vagas.
-- Cria **uma de cada vez** (Nova viagem). Não cria o par ida+volta sozinho.
-- Rotas: **Uberlândia → Pirapora** ou **Pirapora → Uberlândia**. Um campo só (Rota). Mesma cidade nos dois lados não existe.
-- Sugestão de dia: terça para Uberlândia→Pirapora, quinta para o inverso. É só ajuda ao abrir o popup; a data pode ser qualquer uma.
-- Alterar e excluir ficam na **lista** (ícones com título). Na tela da viagem só há **Voltar** (volta para a lista). Sem Alterar nem Excluir ali.
-- Alterar muda só aquela viagem. Excluir pede confirmação no centro. Pessoas da viagem **não são apagadas**.
-- Abas **Próximas** / **Realizadas**: a viagem muda sozinha quando a data passa (hoje ainda é próxima).
-- Colunas: Data, Origem, Destino, Lotação (`ocupados / vagas`), Pagos, Baixar, Abrir, Alterar, Excluir. Sem Pendentes. Sem R$.
-- A lista mostra só as linhas que cabem na tela. **Anterior** e **Próxima** aparecem quando passa disso.
-- Clicar na linha abre os passageiros. No celular, Voltar e a rota ficam na mesma faixa; a busca e Nova pessoa ficam lado a lado.
+- Uma viagem = data + rota + vagas. Nova viagem abre com **45** vagas. Viagens antigas não mudam sozinhas.
+- A data é escolhida na criação. **Não há dia fixo** para ida ou volta. Trocar a rota não muda a data.
+- Cria **uma de cada vez**. Não cria o par ida+volta sozinho.
+- Rotas: **Uberlândia → Pirapora** ou **Pirapora → Uberlândia**. Um campo só (Rota).
+- Alterar e excluir ficam na **lista**. Na tela da viagem só há **Voltar** (no celular, só a seta, na mesma linha da data e da rota).
+- Alterar muda só aquela viagem. Excluir pede confirmação. Pessoas **não são apagadas**.
+- Abas **Próximas** / **Realizadas**: muda sozinha quando a data passa (hoje ainda é próxima).
+- Colunas: Data, **Dia** (Dom, Seg, Ter, Qua, Qui, Sex, Sáb), Origem, Destino, Lotação, Pagos, Baixar, Abrir, Alterar, Excluir. Sem Pendentes. Sem R$.
+- Origem e Destino ficam justas no desktop. No celular os ícones de ação têm toque maior.
+- A lista pagina: só as linhas que cabem. Clicar na linha abre os passageiros.
 
 ## Pessoa
 
 - Cadastro geral. Quem entra numa viagem também entra nesta lista.
-- Campos: Nome (obrigatório), Telefone, Tipo de documento (CPF por padrão, RG, Certidão, Outro), Número, Ponto de referência. Tipo e número são separados. Telefone usa máscara `(34) 98886-1577`. O número segue o tipo: CPF `000.000.000-00`, RG `00.000.000-0`, Certidão em blocos de 32 dígitos. O ponto de referência ocupa a linha inteira do formulário.
-- Na lista, o ponto de referência aparece como **Ref.** No desktop a tabela cabe na largura da tela (sem rolar para o lado). No celular, a grade rola para o lado e o texto não quebra.
-- A lista mostra só as linhas que cabem na tela. **Anterior** e **Próxima** aparecem quando passa disso.
-- Nova pessoa e Editar: **popup no centro**, iguais em Pessoas e dentro da viagem.
-- O **Nome** sai em maiúsculas ao digitar. Com 2 letras, aparecem até 8 cadastros parecidos (nome e telefone em duas linhas). Texto da lista: **Já cadastrada — escolher para usar**. Escolher preenche o form. Na viagem o botão vira **Colocar nesta viagem**. Quem já está no ônibus aparece como **Já nesta viagem**.
-- Editar atualiza o cadastro em **todas** as viagens daquela pessoa.
-- Excluir fica na lista (ícone, ao lado de Editar), com confirmação no centro. A pessoa sai da lista e de **todas** as viagens.
-- **Viagens**: quantas viagens a pessoa está **vinculada** (próximas e realizadas). Número > 0 abre o histórico (popup).
-- **Última**: data da viagem mais recente (também vale a que ainda vai acontecer). Clique abre a viagem e **destaca** a pessoa na tabela.
-- No histórico, clique numa linha abre a viagem com o mesmo destaque. Próximas também listam.
-- Clicar na linha **não** abre painel. O número em **Viagens** abre o histórico; **Última** abre a viagem; Editar e Excluir são os ícones. O filtro usa a largura da tabela.
+- Campos: Nome (obrigatório), Telefone, Tipo (CPF por padrão, RG, Certidão, Outro), Número, Ponto de referência. Telefone `(34) 98886-1577`. CPF `000.000.000-00`, RG `00.000.000-0`, Certidão em blocos.
+- **Nome** e **Ref.** saem com a primeira letra de cada palavra em maiúscula.
+- Ao digitar a Ref., até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref.
+- Na lista, Ref. No desktop a tabela cabe na tela. No celular, rola para o lado.
+- Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
+- Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
+- **Viagens** (número) abre o histórico. **Última** abre a viagem e destaca a pessoa.
 
 ## Passageiro
 
-- Busca filtra quem já está na viagem. Se não achar, oferece Colocar da lista geral ou cadastrar com o nome digitado.
-- Cadastro novo já senta nesta viagem como **Pendente**.
-- Tirar tira só desta viagem (confirmação no centro). A pessoa continua na lista geral.
-- Colunas: Nome, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar. A altura da linha é a mesma da lista de viagens.
-- Pagamento: botão Pago (verde) ou Pendente (âmbar). Um clique troca. Sem valor.
-- Editar e Tirar na tabela são ícones (lápis / tirar), com título.
-- Não cabe mais gente que as vagas.
+- Busca filtra quem já está na viagem. Se não achar, oferece Colocar ou cadastrar.
+- Cadastro novo senta como **Pendente**. Tirar tira só desta viagem.
+- Colunas: Nome, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar.
+- Pagamento: Pago (verde) ou Pendente (âmbar). Sem valor. Não cabe mais gente que as vagas.
 
 ## Popups e campos
 
-Tudo que cria, altera ou confirma abre no centro, com fundo escuro:
+Tudo abre no centro, com fundo escuro. No celular o fundo fica **desfocado**.
 
 | Popup | Campos |
 | --- | --- |
 | Nova / alterar viagem | Data, Rota, Vagas |
-| Nova / editar pessoa | Nome; Telefone, Tipo e Número na mesma linha; Ponto de referência na linha de baixo, largura inteira |
-| Histórico da pessoa | Tabela de viagens |
-| Excluir viagem / excluir pessoa / tirar pessoa | Texto + Cancelar / confirmar |
+| Nova / editar pessoa | Nome; Telefone, Tipo e Número; Ponto de referência na linha de baixo |
+| Histórico | Tabela de viagens |
+| Excluir / tirar / Ajustes | Texto + ações |
 
-Cancelar, clique fora ou Esc fecha. Rótulo + caixa branca em todo campo. O popup **não passa da tela**; a **caixa inteira** rola (nomes, campos e o resto). Título e botões ficam visíveis. A lista de nomes não tem barra própria.
+Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 
 ## Cores
 
-- Uberlândia: `#D7E4F4` / `#1A3F7A` (células De/Para e pastilhas).
+- Uberlândia: `#D7E4F4` / `#1A3F7A`.
 - Pirapora: `#F1E0C8` / `#6B3A12`.
-- Data, Lotação, Pagos: papel `#F3F1EC`. A linha inteira não pinta.
-- Pessoa destacada (veio do histórico): `#F3E6CF`.
+- Data, Lotação, Pagos: `#F3F1EC`.
+- Pessoa destacada: `#F3E6CF`.
 
 ## WhatsApp
 
-- Em Viagens, a engrenagem grava **um** número de WhatsApp.
-- **Baixar** gera o PDF daquela viagem. Nome: `lista-25-09-2026-uberlandia-pirapora.pdf`. Colunas: N., Nome, Tipo, Documento, Ref., Telefone, Pagamento. Texto em uma linha (sem quebra).
-- **Abrir** só abre o WhatsApp Web. Não baixa o PDF — isso fica em **Baixar**.
-- A mensagem usa Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; e pede para anexar o PDF se ele já tiver sido baixado.
-- Sem o número gravado, o ícone abre a configuração.
+- Ajustes grava **um** número.
+- **Baixar** gera o PDF. Colunas: N., Nome, Tipo, Documento, Ref., Telefone, Pagamento. Sem quebra de linha.
+- **Abrir** só abre o WhatsApp. Não baixa o PDF.
+- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; pede para anexar o PDF se já baixou.
 
 ## O que não muda sozinho
 
 - Criar ou alterar uma viagem não altera as outras.
-- Excluir viagem ou tirar assento não apaga pessoa. Excluir a pessoa tira ela da lista e de todas as viagens.
-- Não há preço nem soma em reais. Ajustes só grava o WhatsApp; não é uma tela de configuração geral.
-- A interface não “gera a semana”. A API antiga de semana pode existir no servidor; a tela não a usa.
+- Excluir viagem ou tirar assento não apaga pessoa.
+- Não há preço. Ajustes só grava o WhatsApp.
+- A tela não gera a semana.
