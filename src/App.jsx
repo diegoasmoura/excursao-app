@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Bus, CalendarDays, CalendarPlus, Download, Pencil, Trash2 } from 'lucide-react';
 import AppShell from './components/AppShell';
 import CreateWeekDialog from './components/CreateWeekDialog';
 import LoginScreen from './components/LoginScreen';
 import PaginationBar from './components/PaginationBar';
+import PdfColumnsDialog from './components/PdfColumnsDialog';
 import PeopleScreen from './components/PeopleScreen';
 import WhatsappDialog from './components/WhatsappDialog';
 import WhatsappIcon from './components/WhatsappIcon';
@@ -44,6 +45,7 @@ function App() {
   const [highlightPersonId, setHighlightPersonId] = useState(null);
   const [whatsapp, setWhatsapp] = useState('');
   const [whatsappOpen, setWhatsappOpen] = useState(false);
+  const [pdfTrip, setPdfTrip] = useState(null);
   const [tripsArea, setTripsArea] = useState(null);
   const tripPageSize = useFitPageSize(tripsArea);
 
@@ -55,17 +57,39 @@ function App() {
     setScreen('trips');
   };
 
-  const fetchTrips = async () => {
-    setLoading(true);
-    setError(null);
+  const fetchTrips = async ({ silent = false } = {}) => {
+    if (!silent) {
+      setLoading(true);
+      setError(null);
+    }
     const { data, error: fetchError } = await api.getTrips();
     if (fetchError) {
-      setError(fetchError.message);
-      setTrips([]);
+      if (!silent) {
+        setError(fetchError.message);
+        setTrips([]);
+      }
     } else {
       setTrips(data ?? []);
     }
-    setLoading(false);
+    if (!silent) setLoading(false);
+  };
+
+  const syncTripCounts = useCallback((tripId, passengerCount, paidCount) => {
+    setTrips((current) => {
+      const index = current.findIndex((trip) => trip.id === tripId);
+      if (index < 0) return current;
+      const trip = current[index];
+      if (Number(trip.passenger_count) === passengerCount && Number(trip.paid_count) === paidCount) return current;
+      const next = [...current];
+      next[index] = { ...trip, passenger_count: passengerCount, paid_count: paidCount };
+      return next;
+    });
+  }, []);
+
+  const closeTrip = () => {
+    setSelectedTrip(null);
+    setHighlightPersonId(null);
+    fetchTrips({ silent: true });
   };
 
   useEffect(() => {
@@ -114,13 +138,9 @@ function App() {
     }
   };
 
-  const downloadListedTrip = async (event, trip) => {
+  const downloadListedTrip = (event, trip) => {
     event.stopPropagation();
-    try {
-      await downloadTripPdf(trip);
-    } catch (sendError) {
-      setError(sendError.message || 'Não foi possível baixar a lista.');
-    }
+    setPdfTrip(trip);
   };
 
   useEffect(() => {
@@ -146,9 +166,12 @@ function App() {
   const pagedTrips = usePagedItems(filteredTrips, tripPageSize, `${period}|${sort.key}|${sort.dir}`);
 
   const handleNavigate = (next) => {
+    const leavingTrip = Boolean(selectedTrip);
     setSelectedTrip(null);
     setHighlightPersonId(null);
     setScreen(next);
+    if (next === 'trips' && leavingTrip) fetchTrips({ silent: true });
+    if (next === 'trips' && !leavingTrip && screen === 'people') fetchTrips({ silent: true });
   };
 
   const openPersonTrip = async (tripId, personId) => {
@@ -226,10 +249,8 @@ function App() {
         <TripDetails
           trip={selectedTrip}
           highlightPersonId={highlightPersonId}
-          onBack={() => {
-            setSelectedTrip(null);
-            setHighlightPersonId(null);
-          }}
+          onBack={closeTrip}
+          onPassengersChange={syncTripCounts}
         />
       )}
       {screen === 'trips' && !selectedTrip && (
@@ -378,6 +399,14 @@ function App() {
       )}
       {weekDialogOpen && (
         <CreateWeekDialog onClose={() => setWeekDialogOpen(false)} onCreated={handleWeekCreated} />
+      )}
+      {pdfTrip && (
+        <PdfColumnsDialog
+          onClose={() => setPdfTrip(null)}
+          onConfirm={async (columns) => {
+            await downloadTripPdf(pdfTrip, columns);
+          }}
+        />
       )}
       {whatsappOpen && (
         <WhatsappDialog

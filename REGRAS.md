@@ -70,7 +70,7 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 ## WhatsApp
 
 - Ajustes grava **um** número.
-- **Baixar** gera o PDF. Colunas: N., Nome, Tipo, Documento, Ref., Telefone, Pagamento. Sem quebra de linha.
+- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
 - **Abrir** só abre o WhatsApp. Não baixa o PDF.
 - Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; pede para anexar o PDF se já baixou.
 

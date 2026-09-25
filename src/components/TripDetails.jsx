@@ -9,7 +9,7 @@ import PassengerTable from './PassengerTable';
 import PersonForm, { emptyPersonForm } from './PersonForm';
 import TripHighlights from './TripHighlights';
 
-export default function TripDetails({ trip, highlightPersonId, onBack }) {
+export default function TripDetails({ trip, highlightPersonId, onBack, onPassengersChange }) {
   const confirm = useConfirm();
   const [current] = useState(trip);
   const [passengers, setPassengers] = useState([]);
@@ -171,6 +171,11 @@ export default function TripDetails({ trip, highlightPersonId, onBack }) {
   };
 
   const paid = passengers.filter((seat) => seat.is_paid).length;
+
+  useEffect(() => {
+    if (loading) return;
+    onPassengersChange?.(current.id, passengers.length, paid);
+  }, [loading, current.id, passengers, paid, onPassengersChange]);
 
   return (
     <div className="page-container page-container--trip">

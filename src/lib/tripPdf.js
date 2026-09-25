@@ -2,7 +2,7 @@ import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { api } from './api';
 import { displayPlace, formatTripDate, formatTripDateLong, placeKey, titleCaseName } from './format';
-import { formatPassengerPhone, maskDocument } from './passengerDisplay';
+import { maskDocument } from './passengerDisplay';
 
 const NAVY = [15, 23, 42];
 const HEADER = [30, 58, 95];
@@ -24,10 +24,66 @@ function oneLine(value) {
     .trim();
 }
 
-function buildPdf(trip, passengers) {
+const PDF_COLUMNS = [
+  {
+    key: 'number',
+    head: 'N.',
+    width: 16,
+    value: (_seat, index) => String(index + 1),
+  },
+  {
+    key: 'name',
+    head: 'Nome',
+    width: 90,
+    value: (seat) => titleCaseName(oneLine(seat.name)),
+  },
+  {
+    key: 'document',
+    head: 'Documento',
+    width: 68,
+    value: (seat) => {
+      const type = oneLine(seat.doc_type);
+      const number = oneLine(maskDocument(seat.rg, seat.doc_type));
+      if (type && number) return `${type} ${number}`;
+      return type || number || '—';
+    },
+  },
+  {
+    key: 'ref',
+    head: 'Ref.',
+    width: 75,
+    value: (seat) => titleCaseName(oneLine(seat.reference_point)) || '—',
+  },
+  {
+    key: 'payment',
+    head: 'Pagamento',
+    width: 28,
+    bold: true,
+    value: (seat) => (seat.is_paid ? 'Pago' : 'Pendente'),
+  },
+];
+
+function selectedPdfColumns(columns) {
+  const picked = PDF_COLUMNS.filter((column) => columns?.[column.key]);
+  return picked.length ? picked : PDF_COLUMNS.filter((column) => column.key === 'name');
+}
+
+function widthsFor(columns) {
+  const total = columns.reduce((sum, column) => sum + column.width, 0);
+  const raw = columns.map((column) => (column.width / total) * 277);
+  const rounded = raw.map((width) => Math.round(width * 10) / 10);
+  const diff = 277 - rounded.reduce((sum, width) => sum + width, 0);
+  rounded[rounded.length - 1] = Math.round((rounded[rounded.length - 1] + diff) * 10) / 10;
+  return rounded;
+}
+
+function buildPdf(trip, passengers, columns) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const paid = passengers.filter((seat) => seat.is_paid).length;
+  const selected = selectedPdfColumns(columns);
+  const widths = widthsFor(selected);
+  const paymentIndex = selected.findIndex((column) => column.key === 'payment');
 
   doc.setFillColor(...NAVY);
   doc.rect(0, 0, pageWidth, 28, 'F');
@@ -50,16 +106,8 @@ function buildPdf(trip, passengers) {
     startY: 34,
     margin: { left: 10, right: 10, bottom: 14 },
     tableWidth: 277,
-    head: [['N.', 'Nome', 'Tipo', 'Documento', 'Ref.', 'Telefone', 'Pagamento']],
-    body: passengers.map((seat, index) => [
-      String(index + 1),
-      titleCaseName(oneLine(seat.name)),
-      oneLine(seat.doc_type) || '—',
-      oneLine(maskDocument(seat.rg, seat.doc_type)) || '—',
-      titleCaseName(oneLine(seat.reference_point)) || '—',
-      oneLine(formatPassengerPhone(seat.phone)),
-      seat.is_paid ? 'Pago' : 'Pendente',
-    ]),
+    head: [selected.map((column) => column.head)],
+    body: passengers.map((seat, index) => selected.map((column) => column.value(seat, index))),
     styles: {
       font: 'helvetica',
       fontSize: 9,
@@ -81,17 +129,17 @@ function buildPdf(trip, passengers) {
     },
     alternateRowStyles: { fillColor: PAPER_ALT },
     bodyStyles: { fillColor: PAPER },
-    columnStyles: {
-      0: { cellWidth: 11 },
-      1: { cellWidth: 64 },
-      2: { cellWidth: 20 },
-      3: { cellWidth: 46 },
-      4: { cellWidth: 70 },
-      5: { cellWidth: 38 },
-      6: { cellWidth: 28, fontStyle: 'bold' },
-    },
+    columnStyles: Object.fromEntries(
+      selected.map((column, index) => [
+        index,
+        {
+          cellWidth: widths[index],
+          ...(column.bold ? { fontStyle: 'bold' } : {}),
+        },
+      ]),
+    ),
     didParseCell: (data) => {
-      if (data.section !== 'body' || data.column.index !== 6) return;
+      if (paymentIndex < 0 || data.section !== 'body' || data.column.index !== paymentIndex) return;
       const paidCell = String(data.cell.raw) === 'Pago';
       data.cell.styles.textColor = paidCell ? PAID : PENDING;
     },
@@ -134,8 +182,8 @@ export function tripWhatsappUrl(phone, trip) {
   return `https://wa.me/${full}?text=${encodeURIComponent(text)}`;
 }
 
-export async function downloadTripPdf(trip) {
+export async function downloadTripPdf(trip, columns) {
   const { data, error } = await api.getPassengers(trip.id);
   if (error) throw new Error(error.message);
-  buildPdf(trip, data ?? []).save(tripPdfFileName(trip));
+  buildPdf(trip, data ?? [], columns).save(tripPdfFileName(trip));
 }

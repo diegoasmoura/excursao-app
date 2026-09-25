@@ -42,10 +42,11 @@ export default function InstallPrompt() {
 
   return (
     <div className="install-prompt">
+      <p className="install-prompt__ask">Quer instalar no celular?</p>
       {installEvent ? (
         <button type="button" className="btn btn-secondary install-prompt__action" onClick={install}>
           <Download size={18} aria-hidden />
-          Instalar no celular
+          Instalar
         </button>
       ) : (
         <p className="install-prompt__hint">

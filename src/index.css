@@ -1027,14 +1027,15 @@ html[data-layout='mobile'] .people-list__item--grid {
 }
 
 html[data-layout='mobile'] .trip-workspace {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
 }
 
 html[data-layout='mobile'] .trip-workspace__search-head {
-  display: contents;
+  display: flex;
+  width: 100%;
 }
 
 html[data-layout='mobile'] .trip-workspace__search-head h2 {
@@ -1042,13 +1043,14 @@ html[data-layout='mobile'] .trip-workspace__search-head h2 {
 }
 
 html[data-layout='mobile'] .trip-workspace .filter-input {
-  width: auto;
+  width: 100%;
   min-width: 0;
   margin-bottom: 0;
 }
 
 html[data-layout='mobile'] .trip-workspace .btn-primary {
-  width: auto;
+  width: 100%;
+  min-height: 48px;
 }
 
 html[data-layout='mobile'] .trip-workspace .grid-table-wrap,
@@ -1072,12 +1074,11 @@ html[data-layout='mobile'] .trip-toolbar {
 html[data-layout='mobile'] .trip-toolbar__line {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   min-width: 0;
   max-width: 100%;
-  overflow-x: auto;
 }
 
 html[data-layout='mobile'] .trip-toolbar__back {
@@ -1094,9 +1095,9 @@ html[data-layout='mobile'] .trip-toolbar__back-label {
 
 html[data-layout='mobile'] .trip-route-compact,
 html[data-layout='mobile'] .trip-route-compact--lg {
-  flex: 1 1 auto;
-  flex-wrap: nowrap;
-  white-space: nowrap;
+  flex: 1 1 160px;
+  flex-wrap: wrap;
+  white-space: normal;
   width: auto;
   min-width: 0;
   font-size: 14px;
@@ -1178,12 +1179,12 @@ html[data-layout='mobile'] .person-form__row {
 
 html[data-layout='mobile'] .sidebar-item {
   flex-direction: column;
-  gap: 2px;
-  padding: 6px 4px;
-  font-size: 12px;
-  line-height: 1.2;
+  gap: 4px;
+  padding: 8px 2px;
+  font-size: 11px;
+  line-height: 1.15;
   min-width: 0;
-  min-height: 56px;
+  min-height: 64px;
 }
 
 html[data-layout='mobile'] .grid-table-wrap {
@@ -1544,6 +1545,46 @@ html[data-layout='mobile'] .people-pick {
   margin-top: 0;
 }
 
+.pdf-columns {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.pdf-columns__row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 52px;
+  padding: 10px 14px;
+  border: 1px solid var(--color-border);
+  background: #F7F4EE;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  user-select: none;
+}
+
+.pdf-columns__row input {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  flex-shrink: 0;
+  accent-color: var(--color-primary);
+  pointer-events: none;
+}
+
+.pdf-columns__row.is-on {
+  border-color: var(--color-primary);
+  background: var(--color-paid-bg);
+}
+
+.confirm-dialog:has(.pdf-columns) .confirm-dialog__actions .btn {
+  min-height: 48px;
+}
+
 .login-checking {
   min-height: 100vh;
   min-height: 100dvh;
@@ -1662,8 +1703,16 @@ html[data-layout='mobile'] .people-pick {
   gap: 8px;
 }
 
+.install-prompt__ask {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
 .install-prompt__action {
   width: 100%;
+  min-height: 48px;
 }
 
 .install-prompt__hint {
