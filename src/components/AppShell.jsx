@@ -1,4 +1,5 @@
 import { Bus, CalendarDays, LogOut, Settings, Users } from 'lucide-react';
+import { APP_VERSION } from '../lib/appVersion';
 
 const MAIN_ITEMS = [
   { id: 'trips', icon: CalendarDays, short: 'Viagens', long: 'Viagens' },
@@ -24,7 +25,7 @@ export default function AppShell({ view, settingsOpen = false, onNavigate, onOpe
           <Bus size={22} aria-hidden />
           <div>
             <strong>Excursões</strong>
-            <span>Administração</span>
+            <span>Administração · {APP_VERSION}</span>
           </div>
         </div>
         <nav className="app-nav__tabs" aria-label="Navegação principal">

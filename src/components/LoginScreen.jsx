@@ -3,6 +3,7 @@ import { Bus, Eye, EyeOff } from 'lucide-react';
 import { api } from '../lib/api';
 import { getRememberedUsername, saveAuth } from '../lib/auth';
 import InstallPrompt from './InstallPrompt';
+import { APP_VERSION } from '../lib/appVersion';
 
 export default function LoginScreen({ onLoggedIn }) {
   const remembered = getRememberedUsername();
@@ -34,7 +35,7 @@ export default function LoginScreen({ onLoggedIn }) {
           <Bus size={28} aria-hidden />
           <div>
             <strong>Excursões</strong>
-            <span>Administração</span>
+            <span>Administração · {APP_VERSION}</span>
           </div>
         </div>
         <h1>Entrar</h1>

@@ -1,7 +1,7 @@
 {
   "name": "excursao-app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,6 +9,7 @@
     "start": "node server.cjs & vite",
     "build": "vite build",
     "icons": "node scripts/generate-pwa-icons.mjs",
+    "import-people": "node scripts/import-people.cjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },

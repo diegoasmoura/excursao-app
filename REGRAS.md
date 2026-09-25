@@ -39,6 +39,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 - Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
 - Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 - **Viagens** (número) abre o histórico. **Última** abre a viagem e destaca a pessoa.
+- A lista da planilha entra com `docker compose exec app node scripts/import-people.cjs`. Só cadastro geral, sem duplicar.
 
 ## Passageiro
 

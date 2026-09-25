@@ -43,6 +43,16 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
+Na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.1.0`). O número fica em `package.json`. Se mudou depois do update, o app novo entrou.
+
+Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
+
+```bash
+docker compose exec app node scripts/import-people.cjs
+```
+
+Pode rodar de novo: quem já está no banco é pulado. No Mac, com o servidor local: `npm run import-people`.
+
 ## DNS (Cloudflare)
 
 Túnel **dihan-nas**, rota **Published application**:

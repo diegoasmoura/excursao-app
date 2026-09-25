@@ -15,6 +15,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev \
   && npm rebuild sqlite3 --build-from-source
 COPY server.cjs ./
+COPY scripts ./scripts
 COPY --from=build /app/dist ./dist
 RUN mkdir -p /app/data
 EXPOSE 3005

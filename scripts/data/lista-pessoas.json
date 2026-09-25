@@ -1,0 +1,2522 @@
+[
+  {
+    "name": "André Simas Gomes",
+    "rg": "048.000.746-22",
+    "phone": "(34) 99212-4073",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Ana Clara Gomes Furtado",
+    "rg": "145.178.206-37",
+    "phone": "(34) 99212-4071",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Silvano Dimas de Brito",
+    "rg": "",
+    "phone": "(38) 99905-4598",
+    "doc_type": "Outro",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Ana Célia Fernandes de Souza",
+    "rg": "655.994.116-72",
+    "phone": "(34) 99168-9078",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Aline Cristina Fernandes Souza",
+    "rg": "086.286.586-29",
+    "phone": "(34) 99168-9078",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Matheus Henrique Fernandes",
+    "rg": "180.045.786-32",
+    "phone": "(34) 99168-9078",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Luiz Felipe Fernandes Coutinho",
+    "rg": "180.045.706-58",
+    "phone": "(34) 99168-9073",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Cícero Mariano Ramos",
+    "rg": "304.013.216-49",
+    "phone": "(38) 98884-7558",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Nelson de Oliveira",
+    "rg": "006.444.169-55",
+    "phone": "(34) 99858-9915",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Leiviano Soares Barroso",
+    "rg": "120.023.786-55",
+    "phone": "(34) 99858-9915",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Carmina Maria de Azevedo Nunes",
+    "rg": "066.810.406-67",
+    "phone": "(34) 99167-3190",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Belarmine Nunes Neto",
+    "rg": "404.106.686-72",
+    "phone": "(34) 99167-3190",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Kamily Juizo",
+    "rg": "707.438.506-96",
+    "phone": "(34) 99276-0646",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Fabrício Teixeira de Oliveira",
+    "rg": "189.755.736-13",
+    "phone": "(34) 98408-3238",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Terezinha do Menino Jesus Stos",
+    "rg": "038.474.786-80",
+    "phone": "(34) 99211-9275",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Antônio Carlos da Silva",
+    "rg": "267.792.066-92",
+    "phone": "(38) 99839-8595",
+    "doc_type": "CPF",
+    "reference_point": "Dial"
+  },
+  {
+    "name": "Samuel Rodrigues de Souza",
+    "rg": "109.318.336-55",
+    "phone": "(34) 99802-3055",
+    "doc_type": "CPF",
+    "reference_point": "Viaduto da Samia"
+  },
+  {
+    "name": "Keila Medeiros Calvera",
+    "rg": "044.243.506-23",
+    "phone": "(38) 99823-1637",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Edneia Dias Pires",
+    "rg": "057.190.896-06",
+    "phone": "(38) 99832-1637",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Raymara Conde de Araujo",
+    "rg": "110.164.686-10",
+    "phone": "(34) 99816-4107",
+    "doc_type": "CPF",
+    "reference_point": "Porto da Matinha"
+  },
+  {
+    "name": "Marilene Carmo Rocha",
+    "rg": "729.503.586-91",
+    "phone": "(38) 99863-3105",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Yurandi Pereira dos Santos",
+    "rg": "14.636.063",
+    "phone": "(34) 99802-5055",
+    "doc_type": "RG",
+    "reference_point": "Porto Xodo"
+  },
+  {
+    "name": "Vitor Manuel Ferreira da Cruz",
+    "rg": "009.358.412-00",
+    "phone": "(34) 99237-9457",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Carlos Rodrigues Araujo Silva",
+    "rg": "901.234.672-31",
+    "phone": "(34) 99237-9457",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Lucineide Ferreira da Silva A.",
+    "rg": "004.296.891-22",
+    "phone": "(34) 99237-9457",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Maria de Fátima da Silva Santos",
+    "rg": "016.187.916-05",
+    "phone": "(34) 99237-3385",
+    "doc_type": "CPF",
+    "reference_point": "Sup. Bretas"
+  },
+  {
+    "name": "Simone Medeiros dos Santos",
+    "rg": "040.055.516-33",
+    "phone": "(34) 98402-5637",
+    "doc_type": "CPF",
+    "reference_point": "[riscado - consultar]"
+  },
+  {
+    "name": "Aparecida de Fátima Acunha",
+    "rg": "074.269.446-71",
+    "phone": "(34) 99945-1623",
+    "doc_type": "CPF",
+    "reference_point": "Term. [riscado]"
+  },
+  {
+    "name": "Patrícia Fernandes de Anchialo",
+    "rg": "087.978.256-03",
+    "phone": "(34) 99822-5598",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Thauane Micaele da Silva",
+    "rg": "149.581.956-78",
+    "phone": "(34) 99822-5598",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Samuel Arthur Fernandes Silva",
+    "rg": "304.178.166-22",
+    "phone": "(34) 99822-5598",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Eliane",
+    "rg": "",
+    "phone": "(34) 98441-7684",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Alex Pereira Alves",
+    "rg": "065.891.996-20",
+    "phone": "(38) 99157-1700",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Juraci Augusto da Silva",
+    "rg": "17.899.169",
+    "phone": "(34) 98402-5632",
+    "doc_type": "RG",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Valcimar de Silva Santos",
+    "rg": "",
+    "phone": "(34) 99237-9457",
+    "doc_type": "Outro",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Leonardo da Silva Ferreira",
+    "rg": "",
+    "phone": "(34) 99237-9457",
+    "doc_type": "Outro",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "José Wilton Rocha Maciel",
+    "rg": "160.532.916-92",
+    "phone": "(34) 99861-1868",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Rogério Eduardo Ferreira",
+    "rg": "171.597.376-36",
+    "phone": "(34) 99861-1868",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Wesley Muniz Pereira",
+    "rg": "088.846.846-31",
+    "phone": "(34) 99131-9605",
+    "doc_type": "CPF",
+    "reference_point": "Mega Box"
+  },
+  {
+    "name": "Fabrício Teixeira de Araujo",
+    "rg": "297.240.955-30",
+    "phone": "(38) 99241-0741",
+    "doc_type": "CPF",
+    "reference_point": ""
+  },
+  {
+    "name": "Edson Soares dos Santos",
+    "rg": "034.022.806-71",
+    "phone": "(34) 99303-7071",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Ana Lúcia Aparecida Santos",
+    "rg": "078.489.486-84",
+    "phone": "(34) 99981-3577",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Maria de Fátima Barbosa Stos",
+    "rg": "724.705.851-04",
+    "phone": "(34) 99816-7144",
+    "doc_type": "CPF",
+    "reference_point": ""
+  },
+  {
+    "name": "Edvaldo de Oliveira Santos",
+    "rg": "100.738.936-25",
+    "phone": "(34) 99816-7144",
+    "doc_type": "CPF",
+    "reference_point": ""
+  },
+  {
+    "name": "Maria Helena de Souza Oliveira",
+    "rg": "586.102.116-00",
+    "phone": "(38) 99917-9553",
+    "doc_type": "CPF",
+    "reference_point": "Porto Centenário"
+  },
+  {
+    "name": "Wanderson dos Santos Lima",
+    "rg": "",
+    "phone": "(34) 99632-6155",
+    "doc_type": "Outro",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Eliano dos Santos Furtado",
+    "rg": "",
+    "phone": "(34) 99632-6155",
+    "doc_type": "Outro",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Karina Soriano Moreira Aquino",
+    "rg": "152.585.766-61",
+    "phone": "(34) 98419-4857",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Maria Aparecida Botelho Silva",
+    "rg": "042.766.666-41",
+    "phone": "(38) 98827-3382",
+    "doc_type": "CPF",
+    "reference_point": "Porto na Sra da Guia"
+  },
+  {
+    "name": "Yasmin Costa da Silva",
+    "rg": "816.537.436-20",
+    "phone": "(38) 98827-3382",
+    "doc_type": "CPF",
+    "reference_point": "Porto na Sra da Guia"
+  },
+  {
+    "name": "José Rodrigues da Silva",
+    "rg": "292.289.646-34",
+    "phone": "(34) 99650-8416",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Mailde de Fátima Lucindo",
+    "rg": "074.269.446-11",
+    "phone": "(34) 99945-1663",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Juliano Alves de Lima",
+    "rg": "048.742.876-66",
+    "phone": "(38) 99218-0942",
+    "doc_type": "CPF",
+    "reference_point": "Último Golpe"
+  },
+  {
+    "name": "Iza Cardoso de Oliveira Lima",
+    "rg": "034.464.306-50",
+    "phone": "(38) 99218-0942",
+    "doc_type": "CPF",
+    "reference_point": "Último Golpe"
+  },
+  {
+    "name": "Benedito Pereira do Carmo",
+    "rg": "040.073.006-58",
+    "phone": "(34) 99977-8030",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Deliana Ramos da Silva",
+    "rg": "122.103.316-74",
+    "phone": "(34) 99974-3496",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Marilene Batista dos Santos",
+    "rg": "135.609.916-03",
+    "phone": "(38) 99973-1576",
+    "doc_type": "CPF",
+    "reference_point": "Sup. Dial"
+  },
+  {
+    "name": "Antônio Carlos P. Santos",
+    "rg": "013.283.566-07",
+    "phone": "(34) 99119-1648",
+    "doc_type": "CPF",
+    "reference_point": "Café - Bairro Morumbi"
+  },
+  {
+    "name": "Mário Gonçalves da Silva",
+    "rg": "058.340.976-55",
+    "phone": "(38) 99831-9762",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Eden Ramos Gonçalves",
+    "rg": "105.796.956-50",
+    "phone": "(34) 99915-3817",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Ana Paula Santos Silva",
+    "rg": "019.306.114-77",
+    "phone": "(38) 99824-5374",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Marcos Alexandre da Silva",
+    "rg": "009.842.696-65",
+    "phone": "(38) 99931-9632",
+    "doc_type": "CPF",
+    "reference_point": "Porto Xodo"
+  },
+  {
+    "name": "Ana Clara Barbosa",
+    "rg": "182.190.876-76",
+    "phone": "(38) 99953-3589",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Hudson Araújo",
+    "rg": "",
+    "phone": "(38) 98423-8383",
+    "doc_type": "Outro",
+    "reference_point": "Porto na Sra da Guia"
+  },
+  {
+    "name": "Thiago Carvalho dos Santos",
+    "rg": "145.778.256-70",
+    "phone": "(38) 98423-8383",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Telma Rodrigues Nunes",
+    "rg": "900.825.019-12",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Maurício da Conceição Pereira",
+    "rg": "198.847.010-21",
+    "phone": "(34) 99802-3055",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Leiter Emanuel dos Santos",
+    "rg": "379.213.099-00",
+    "phone": "(38) 98807-0755",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Jéssica Janne Silva Santos",
+    "rg": "110.407.746-75",
+    "phone": "(38) 98807-0755",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Alan Rafael Lopes Santana",
+    "rg": "343.626.835-03",
+    "phone": "(34) 99681-6222",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Daiana Percy",
+    "rg": "014.292.016-43",
+    "phone": "(34) 99159-5618",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Roberto Ney",
+    "rg": "705.489.660-1",
+    "phone": "(34) 99159-5618",
+    "doc_type": "RG",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Camile Beleni",
+    "rg": "075.907.771-42",
+    "phone": "(34) 99159-5618",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Janilda Santana Fernandes",
+    "rg": "185.197.736-64",
+    "phone": "(38) 998?740?",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Anacleto dos Santos Medeiros",
+    "rg": "066.047.946-87",
+    "phone": "(38) 99988-1374",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Fausto Cardoso de Oliveira",
+    "rg": "369.215.906-53",
+    "phone": "(38) 99826-4176",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Pedro Henrique Galvanesio",
+    "rg": "170.466.916-35",
+    "phone": "(38) 99826-4176",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Elias Sorobim Sampaio",
+    "rg": "149.377.19",
+    "phone": "(34) 99900-7529",
+    "doc_type": "RG",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Antônio Edson Rabelo",
+    "rg": "217.961.066-15",
+    "phone": "(34) 99930-1421",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Pamela Thayna Costa Santos",
+    "rg": "001.280.765-50",
+    "phone": "(38) 99949-1944",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Cândida Maria da Silva",
+    "rg": "546.236.066-00",
+    "phone": "(38) 98414-2562",
+    "doc_type": "CPF",
+    "reference_point": "Ritchoz"
+  },
+  {
+    "name": "Luana Pereira Pequito",
+    "rg": "725.582.156-12",
+    "phone": "(34) 99133-5839",
+    "doc_type": "CPF",
+    "reference_point": "Tamanduá"
+  },
+  {
+    "name": "Osvaldivino Ramos da Silva",
+    "rg": "238.936.841-90",
+    "phone": "(34) 99133-5839",
+    "doc_type": "CPF",
+    "reference_point": "Tamanduá"
+  },
+  {
+    "name": "Anderson Furtado Rodrigues",
+    "rg": "141.324.176-73",
+    "phone": "(34) 98569-3894",
+    "doc_type": "CPF",
+    "reference_point": "Nova Skima"
+  },
+  {
+    "name": "Natália Apelia",
+    "rg": "001.010.356-12",
+    "phone": "(34) 998??6666",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Pedro Rogério",
+    "rg": "086.921.216-81",
+    "phone": "(34) 99200-6666",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "João Pedro Lopes da Silva",
+    "rg": "174.609.856-02",
+    "phone": "(34) 99143-6560",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Jacqueline Soares",
+    "rg": "097.692.586-95",
+    "phone": "(34) 99745-5744",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Thais Cardoso dos Santos",
+    "rg": "124.348.306-78",
+    "phone": "(38) 99984-1620",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Kawan Gabriel Cardoso Antunes",
+    "rg": "151.929.496-45",
+    "phone": "(38) 99984-1620",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Brayonn Miguel Farias Alves",
+    "rg": "171.642.156-00",
+    "phone": "(38) 98424-6264",
+    "doc_type": "CPF",
+    "reference_point": "Mega Box"
+  },
+  {
+    "name": "Lucimara Farias Alves",
+    "rg": "070.921.756-07",
+    "phone": "(38) 98424-6264",
+    "doc_type": "CPF",
+    "reference_point": "Mega Box"
+  },
+  {
+    "name": "Mario José dos Santos",
+    "rg": "041.363.376-39",
+    "phone": "(38) 98424-6264",
+    "doc_type": "CPF",
+    "reference_point": "Mega Box"
+  },
+  {
+    "name": "Vanderlício dos Santos Vieira",
+    "rg": "034.123.306-47",
+    "phone": "(38) 98424-6264",
+    "doc_type": "CPF",
+    "reference_point": "Mega Box"
+  },
+  {
+    "name": "Elizete de Fátima",
+    "rg": "132.925.737-00",
+    "phone": "(38) 99822-2856",
+    "doc_type": "CPF",
+    "reference_point": "Acunque Brazão"
+  },
+  {
+    "name": "Hudson José Rodrigues dos Santos",
+    "rg": "182.631.266-81",
+    "phone": "(38) 9825-7208",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Lourso Carvalho dos Santos Silva",
+    "rg": "165.941.960-03",
+    "phone": "(38) 9825-7208",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Leison Marcos Campos",
+    "rg": "127.621.223-76",
+    "phone": "(34) 99335-8261",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Danielle Rodrigues dos Anjos",
+    "rg": "046.796.631-11",
+    "phone": "(34) 99335-8261",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Waldelina Soares da Silva",
+    "rg": "025.776.556-10",
+    "phone": "(38) 99868-6846",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Francisco Elídio Custódio",
+    "rg": "044.230.696-76",
+    "phone": "(34) 99945-5278",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Faz. Benedito Borges Teixeira",
+    "rg": "582.908.186-53",
+    "phone": "(34) 99947-3332",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Zélia Aparecida C. dos Stos",
+    "rg": "105.910.196-18",
+    "phone": "(34) 99236-5135",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "José Antônio dos Santos",
+    "rg": "100.345.531-81",
+    "phone": "(38) 99845-3775",
+    "doc_type": "CPF",
+    "reference_point": "Terminal Canaã"
+  },
+  {
+    "name": "Idelícia Luiza Santos",
+    "rg": "673.846.336-72",
+    "phone": "(38) 99153-1348",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Emilene Arores Souza",
+    "rg": "920.813.396-68",
+    "phone": "(34) 99882-0570",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Lúcio Gomes da Costa",
+    "rg": "418.301",
+    "phone": "(34) 99882-0570",
+    "doc_type": "RG",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Adelson Gonçalo da Silva",
+    "rg": "146.889.836",
+    "phone": "(34) 99962-9539",
+    "doc_type": "RG",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Ana Lúcia Aparecida Santos Silva",
+    "rg": "078.458.468-84",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Pedro Gonçalves de Freitas",
+    "rg": "129.642.612-12",
+    "phone": "(38) 99809-1671",
+    "doc_type": "CPF",
+    "reference_point": "Berrite"
+  },
+  {
+    "name": "Jéssica Moreno Alves",
+    "rg": "137.806.516-61",
+    "phone": "(34) 99873-9059",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Leonardo Francisco Armando",
+    "rg": "067.584.586-60",
+    "phone": "(34) 99041-5661",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Valdineia Soares da Silva",
+    "rg": "025.776.656-10",
+    "phone": "(38) 99857-0664",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Vivian Gonçalves da Cruz",
+    "rg": "187.735.966-92",
+    "phone": "(34) 99857-0664",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Maria Inês Pereira dos Santos",
+    "rg": "075.312.636-02",
+    "phone": "(38) 99117-3249",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Maria da Conceição Cardoso S.",
+    "rg": "208.836.466-53",
+    "phone": "(38) 99117-3249",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Ana Paula Cardoso dos Santos",
+    "rg": "105.665.536-36",
+    "phone": "(38) 99810-8095",
+    "doc_type": "CPF",
+    "reference_point": "Sup. Avenida"
+  },
+  {
+    "name": "Pedro Amorim Cardoso Oliveira",
+    "rg": "028.840.216-30",
+    "phone": "(38) 99841-1404",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Reneli Batista da Silva",
+    "rg": "009.846.646-71",
+    "phone": "(34) 98809-3704",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "ANEDES Bispo da Cruz",
+    "rg": "047.166.616-52",
+    "phone": "(38) 99964-0455",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Geyse Cardoso Monteiro dos Santos",
+    "rg": "136.579.696-59",
+    "phone": "(38) 99175-3173",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Gessica Rodrigues Vieira",
+    "rg": "004.503.508-11",
+    "phone": "(38) 99852-3372",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Jean Alves dos Santos",
+    "rg": "109.068.206-93",
+    "phone": "(34) 99131-7155",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Júlia Ferreira da Silva",
+    "rg": "080.588.476-90",
+    "phone": "(34) 99131-7155",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Adnil Lucas Ferreira Moura",
+    "rg": "151.133.786-00",
+    "phone": "(34) 99130-5262",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Edson Ferreira dos Santos",
+    "rg": "032.327.916-97",
+    "phone": "(34) 99130-5262",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Maria Lúcia Ferreira de Souza",
+    "rg": "784.243.966-68",
+    "phone": "(34) 99130-5262",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Marielly de Souza Balazoni",
+    "rg": "078.054.496-00",
+    "phone": "(38) 99155-6257",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Cândida America da Silva",
+    "rg": "548.627.266-00",
+    "phone": "(34) 99433-5839",
+    "doc_type": "CPF",
+    "reference_point": "Av. Quadrangular"
+  },
+  {
+    "name": "Thais Cardoso dos Santos",
+    "rg": "124.348.306-76",
+    "phone": "(38) 99984-1620",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Kawan Daniel Cardoso dos Reis",
+    "rg": "151.929.266-02",
+    "phone": "(38) 99984-1620",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Maria Irene Amorim Oliveira",
+    "rg": "986.665.500-88",
+    "phone": "(34) 99982-3055",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Edite Alves Neres",
+    "rg": "673.955.546-04",
+    "phone": "(34) 99947-0012",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Dalci Coneiro de Aquino",
+    "rg": "609.376.616-00",
+    "phone": "(34) 99947-0012",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Manuel Cândido de Melo",
+    "rg": "335.826.666-15",
+    "phone": "(34) 99880-3002",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Yadma dos Santos Pena",
+    "rg": "160.547.306-13",
+    "phone": "(34) 99803-9658",
+    "doc_type": "CPF",
+    "reference_point": "Rota do Sul"
+  },
+  {
+    "name": "Gerson Pereira de Souza",
+    "rg": "006.305.946-90",
+    "phone": "(34) 99817-7438",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Enzo Helder Pereira de Jesus",
+    "rg": "333.441.843-51",
+    "phone": "(31) 99635-3872",
+    "doc_type": "CPF",
+    "reference_point": "Rota do Sol-Patrocínio"
+  },
+  {
+    "name": "Enzo Gabriel Alves de Jesus",
+    "rg": "901.823.372-00",
+    "phone": "(31) 99635-3872",
+    "doc_type": "CPF",
+    "reference_point": "Rota do Sol-Patrocínio"
+  },
+  {
+    "name": "Carlos Daniel Pires de Jesus",
+    "rg": "655.901.303-12",
+    "phone": "(31) 99635-3872",
+    "doc_type": "CPF",
+    "reference_point": "Rota do Sol Patrocínio"
+  },
+  {
+    "name": "Jdinei Soares da Luz Dias",
+    "rg": "044.993.546-01",
+    "phone": "(38) 99946-8319",
+    "doc_type": "CPF",
+    "reference_point": "Sup. Astro - Av. Solidaried."
+  },
+  {
+    "name": "Jamelia Cardoso de Jesus",
+    "rg": "025.034.756-39",
+    "phone": "(34) 99134-0523",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Antônio de Souza Brito",
+    "rg": "225.532.156-12",
+    "phone": "(34) 99433-5839",
+    "doc_type": "CPF",
+    "reference_point": "Av. Quadrangular"
+  },
+  {
+    "name": "Luana Pereira Ramos",
+    "rg": "141.322.316-82",
+    "phone": "(38) 99808-8952",
+    "doc_type": "CPF",
+    "reference_point": "Sup. ABC"
+  },
+  {
+    "name": "Vitor Samuel Juana Silva",
+    "rg": "135.483.398-55",
+    "phone": "(38) 99115-6813",
+    "doc_type": "CPF",
+    "reference_point": "Sup. ABC"
+  },
+  {
+    "name": "Deyvid Rafael Lucena Cabral",
+    "rg": "132.455.573-44",
+    "phone": "(38) 99434-6813",
+    "doc_type": "CPF",
+    "reference_point": "Sup. ABC"
+  },
+  {
+    "name": "Rosilene da Conceição Soares",
+    "rg": "072.517.006-12",
+    "phone": "(38) 99852-2982",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Natália Silva",
+    "rg": "001.013.086-12",
+    "phone": "(34) 99143-6560",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Letícia Emmanuelle Gonçalves C.",
+    "rg": "172.905.856-90",
+    "phone": "(34) 99851-7360",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Ery de Jesus Oliveira",
+    "rg": "",
+    "phone": "",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "[nome riscado / confirmar]",
+    "rg": "920.897.636-04",
+    "phone": "(38) 99853-20184",
+    "doc_type": "CPF",
+    "reference_point": "Churrascaria Gaúcha"
+  },
+  {
+    "name": "Hélio Ney",
+    "rg": "139.759.165-80",
+    "phone": "(34) 99802-3055",
+    "doc_type": "CPF",
+    "reference_point": "ABC - Sup. HBC"
+  },
+  {
+    "name": "Emilly Danielle Rodrigues",
+    "rg": "171.801.086-93",
+    "phone": "(38) 99959-8639",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Eliane dos Santos Lopes",
+    "rg": "180.683.856-50",
+    "phone": "(38) 99893-4436",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Elivete Luiz de Moura",
+    "rg": "164.188.396-09",
+    "phone": "(38) 99893-4436",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Kawan Henrique Souza Barbosa",
+    "rg": "174.866.236-10",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drograria Cristina"
+  },
+  {
+    "name": "Luiz Gustavo Fernandes de Souza",
+    "rg": "706.638.996-48",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Thais Nunes de Souza",
+    "rg": "112.555.336-02",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Jarlan Leite Barbosa",
+    "rg": "177.236.626-85",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Alexandro da Silva Lopes",
+    "rg": "359.964.838-80",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Pedro Henrique Leite Barbosa",
+    "rg": "155.623.126-11",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Danielle Rodrigues dos Anjos",
+    "rg": "592.326.612-00",
+    "phone": "(34) 99235-8261",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Marinês Maria Pereira",
+    "rg": "108.860.043-92",
+    "phone": "(34) 99235-8261",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Pâmela Theomália dos Santos",
+    "rg": "004.280.676-59",
+    "phone": "(38) 98444-7563",
+    "doc_type": "CPF",
+    "reference_point": "Sup. ABC"
+  },
+  {
+    "name": "Givan Pereira de Souza",
+    "rg": "064.295.426-90",
+    "phone": "(38) 99837-7478",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Viviane Ferreira",
+    "rg": "154.616.646-79",
+    "phone": "(34) 98443-1221",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Marcelo da Silva Lopes",
+    "rg": "279.436.268-70",
+    "phone": "(34) 99102-8384",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Rosenara dos Santos Rosa",
+    "rg": "100.517.306-13",
+    "phone": "(34) 99807-2855",
+    "doc_type": "CPF",
+    "reference_point": "Rota do Sol"
+  },
+  {
+    "name": "Cíntia Maria da Silva Monteiro",
+    "rg": "068.553.846-23",
+    "phone": "(38) 99117-9525",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Leynderson Emanuel de Paulo Oliveira",
+    "rg": "344.997.714-62",
+    "phone": "(34) 99174-4245",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Maria Pereira dos Reis",
+    "rg": "608.636.056-49",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Santo Antônio"
+  },
+  {
+    "name": "Maria Esmeralda dos Santos",
+    "rg": "141.973.674-51",
+    "phone": "(62) 99997-9591",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Patrícia Alves de Oliveira",
+    "rg": "021.681.816-63",
+    "phone": "(38) 99948-1190",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Matheus Martins Andrade",
+    "rg": "133.146.586-99",
+    "phone": "(38) 99899-9671",
+    "doc_type": "CPF",
+    "reference_point": "Realiza"
+  },
+  {
+    "name": "Izaineide Gonçalves Silva",
+    "rg": "035.545.436-66",
+    "phone": "(38) 99899-9671",
+    "doc_type": "CPF",
+    "reference_point": "Realiza"
+  },
+  {
+    "name": "1 pet - cachorro",
+    "rg": "",
+    "phone": "(38) 99899-9671",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Beatriz da Silva Barbosa",
+    "rg": "108.911.786-86",
+    "phone": "(38) 99876-3339",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Gevanderson da Silva Santos",
+    "rg": "708.917.761-09",
+    "phone": "(38) 98402-5637",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Rosalino de Jesus Silva",
+    "rg": "150.753.782",
+    "phone": "(38) 99802-1092",
+    "doc_type": "RG",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Ana Clara da Silva Santos",
+    "rg": "182.111.036",
+    "phone": "(38) 99802-1092",
+    "doc_type": "RG",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Pedro Gonçalves de Almeida",
+    "rg": "098.815.338-41",
+    "phone": "(38) 99123-4195",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Gabrielle Aparecida Oliveira",
+    "rg": "150.978.076-66",
+    "phone": "(38) 99123-4195",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Maria Aparecida Peres Stos",
+    "rg": "071.166.965-71",
+    "phone": "(38) 99825-3895",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Sandra Pereira de Oliveira",
+    "rg": "139.791.001-33",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Julianne dos Santos Cruz",
+    "rg": "037.999.306-90",
+    "phone": "(38) 99800-5767",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Fábio Júnior da Cruz",
+    "rg": "089.964.116-10",
+    "phone": "(38) 99800-5767",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Tatiane do Silva Ramos",
+    "rg": "121.674.976-04",
+    "phone": "(38) 99960-7029",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Antônio Lima Soares da Silva",
+    "rg": "071.926.936-93",
+    "phone": "(38) 99960-7029",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Arthur Vinícius Silva Nobre",
+    "rg": "165.204.966-50",
+    "phone": "(38) 99960-7029",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Thalisson Eduardo Ramos Leite",
+    "rg": "157.407.116-82",
+    "phone": "(38) 99960-7029",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Fita Ferreira Maria Rocha",
+    "rg": "425.331.16",
+    "phone": "(38) 99724-3417",
+    "doc_type": "RG",
+    "reference_point": "Porto Golpe"
+  },
+  {
+    "name": "Sebastião Rodrigues Neto",
+    "rg": "534.992.696-20",
+    "phone": "(38) 99724-3417",
+    "doc_type": "CPF",
+    "reference_point": "Porto Oliveira"
+  },
+  {
+    "name": "Jaci Pereira da Costa",
+    "rg": "174.983.742-00",
+    "phone": "(34) 99826-1515",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Américo Francisco Santos",
+    "rg": "158.201.344-11",
+    "phone": "(34) 99826-1515",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "José Gonçalves",
+    "rg": "64.060.129",
+    "phone": "(38) 99830-2693",
+    "doc_type": "RG",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Nasyl Franklin Batista S.",
+    "rg": "106.995.396-25",
+    "phone": "(34) 99235-7501",
+    "doc_type": "CPF",
+    "reference_point": "Hotel Liz"
+  },
+  {
+    "name": "Tânia Suelen Rodrigues Stos",
+    "rg": "134.025.946-82",
+    "phone": "(38) 99142-5697",
+    "doc_type": "CPF",
+    "reference_point": "Várzea de Minas"
+  },
+  {
+    "name": "Rafael Souza de Oliveira",
+    "rg": "050.632.806-69",
+    "phone": "(34) 99192-6587",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Juliana Simões dos Santos",
+    "rg": "051.632.606-69",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Eden Ferreira dos Santos",
+    "rg": "033.237.316-97",
+    "phone": "(34) 99130-5262",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Natália",
+    "rg": "",
+    "phone": "(38) 99743-4095",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Samara Pereira de Oliveira",
+    "rg": "603.607.936-87",
+    "phone": "(38) 99842-1501",
+    "doc_type": "CPF",
+    "reference_point": "Berrite"
+  },
+  {
+    "name": "Wanderlei de Souza Machado",
+    "rg": "096.407.036-90",
+    "phone": "(38) 99743-7949",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Ivani Maria Santana",
+    "rg": "575.056.356-91",
+    "phone": "(38) 99881-3594",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Marilene de Jesus Miranda",
+    "rg": "044.606.376-88",
+    "phone": "(38) 99900-6760",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Lucília de Jesus Alves Figueiredo",
+    "rg": "823.526.818-69",
+    "phone": "(38) 99932-7393",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Luciene Neves",
+    "rg": "086.635.286-47",
+    "phone": "(34) 99228-1853",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "Maria Aparecida Batista S.",
+    "rg": "042.766.266-41",
+    "phone": "(38) 98827-3382",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "Maria Antonia Batista Silva",
+    "rg": "708.907.446-49",
+    "phone": "(38) 98827-3382",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "Magda Lorena da Silva Almeida",
+    "rg": "129.471.186-50",
+    "phone": "(38) 98827-3382",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "José Oliveira Leite",
+    "rg": "344.980.505-5",
+    "phone": "(34) 99165-3811",
+    "doc_type": "RG",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Maria Tereza Neves Amorim",
+    "rg": "731.940.935",
+    "phone": "(38) 99866-6550",
+    "doc_type": "RG",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Maria da Conceição Santos",
+    "rg": "301.968.456-20",
+    "phone": "(38) 99866-6550",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Natália Eunice Moura Batista",
+    "rg": "141.???.336-00",
+    "phone": "(38) 99921-7015",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Reida Adriano da Silva",
+    "rg": "707.235.586-39",
+    "phone": "(34) 99708-8376",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Juliana Fernandes de Paula",
+    "rg": "155.933.456-00",
+    "phone": "(34) 99169-9868",
+    "doc_type": "CPF",
+    "reference_point": "Esc. Geny Hattem"
+  },
+  {
+    "name": "Dajme Beatriz Pereira Santos",
+    "rg": "153.506.096-45",
+    "phone": "(34) 98815-5863",
+    "doc_type": "CPF",
+    "reference_point": "Praça Santo Antônio"
+  },
+  {
+    "name": "Celimita Umbelino da Silva",
+    "rg": "024.318.866-12",
+    "phone": "(34) 99128-6520",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Geronilda Souza dos Anjos",
+    "rg": "128.917.444-00",
+    "phone": "(34) 99128-6520",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Valdirim Bernardino Leite",
+    "rg": "958.820.336-49",
+    "phone": "(34) 99803-3111",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Hélio Marcondes dos Santos",
+    "rg": "410.029.716-00",
+    "phone": "(34) 99803-3111",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "José Carlos",
+    "rg": "086.570.016-00",
+    "phone": "(38) 99805-1433",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Victor Gomes Pereira",
+    "rg": "457.964.470-40",
+    "phone": "(38) 99885-9016",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Apareci Sandro Ramos Silva",
+    "rg": "086.653.976-02",
+    "phone": "(38) 99885-9016",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Edvaldo Manuel",
+    "rg": "112.601.376-51",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "José Alves",
+    "rg": "749.017.356-04",
+    "phone": "(34) 99128-6520",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Gabrielly Vitória Alves Reis",
+    "rg": "706.110.086-55",
+    "phone": "(38) 99742-7970",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Buritizeiro"
+  },
+  {
+    "name": "Gerson Gomes Júnior",
+    "rg": "151.214.430",
+    "phone": "(34) 99895-2802",
+    "doc_type": "RG",
+    "reference_point": "Praça Sto Antônio"
+  },
+  {
+    "name": "Maria Fernandes Batista F.",
+    "rg": "022.234.256-94",
+    "phone": "(34) 99842-0349",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Manoel José Pereira dos S.",
+    "rg": "336.096.291-32",
+    "phone": "(34) 99860-4220",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "José Fernandes dos Reis",
+    "rg": "025.674.636-51",
+    "phone": "(34) 99802-5055",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "André Gonçalves Pereira",
+    "rg": "051.547.916-06",
+    "phone": "(38) 99860-6418",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Marlucinda Nunes",
+    "rg": "920.901.506-10",
+    "phone": "(34) 99148-8899",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Sol da Terra"
+  },
+  {
+    "name": "Maria da Conceição Santos",
+    "rg": "403.968.496-20",
+    "phone": "(38) 99882-3314",
+    "doc_type": "CPF",
+    "reference_point": "Realiza"
+  },
+  {
+    "name": "Victoria Beatriz dos Santos",
+    "rg": "165.657.876-03",
+    "phone": "(38) 99820-1092",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Ana Clara da Silva Santos",
+    "rg": "182.111.036-14",
+    "phone": "(38) 99820-1092",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Mariludo Rodrigues Paes",
+    "rg": "598.264.446-72",
+    "phone": "(34) 99950-0902",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Liliane Mendes da Silva",
+    "rg": "074.410.766-09",
+    "phone": "(34) 99764-3286",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Julita Soares dos Santos",
+    "rg": "554.025.586-20",
+    "phone": "(34) 99210-6973",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Gerlanda Pereira Rocha",
+    "rg": "025.926.496-09",
+    "phone": "(34) 98419-5554",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Cristiane Silva Maciel Moura",
+    "rg": "083.853.246-23",
+    "phone": "(38) 99117-9555",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Angelo Maria da Fonseca",
+    "rg": "029.940.586-11",
+    "phone": "(34) 998??1064",
+    "doc_type": "CPF",
+    "reference_point": ""
+  },
+  {
+    "name": "Rison da Silva Ramos",
+    "rg": "170.357.146-98",
+    "phone": "(34) 998?9064",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Kátia Aparecida Pelvério",
+    "rg": "737.931.336-34",
+    "phone": "(38) 99969-1306",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Ana Karoline dos Santos Souza",
+    "rg": "184.003.786-68",
+    "phone": "(38) 99862-1503",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Yara? Maria Moura dos Santos V.",
+    "rg": "015.679.436-25",
+    "phone": "(38) 99862-1503",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Daniel Vitor dos Santos Silva",
+    "rg": "146.525.786-80",
+    "phone": "(38) 99862-1503",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Vivian Gonçalves da Cruz",
+    "rg": "187.735.966-12",
+    "phone": "(34) 99875-7664",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Dezuma Amorim da Silva",
+    "rg": "920.855.506-44",
+    "phone": "(38) 99813-4999",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha (ABC)"
+  },
+  {
+    "name": "Ana dos Anjos da Conceição",
+    "rg": "061.059.966-20",
+    "phone": "(38) 99941-5788",
+    "doc_type": "CPF",
+    "reference_point": "Último Golpe"
+  },
+  {
+    "name": "Matheus Rodrigues",
+    "rg": "152.818.646-02",
+    "phone": "(38) 99846-1059",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Fernando Silva",
+    "rg": "039.454.026-38",
+    "phone": "(34) 99948-9572",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Philippe Veloso Silva dos Santos",
+    "rg": "110.165.376-29",
+    "phone": "(34) 992?331?9",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Jefferson Pereira de Queiroz",
+    "rg": "134.542.416-67",
+    "phone": "(34) 99243-3179",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Ranyelle Romia de Lima",
+    "rg": "019.368.826-90",
+    "phone": "(34) 998?331?9",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "João Miguel Queiroz de Lima",
+    "rg": "177.355.835-69",
+    "phone": "(34) 998?331?9",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Maria do Carmo Machado",
+    "rg": "920.140.926-68",
+    "phone": "(38) 99154-1865",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Valdineia da Silva Lopes",
+    "rg": "021.568.846-50",
+    "phone": "(38) 99879-6527",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Dinalva Lopes da Cruz",
+    "rg": "001.007.566-75",
+    "phone": "(38) 99879-6527",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Paola Leonny dos Santos C.",
+    "rg": "118.715.676-02",
+    "phone": "(34) 99269-2953",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Marua do Rosário Campos Penha",
+    "rg": "600.940.106-25",
+    "phone": "(34) 99108-6256",
+    "doc_type": "CPF",
+    "reference_point": "Sup. Dial"
+  },
+  {
+    "name": "Diene de Assis",
+    "rg": "042.203.256-51",
+    "phone": "(34) 99220-1489",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Bruno Vitor Nascimento dos Santos",
+    "rg": "176.345.567-7",
+    "phone": "(38) 99952-3478",
+    "doc_type": "RG",
+    "reference_point": "Geny Hattem"
+  },
+  {
+    "name": "Maurício de Araújo dos Santos",
+    "rg": "046.027.983-10",
+    "phone": "(34) 99151-1275",
+    "doc_type": "CPF",
+    "reference_point": "Trevo de Pratápolis"
+  },
+  {
+    "name": "Eliam de Cássia Chaves",
+    "rg": "095.415.596-25",
+    "phone": "(34) 99151-1275",
+    "doc_type": "CPF",
+    "reference_point": "Rodoviária Iuza"
+  },
+  {
+    "name": "Annete Marques Pereira",
+    "rg": "",
+    "phone": "(38) 99838-5633",
+    "doc_type": "Outro",
+    "reference_point": "Último Golpe"
+  },
+  {
+    "name": "Marina da Conceição dos Santos",
+    "rg": "103.968.436-20",
+    "phone": "(38) 998?35546",
+    "doc_type": "CPF",
+    "reference_point": "Buritizeiro"
+  },
+  {
+    "name": "Viviane Pereira da Costa",
+    "rg": "157.616.646-79",
+    "phone": "(34) 98443-1221",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Matheus Pereira da Rocha",
+    "rg": "072.594.416-27",
+    "phone": "(34) 99998-3340",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Gevanderson da Silva Santos",
+    "rg": "159.098.276-26",
+    "phone": "(34) 98411-5719",
+    "doc_type": "CPF",
+    "reference_point": "Praça Santo Antônio"
+  },
+  {
+    "name": "Kelly Cristina Alves da Silva",
+    "rg": "001.005.746-37",
+    "phone": "(34) 99914-0367",
+    "doc_type": "CPF",
+    "reference_point": "Praça Santo Antônio"
+  },
+  {
+    "name": "Joaquima Alves Correa",
+    "rg": "123.333.815-00",
+    "phone": "(34) 98447-2516",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Elizangela Barbosa",
+    "rg": "058.433.856-00",
+    "phone": "(34) 99648-2999",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Gervasio Soares Santos",
+    "rg": "022.327.376-09",
+    "phone": "(34) 99648-2999",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Maria Pereira Oliveira",
+    "rg": "912.001.138-17",
+    "phone": "(38) 99821-5695",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Dayane Mavino de Jesus",
+    "rg": "123.930.216-99",
+    "phone": "(38) 99136-569?",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Yasmarina"
+  },
+  {
+    "name": "Elisa Cristina Gonçalves A.",
+    "rg": "158.181.046-64",
+    "phone": "(34) 99736-5493",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Yasmarina"
+  },
+  {
+    "name": "Enzo Gabriel Gonçalves",
+    "rg": "168.150.756-05",
+    "phone": "(34) 99736-5493",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Yasmarina"
+  },
+  {
+    "name": "Sthefany Vitória Mota Medeiros",
+    "rg": "163.534.746-67",
+    "phone": "(38) 99993-5624",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Elizete de Fátima",
+    "rg": "",
+    "phone": "(38) 99822-8567",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Michele Oliveira",
+    "rg": "643.245.821-00",
+    "phone": "(34) 98830-3879",
+    "doc_type": "CPF",
+    "reference_point": "Tamanduá"
+  },
+  {
+    "name": "Tânia Maria de Almeida",
+    "rg": "356.268.456-15",
+    "phone": "(34) 99878-4172",
+    "doc_type": "CPF",
+    "reference_point": "Bar da Mancha"
+  },
+  {
+    "name": "Adriana Rodrigues Silva",
+    "rg": "129.981.946-05",
+    "phone": "(34) 99715-5857",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Davi Miguel Alves Silva",
+    "rg": "167.817.996-57",
+    "phone": "(34) 99715-5857",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Juliana Muniz Rocha",
+    "rg": "482.913.306-87",
+    "phone": "(34) 99142-9158",
+    "doc_type": "CPF",
+    "reference_point": "Último Golpe"
+  },
+  {
+    "name": "Pitty? Cristina de Souza",
+    "rg": "535.516.066-49",
+    "phone": "(38) 990?513?",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Diego de Jesus",
+    "rg": "042.026.656-51",
+    "phone": "(38) 99201-4189",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Tânia Santiago Teixeira",
+    "rg": "143.901.996-00",
+    "phone": "(38) 98584-9883",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Ruth Santiago Teixeira",
+    "rg": "740.935.356-49",
+    "phone": "(38) 98584-9883",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Tatiane Moreira dos Santos",
+    "rg": "058.703.586-20",
+    "phone": "(38) 99146-6561",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Amaraisa Batista Rodrigues",
+    "rg": "349.412.764-55",
+    "phone": "(34) 99176-3021",
+    "doc_type": "CPF",
+    "reference_point": "Ciclovândia"
+  },
+  {
+    "name": "1 moto",
+    "rg": "",
+    "phone": "(34) 99132-0012",
+    "doc_type": "Outro",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Maria Maia",
+    "rg": "068.305.586-06",
+    "phone": "(38) 99841-0139",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Túlio Oliveira",
+    "rg": "140.526.416-69",
+    "phone": "(38) 99941-0139",
+    "doc_type": "CPF",
+    "reference_point": "Term. Sta Luzia"
+  },
+  {
+    "name": "Francisco de Assis A. Santos",
+    "rg": "638.638.686-53",
+    "phone": "(38) 99941-1415",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Agnei Sandro Ramos Silva",
+    "rg": "086.539.796-82",
+    "phone": "(34) 99859-9016",
+    "doc_type": "CPF",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Nilde Maria Cardoso",
+    "rg": "062.491.296-50",
+    "phone": "(38) 99855-9237",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Victor Gomes Pereira",
+    "rg": "457.964.470-4",
+    "phone": "(38) 99855-9237",
+    "doc_type": "RG",
+    "reference_point": "Term. Canaã"
+  },
+  {
+    "name": "Dayane Mavino de Jesus",
+    "rg": "129.930.216-99",
+    "phone": "(34) 99736-5493",
+    "doc_type": "CPF",
+    "reference_point": "Igreja Yasmarina"
+  },
+  {
+    "name": "Danilda dos Santos Silva",
+    "rg": "057.915.316-09",
+    "phone": "(34) 99140-7867",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Elise Vieira",
+    "rg": "",
+    "phone": "(38) 99936-6566",
+    "doc_type": "Outro",
+    "reference_point": "Geny Hattem"
+  },
+  {
+    "name": "Iacy Francisca Pereira",
+    "rg": "",
+    "phone": "(38) 99936-6566",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Raimundo Edson Gomes",
+    "rg": "",
+    "phone": "(38) 99936-6566",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Amaraisa Batista Rodrigues",
+    "rg": "123.465.306-03",
+    "phone": "(38) 99176-3021",
+    "doc_type": "CPF",
+    "reference_point": "Ciclovândia - D. Almir"
+  },
+  {
+    "name": "Ana Clara da Silva Santos",
+    "rg": "181.116.636-14",
+    "phone": "(38) 99820-1092",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Elizete de Fátima Almeida C.",
+    "rg": "088.547.297-20",
+    "phone": "(38) 99838-8856",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Jacqueline Bento Ferreira Santos",
+    "rg": "009.585.876-91",
+    "phone": "(34) 99735-4853",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Janaina Soares Correa",
+    "rg": "099.859.436-31",
+    "phone": "(34) 99714-4389",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Marlene dos Santos C. Santana",
+    "rg": "127.415.006-23",
+    "phone": "(34) 98410-5873",
+    "doc_type": "CPF",
+    "reference_point": "Porto dos Amigos"
+  },
+  {
+    "name": "Thaynná Werellyn Santana",
+    "rg": "187.649.486-55",
+    "phone": "(38) 99853-5423",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Sandra Teixeira",
+    "rg": "124.648.786-18",
+    "phone": "(34) 99905-5846",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Sofia Emmanuelle Vieira Costa",
+    "rg": "161.502.096-55",
+    "phone": "(34) 99905-5846",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Davi Luca Teixeira Costa",
+    "rg": "181.990.416-41",
+    "phone": "(34) 99905-5846",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Maria Ivanilde Rocha Pereira",
+    "rg": "137.826.786-76",
+    "phone": "(38) 98418-9516",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "Eloah Aurora",
+    "rg": "015.968.876-84",
+    "phone": "(38) 98418-9516",
+    "doc_type": "CPF",
+    "reference_point": "Pad. Pão de Mel"
+  },
+  {
+    "name": "Amália Carvalho da Silva",
+    "rg": "101.031.746-23",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Borrachária de Mel"
+  },
+  {
+    "name": "Antônio Gabriel dos Santos P.",
+    "rg": "144.432.927-63",
+    "phone": "(38) 99807-0575",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Mizielle Gimão Neves",
+    "rg": "159.092.546-03",
+    "phone": "(34) 98402-6475",
+    "doc_type": "CPF",
+    "reference_point": "Praça Sto Antônio"
+  },
+  {
+    "name": "Fábio Alves Costa",
+    "rg": "098.773.146-73",
+    "phone": "(34) 98402-6475",
+    "doc_type": "CPF",
+    "reference_point": "Praça Sto Antônio"
+  },
+  {
+    "name": "Juliana Soares Rodrigues",
+    "rg": "111.433.306-70",
+    "phone": "(34) 99698-1650",
+    "doc_type": "CPF",
+    "reference_point": "Berrute"
+  },
+  {
+    "name": "Gabrielly Vitória Carvalho P.",
+    "rg": "173.001.376-79",
+    "phone": "(34) 99983-3404",
+    "doc_type": "CPF",
+    "reference_point": "Merc. Roberto - C. Jardim"
+  },
+  {
+    "name": "Ademir de Oliveira Reis",
+    "rg": "047.916.006-80",
+    "phone": "(34) 99802-0872",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Carlos André Batista de Jesus",
+    "rg": "105.375.596-91",
+    "phone": "(38) 99949-5553",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja - Av. Pio XI"
+  },
+  {
+    "name": "Tânia Santiago Teixeira",
+    "rg": "117.337.490",
+    "phone": "(38) 98841-9883",
+    "doc_type": "RG",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Vanessa Souza Pinheiro",
+    "rg": "014.458.166-77",
+    "phone": "(38) 98841-9883",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Francisco Assis Alves Santos",
+    "rg": "638.865.886-53",
+    "phone": "(38) 99971-1445",
+    "doc_type": "CPF",
+    "reference_point": "Cidade Jardim"
+  },
+  {
+    "name": "Maria Aparecida Pereira S. Souza",
+    "rg": "18.079.486",
+    "phone": "(34) 99727-2719",
+    "doc_type": "RG",
+    "reference_point": "Ideal"
+  },
+  {
+    "name": "Thays Viviane de Oliveira Santos",
+    "rg": "174.960.976-24",
+    "phone": "(38) 99880-6691",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "José Fernandes dos Reis",
+    "rg": "025.674.626-51",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Geny Hattem"
+  },
+  {
+    "name": "Ana Paula dos Santos",
+    "rg": "130.514.996-40",
+    "phone": "(34) 99128-5647",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Emílio Soares Santos",
+    "rg": "022.327.576-09",
+    "phone": "(34) 99646-2999",
+    "doc_type": "CPF",
+    "reference_point": "T. Santo Luzia"
+  },
+  {
+    "name": "Elizangela Barros de Moura",
+    "rg": "058.433.286-60",
+    "phone": "(34) 99646-2999",
+    "doc_type": "CPF",
+    "reference_point": "T. Santo Luzia"
+  },
+  {
+    "name": "Adriele Guimarães Neves",
+    "rg": "019.503.546-10",
+    "phone": "(34) 98402-6475",
+    "doc_type": "CPF",
+    "reference_point": "ABC"
+  },
+  {
+    "name": "Gisiane Melo dos Santos",
+    "rg": "171.771.356-93",
+    "phone": "(38) 99734-2688",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Joyciana Pereira Barbosa",
+    "rg": "161.979.346-51",
+    "phone": "(38) 99910-0080",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Isaque Melo dos Santos",
+    "rg": "141.315.586-83",
+    "phone": "(38) 99974-2688",
+    "doc_type": "CPF",
+    "reference_point": "Porto Mourumbi"
+  },
+  {
+    "name": "Adriana Soares de Medeiros",
+    "rg": "081.470.146-79",
+    "phone": "(38) 95843-3378",
+    "doc_type": "CPF",
+    "reference_point": "Bar da Mancha"
+  },
+  {
+    "name": "Camile Vitória Medeiros de Castro",
+    "rg": "157.998.526-24",
+    "phone": "(38) 95843-3378",
+    "doc_type": "CPF",
+    "reference_point": "Bar da Mancha"
+  },
+  {
+    "name": "Camila Vitória",
+    "rg": "000.381.221-00",
+    "phone": "(38) 98406-6149",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Maria Pereira",
+    "rg": "558.802.130-17",
+    "phone": "(38) 98406-6149",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Josiane Neves",
+    "rg": "178.827.121-10",
+    "phone": "(38) 98406-6149",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Ana Júlia Lopes",
+    "rg": "515.801.066-31",
+    "phone": "(38) 98406-6149",
+    "doc_type": "CPF",
+    "reference_point": "Salva Vidas"
+  },
+  {
+    "name": "Deise Lúcia Pereira",
+    "rg": "066.099.676-60",
+    "phone": "(34) 98815-6439",
+    "doc_type": "CPF",
+    "reference_point": "Bar da Mancha"
+  },
+  {
+    "name": "Gabrielly Vitória Alves dos Reis",
+    "rg": "706.110.026-55",
+    "phone": "(38) 99742-7970",
+    "doc_type": "CPF",
+    "reference_point": "Porto Matinha"
+  },
+  {
+    "name": "Maurício de Araújo dos Santos",
+    "rg": "046.022.783-10",
+    "phone": "(38) 99410-7631",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Natany Grellin",
+    "rg": "171.674.336-00",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Porto da Matinha"
+  },
+  {
+    "name": "José Carlos de Campos",
+    "rg": "139.773.998-05",
+    "phone": "(38) 98414-4106",
+    "doc_type": "CPF",
+    "reference_point": "Porto Pau Furado"
+  },
+  {
+    "name": "Rosimeire Alves da Silva Santos",
+    "rg": "037.100.786-01",
+    "phone": "(38) 99812-9349",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Emerson Nascimento Lima",
+    "rg": "84.367.62",
+    "phone": "(34) 99189-0409",
+    "doc_type": "RG",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Gabriela Evangelista de Souza",
+    "rg": "072.973.496-07",
+    "phone": "(34) 99189-0409",
+    "doc_type": "CPF",
+    "reference_point": "Drogaria Cristina"
+  },
+  {
+    "name": "Poltermo Nara Rei na cozinha",
+    "rg": "",
+    "phone": "(34) 99189-0409",
+    "doc_type": "Outro",
+    "reference_point": ""
+  },
+  {
+    "name": "Rosário de Jesus Silva",
+    "rg": "037.010.116-82",
+    "phone": "(38) 99820-1092",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Antônio Andrade de Souza",
+    "rg": "260.626.806-00",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Marcelina Santos de Souza",
+    "rg": "234.102.216-20",
+    "phone": "",
+    "doc_type": "CPF",
+    "reference_point": "Wamaja"
+  },
+  {
+    "name": "Eunice Aparecida Gonçalves",
+    "rg": "155.680.476-55",
+    "phone": "(34) 99179-6428",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Ademirson de Jesus",
+    "rg": "044.348.646-52",
+    "phone": "(38) 99123-7405",
+    "doc_type": "CPF",
+    "reference_point": "Praça da Bíblia"
+  },
+  {
+    "name": "Nadia Fernandes da Silva",
+    "rg": "635.201.336-87",
+    "phone": "(34) 99891-5214",
+    "doc_type": "CPF",
+    "reference_point": "Rodov. Buritizeiro"
+  },
+  {
+    "name": "Mayero Cardoso",
+    "rg": "036.949.916-62",
+    "phone": "(34) 98443-1373",
+    "doc_type": "CPF",
+    "reference_point": "Geny Hattem"
+  },
+  {
+    "name": "Rakele Emmanuelle dos Santos",
+    "rg": "160.273.636-?3",
+    "phone": "(38) 99939-7168",
+    "doc_type": "CPF",
+    "reference_point": "Geny Hattem"
+  },
+  {
+    "name": "Marlene Marques de Souza",
+    "rg": "139.050.276-74",
+    "phone": "(38) 99948-3773",
+    "doc_type": "CPF",
+    "reference_point": "Geny Hattem"
+  }
+]
