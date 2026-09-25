@@ -35,7 +35,7 @@ export default function LoginScreen({ onLoggedIn }) {
           <Bus size={28} aria-hidden />
           <div>
             <strong>Excursões</strong>
-            <span>Administração · {APP_VERSION}</span>
+            <span>Administração<span className="app-version"> · {APP_VERSION}</span></span>
           </div>
         </div>
         <h1>Entrar</h1>

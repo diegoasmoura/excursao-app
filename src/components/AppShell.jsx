@@ -25,7 +25,7 @@ export default function AppShell({ view, settingsOpen = false, onNavigate, onOpe
           <Bus size={22} aria-hidden />
           <div>
             <strong>Excursões</strong>
-            <span>Administração · {APP_VERSION}</span>
+            <span>Administração<span className="app-version"> · {APP_VERSION}</span></span>
           </div>
         </div>
         <nav className="app-nav__tabs" aria-label="Navegação principal">

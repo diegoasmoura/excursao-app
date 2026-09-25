@@ -242,6 +242,14 @@ h1, h2, h3, h4, h5, h6 {
   color: #94A3B8;
 }
 
+.app-version {
+  display: none;
+}
+
+html[data-layout='desktop'] .app-version {
+  display: inline;
+}
+
 .app-nav__tabs {
   display: flex;
   gap: 4px;
