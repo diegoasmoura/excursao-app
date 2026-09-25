@@ -294,6 +294,9 @@ async function setupDatabase() {
   await run(
     'CREATE UNIQUE INDEX IF NOT EXISTS idx_trip_person ON passengers(trip_id, person_id)',
   );
+  await run(
+    'CREATE INDEX IF NOT EXISTS idx_passenger_person ON passengers(person_id)',
+  );
 
   const ruleCount = await get('SELECT COUNT(*) AS count FROM schedule_rules');
   if (!ruleCount || ruleCount.count === 0) {
@@ -576,27 +579,27 @@ app.get('/api/people', asyncRoute(async (_req, res) => {
   const rows = await all(
     `
       SELECT pe.*,
-             COALESCE(COUNT(t.id), 0) AS trip_count,
-             (
-               SELECT t2.trip_date
-               FROM passengers p2
-               JOIN trips t2 ON t2.id = p2.trip_id
-               WHERE p2.person_id = pe.id
-               ORDER BY t2.trip_date DESC
-               LIMIT 1
-             ) AS last_trip_date,
-             (
-               SELECT t2.id
-               FROM passengers p2
-               JOIN trips t2 ON t2.id = p2.trip_id
-               WHERE p2.person_id = pe.id
-               ORDER BY t2.trip_date DESC
-               LIMIT 1
-             ) AS last_trip_id
+             COALESCE(s.trip_count, 0) AS trip_count,
+             s.last_trip_date,
+             s.last_trip_id
       FROM people pe
-      LEFT JOIN passengers p ON p.person_id = pe.id
-      LEFT JOIN trips t ON t.id = p.trip_id
-      GROUP BY pe.id
+      LEFT JOIN (
+        SELECT person_id, trip_count, last_trip_date, last_trip_id
+        FROM (
+          SELECT
+            p.person_id,
+            t.trip_date AS last_trip_date,
+            t.id AS last_trip_id,
+            COUNT(*) OVER (PARTITION BY p.person_id) AS trip_count,
+            ROW_NUMBER() OVER (
+              PARTITION BY p.person_id
+              ORDER BY t.trip_date DESC, t.id DESC
+            ) AS rn
+          FROM passengers p
+          JOIN trips t ON t.id = p.trip_id
+        ) ranked
+        WHERE rn = 1
+      ) s ON s.person_id = pe.id
       ORDER BY pe.name COLLATE NOCASE ASC
     `,
   );

@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import { useLayout } from '../context/LayoutContext';
 
 function bottomReserve(layout) {
-  if (layout === 'desktop') return 28;
-  return 88;
+  if (layout === 'desktop') return 16;
+  return 72;
 }
 
-export function useFitPageSize(element, { min = 4, max = 24, rowHeight = 40, headerHeight = 38, barHeight = 62 } = {}) {
+export function useFitPageSize(element, { min = 4, max = 40, rowHeight = 34, headerHeight = 36, barHeight = 52 } = {}) {
   const layout = useLayout();
-  const fallback = layout === 'desktop' ? 12 : layout === 'tablet' ? 8 : 6;
+  const fallback = layout === 'desktop' ? 20 : layout === 'tablet' ? 12 : 8;
   const [pageSize, setPageSize] = useState(fallback);
 
   useEffect(() => {
