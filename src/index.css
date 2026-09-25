@@ -209,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
   min-height: 100dvh;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .app-nav {
@@ -1319,19 +1319,25 @@ html[data-layout='mobile'] .people-pick {
 @media (min-width: 900px) {
   .app-layout {
     flex-direction: row;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
   }
 
   .app-nav {
     display: flex;
     flex-direction: column;
+    flex: 0 0 232px;
     width: 232px;
-    height: 100vh;
-    height: 100dvh;
-    position: sticky;
-    top: 0;
+    height: 100%;
+    align-self: stretch;
+    position: relative;
+    top: auto;
     bottom: auto;
     order: 0;
     padding: 20px 12px;
+    overflow: hidden;
   }
 
   .app-nav__brand {
@@ -1382,6 +1388,10 @@ html[data-layout='mobile'] .people-pick {
 
   .main-content {
     order: 1;
+    min-height: 0;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .period-tabs {
