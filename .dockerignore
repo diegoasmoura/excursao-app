@@ -1,0 +1,8 @@
+node_modules
+data
+database.sqlite
+dist
+dev-dist
+.git
+.env
+*.local
