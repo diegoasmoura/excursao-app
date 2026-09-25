@@ -1,0 +1,11 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3005:3005"
+    environment:
+      PORT: 3005
+      DB_PATH: /app/data/database.sqlite
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

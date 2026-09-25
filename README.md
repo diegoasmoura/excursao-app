@@ -12,6 +12,29 @@ npm run dev      # tela em http://localhost:5173
 
 Dados ficam em `database.sqlite`. O Vite encaminha `/api` para a porta 3005.
 
+### No NAS (Docker)
+
+O GitHub é o meio: o Mac envia o código; o NAS baixa e sobe o container.
+
+No computador, com o repositório já ligado:
+
+```bash
+git remote add origin https://github.com/diegoasmoura/excursao-app.git
+git push -u origin main
+```
+
+No NAS (Container Manager / SSH), na pasta do app:
+
+```bash
+git clone https://github.com/diegoasmoura/excursao-app.git
+cd excursao-app
+mkdir -p data
+# se quiser levar os cadastros atuais, copie o database.sqlite do Mac para data/database.sqlite
+docker compose up -d --build
+```
+
+O painel fica em `http://IP-DO-NAS:3005`. O banco fica em `data/database.sqlite` e não sobe no Git. Para atualizar depois: `git pull` e `docker compose up -d --build`.
+
 O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senha ao digitar. **Lembrar neste computador** mantém logado até clicar em **Sair**. Sem isso, fecha o navegador e precisa entrar de novo.
 
 ### Instalar no celular (PWA)

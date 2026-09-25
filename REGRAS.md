@@ -10,7 +10,7 @@ O painel pede login. Usuário: `Gomoura`. Senha: `Gomoura#`. Dá para ver a senh
 
 Barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**.
 
-Dá para **instalar no celular** (PWA): ícone na tela inicial, abre em tela cheia. A API e os dados continuam no computador da casa. No iPhone: Compartilhar → Adicionar à Tela de Início. No Android: Instalar app (Chrome pede conexão segura).
+Dá para **instalar no celular** (PWA): ícone na tela inicial, abre em tela cheia. No iPhone: Compartilhar → Adicionar à Tela de Início. No Android: Instalar app (Chrome pede conexão segura). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
 ## Viagem
 

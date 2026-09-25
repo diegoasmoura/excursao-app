@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const dbPath = path.join(__dirname, 'database.sqlite');
+const dbPath = process.env.DB_PATH || path.join(__dirname, 'database.sqlite');
 const db = new sqlite3.Database(dbPath);
 
 function run(sql, params = []) {
@@ -739,7 +739,7 @@ if (fs.existsSync(distPath)) {
   });
 }
 
-const PORT = 3005;
+const PORT = Number(process.env.PORT) || 3005;
 
 setupDatabase()
   .then(() => {

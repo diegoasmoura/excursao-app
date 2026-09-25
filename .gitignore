@@ -9,6 +9,7 @@ lerna-debug.log*
 
 node_modules
 database.sqlite
+data/*.sqlite
 .env
 dist
 dist-ssr
