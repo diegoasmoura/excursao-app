@@ -155,9 +155,16 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: var(--border-radius-sm);
   font-family: var(--font-body);
   font-size: 16px;
+  color: var(--color-black);
   background-color: #fff;
   outline: none;
   min-height: 44px;
+}
+
+.form-input::placeholder,
+.form-input::-webkit-input-placeholder {
+  color: #E6E9EE;
+  opacity: 1;
 }
 
 .form-input:focus {
