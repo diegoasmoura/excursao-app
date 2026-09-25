@@ -4,7 +4,7 @@ import { useConfirm } from '../context/ConfirmContext';
 import { useFitPageSize } from '../hooks/useFitPageSize';
 import { usePagedItems } from '../hooks/usePagedItems';
 import { api } from '../lib/api';
-import { formatTripDate, routeLabel, titleCaseName } from '../lib/format';
+import { formatTripDate, routeLabel } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import PaginationBar from './PaginationBar';
@@ -65,11 +65,11 @@ export default function PeopleScreen({ onOpenTrip }) {
     event?.stopPropagation();
     setForm({
       id: person.id,
-      name: titleCaseName(person.name),
+      name: person.name || '',
       rg: person.rg || '',
       phone: person.phone || '',
       doc_type: person.doc_type || inferDocType(person.rg),
-      reference_point: titleCaseName(person.reference_point),
+      reference_point: person.reference_point || '',
     });
   };
 
@@ -77,7 +77,7 @@ export default function PeopleScreen({ onOpenTrip }) {
     event?.stopPropagation();
     const ok = await confirm({
       title: 'Excluir pessoa',
-      message: `Excluir ${titleCaseName(person.name)}? A pessoa sai desta lista e de todas as viagens.`,
+      message: `Excluir ${person.name}? A pessoa sai desta lista e de todas as viagens.`,
       confirmLabel: 'Excluir',
     });
     if (!ok) return;
@@ -209,7 +209,7 @@ export default function PeopleScreen({ onOpenTrip }) {
                 <tbody>
                   {paged.slice.map((person) => (
                     <tr key={person.id}>
-                      <td className="name-cell">{titleCaseName(person.name)}</td>
+                      <td className="name-cell">{person.name}</td>
                       <td>{formatPassengerPhone(person.phone)}</td>
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="type" />
@@ -217,7 +217,7 @@ export default function PeopleScreen({ onOpenTrip }) {
                   <td>
                     <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                   </td>
-                  <td>{titleCaseName(person.reference_point) || '—'}</td>
+                  <td>{person.reference_point || '—'}</td>
                   <td className="people-table__count" onClick={(event) => event.stopPropagation()}>
                     {(person.trip_count ?? person.past_count) > 0 ? (
                       <button type="button" className="table-link" onClick={(event) => openHistory(person, event)}>
@@ -281,7 +281,7 @@ export default function PeopleScreen({ onOpenTrip }) {
       {history && (
         <div className="confirm-overlay" onClick={() => setHistory(null)}>
           <div className="confirm-dialog confirm-dialog--wide" onClick={(event) => event.stopPropagation()}>
-            <h2>Viagens de {titleCaseName(history.name)}</h2>
+            <h2>Viagens de {history.name}</h2>
             <p>Clique numa linha para abrir a viagem com esta pessoa destacada.</p>
             {(history.trips || []).length === 0 ? (
               <p>Ainda não esteve em nenhuma viagem.</p>

@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { api } from './api';
-import { displayPlace, formatTripDate, formatTripDateLong, placeKey, titleCaseName } from './format';
+import { displayPlace, formatTripDate, formatTripDateLong, placeKey } from './format';
 import { maskDocument } from './passengerDisplay';
 
 const NAVY = [15, 23, 42];
@@ -35,7 +35,7 @@ const PDF_COLUMNS = [
     key: 'name',
     head: 'Nome',
     width: 90,
-    value: (seat) => titleCaseName(oneLine(seat.name)),
+    value: (seat) => oneLine(seat.name),
   },
   {
     key: 'document',
@@ -52,7 +52,7 @@ const PDF_COLUMNS = [
     key: 'ref',
     head: 'Ref.',
     width: 75,
-    value: (seat) => titleCaseName(oneLine(seat.reference_point)) || '—',
+    value: (seat) => oneLine(seat.reference_point) || '—',
   },
   {
     key: 'payment',
@@ -167,7 +167,7 @@ function whatsappGreeting(now = new Date()) {
   return 'Boa noite, Cumpadre.';
 }
 
-export function tripWhatsappUrl(phone, trip) {
+export function tripWhatsappUrl(phone, trip, { inBrowser = false } = {}) {
   const digits = String(phone || '').replace(/\D/g, '');
   const full = digits.length <= 11 ? `55${digits}` : digits;
   const text = [
@@ -175,10 +175,11 @@ export function tripWhatsappUrl(phone, trip) {
     '',
     `Estou te enviando a lista da viagem de ${formatTripDate(trip.trip_date)}, ${displayPlace(trip.origin)} - ${displayPlace(trip.destination)}.`,
     '',
-    'Se baixou a lista, é só anexar o PDF nesta conversa.',
-    '',
     'Abraço.',
   ].join('\n');
+  if (inBrowser) {
+    return `https://web.whatsapp.com/send?phone=${full}&text=${encodeURIComponent(text)}`;
+  }
   return `https://wa.me/${full}?text=${encodeURIComponent(text)}`;
 }
 

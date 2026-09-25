@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, UserPlus } from 'lucide-react';
 import { useConfirm } from '../context/ConfirmContext';
 import { api } from '../lib/api';
-import { placeKey, titleCaseName } from '../lib/format';
+import { placeKey } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import PassengerTable from './PassengerTable';
@@ -78,11 +78,11 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
     setQuery('');
     setDraft({
       id: seat.person_id,
-      name: titleCaseName(seat.name),
+      name: seat.name || '',
       phone: seat.phone || '',
       rg: seat.rg || '',
       doc_type: seat.doc_type || inferDocType(seat.rg),
-      reference_point: titleCaseName(seat.reference_point),
+      reference_point: seat.reference_point || '',
     });
   };
 
@@ -158,7 +158,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
   const removeSeat = async (seat) => {
     const ok = await confirm({
       title: 'Tirar desta viagem',
-      message: `Tirar ${titleCaseName(seat.name)} desta viagem? A pessoa continua na lista geral.`,
+      message: `Tirar ${seat.name} desta viagem? A pessoa continua na lista geral.`,
       confirmLabel: 'Tirar',
     });
     if (!ok) return;
@@ -239,7 +239,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
                 <tbody>
                   {matches.map((person) => (
                     <tr key={person.id} className="is-clickable" onClick={() => addExisting(person)}>
-                      <td className="name-cell">{titleCaseName(person.name)}</td>
+                      <td className="name-cell">{person.name}</td>
                       <td>{formatPassengerPhone(person.phone)}</td>
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="type" />
@@ -247,7 +247,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                       </td>
-                      <td>{titleCaseName(person.reference_point) || '—'}</td>
+                      <td>{person.reference_point || '—'}</td>
                       <td>
                         <button type="button" className="table-link" onClick={() => addExisting(person)}>
                           Colocar

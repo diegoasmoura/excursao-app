@@ -8,7 +8,6 @@ import {
   tableFeatures,
   useTable,
 } from '@tanstack/react-table';
-import { titleCaseName } from '../lib/format';
 import { formatPassengerPhone } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 
@@ -36,7 +35,7 @@ export default function PassengerTable({ passengers, onTogglePaid, onRemove, onE
       helper.columns([
         helper.accessor('name', {
           header: 'Nome',
-          cell: (info) => titleCaseName(info.getValue()) || '—',
+          cell: (info) => info.getValue() || '—',
         }),
         helper.accessor((row) => row.doc_type || '', {
           id: 'docType',
@@ -58,7 +57,7 @@ export default function PassengerTable({ passengers, onTogglePaid, onRemove, onE
           id: 'reference',
           header: 'Ref.',
           enableSorting: false,
-          cell: (info) => titleCaseName(info.getValue()) || '—',
+          cell: (info) => info.getValue() || '—',
         }),
         helper.accessor((row) => formatPassengerPhone(row.phone), {
           id: 'phone',

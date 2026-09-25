@@ -3,17 +3,10 @@ const PLACE_LABELS = {
   pirapora: 'Pirapora',
 };
 
-export function titleCaseName(value) {
+export function trimText(value) {
   return String(value || '')
     .trim()
-    .replace(/\s+/g, ' ')
-    .split(' ')
-    .filter(Boolean)
-    .map((word) => {
-      const lower = word.toLocaleLowerCase('pt-BR');
-      return lower.charAt(0).toLocaleUpperCase('pt-BR') + lower.slice(1);
-    })
-    .join(' ');
+    .replace(/\s+/g, ' ');
 }
 
 export function foldText(value) {

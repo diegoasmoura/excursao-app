@@ -94,11 +94,11 @@ Pessoa é cadastro. Quem entra numa viagem também entra nesta lista. Tirar da v
 
 Campos:
 
-- Nome (obrigatório) — primeira letra de cada palavra em maiúscula
+- Nome (obrigatório) — o pai escreve como quiser; só tira espaços sobrando
 - Telefone
 - Tipo de documento: CPF, RG, Certidão ou Outro
 - Número (tipo e número separados)
-- Ponto de referência (linha inteira; na tabela, **Ref.**) — mesma máscara do nome. Ao digitar, sugere até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref.
+- Ponto de referência (linha inteira; na tabela, **Ref.**). Ao digitar, sugere até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref. Só tira espaços sobrando.
 
 Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar). Na viagem o botão vira **Colocar nesta viagem**. Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 
@@ -131,7 +131,7 @@ Cancelar, clique fora ou Esc fecha.
 - Ajustes grava **um** número.
 - **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`).
 - **Abrir** só abre o WhatsApp. Não baixa o PDF.
-- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; pede para anexar o PDF se já baixou.
+- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
 
 ### Cores das cidades
 

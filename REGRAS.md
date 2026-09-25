@@ -33,7 +33,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 
 - Cadastro geral. Quem entra numa viagem também entra nesta lista.
 - Campos: Nome (obrigatório), Telefone, Tipo (CPF por padrão, RG, Certidão, Outro), Número, Ponto de referência. Telefone `(34) 98886-1577`. CPF `000.000.000-00`, RG `00.000.000-0`, Certidão em blocos.
-- **Nome** e **Ref.** saem com a primeira letra de cada palavra em maiúscula.
+- **Nome** e **Ref.** ficam como o pai escrever. Só tira espaços sobrando.
 - Ao digitar a Ref., até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref.
 - Na lista, Ref. No desktop a tabela cabe na tela. No celular, rola para o lado.
 - Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
@@ -72,7 +72,7 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 - Ajustes grava **um** número.
 - **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
 - **Abrir** só abre o WhatsApp. Não baixa o PDF.
-- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; pede para anexar o PDF se já baixou.
+- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
 
 ## O que não muda sozinho
 

@@ -38,17 +38,10 @@ function get(sql, params = []) {
   });
 }
 
-function titleCaseName(value) {
+function trimText(value) {
   return String(value || '')
     .trim()
-    .replace(/\s+/g, ' ')
-    .split(' ')
-    .filter(Boolean)
-    .map((word) => {
-      const lower = word.toLocaleLowerCase('pt-BR');
-      return lower.charAt(0).toLocaleUpperCase('pt-BR') + lower.slice(1);
-    })
-    .join(' ');
+    .replace(/\s+/g, ' ');
 }
 
 function inferDocType(docStr) {
@@ -631,7 +624,7 @@ app.get('/api/people/:id', asyncRoute(async (req, res) => {
 }));
 
 app.post('/api/people', asyncRoute(async (req, res) => {
-  const name = titleCaseName(req.body?.name);
+  const name = trimText(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
   const id = uuidv4();
   await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -640,20 +633,20 @@ app.post('/api/people', asyncRoute(async (req, res) => {
     req.body.rg || '',
     req.body.phone || '',
     req.body.doc_type || inferDocType(req.body.rg),
-    titleCaseName(req.body.reference_point),
+    trimText(req.body.reference_point),
   ]);
   res.json(await get('SELECT * FROM people WHERE id = ?', [id]));
 }));
 
 app.put('/api/people/:id', asyncRoute(async (req, res) => {
-  const name = titleCaseName(req.body?.name);
+  const name = trimText(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
   const result = await run('UPDATE people SET name = ?, rg = ?, phone = ?, doc_type = ?, reference_point = ? WHERE id = ?', [
     name,
     req.body.rg || '',
     req.body.phone || '',
     req.body.doc_type || inferDocType(req.body.rg),
-    titleCaseName(req.body.reference_point),
+    trimText(req.body.reference_point),
     req.params.id,
   ]);
   if (!result.changes) return res.status(404).json({ error: 'Pessoa não encontrada.' });
@@ -695,7 +688,7 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
   const isPaid = req.body?.is_paid ? 1 : 0;
 
   if (!personId) {
-    const name = titleCaseName(req.body?.name);
+    const name = trimText(req.body?.name);
     if (!name) return res.status(400).json({ error: 'Escolha uma pessoa ou informe o nome.' });
     personId = uuidv4();
     await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
@@ -704,7 +697,7 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
       req.body.rg || '',
       req.body.phone || '',
       req.body.doc_type || inferDocType(req.body.rg),
-      titleCaseName(req.body.reference_point),
+      trimText(req.body.reference_point),
     ]);
   } else {
     const person = await get('SELECT id FROM people WHERE id = ?', [personId]);

@@ -12,6 +12,7 @@ import { placeCellClass } from './components/PlaceChip';
 import SortableTh, { compareNumber, compareText, nextSort } from './components/SortableTh';
 import TripDetails from './components/TripDetails';
 import { useConfirm } from './context/ConfirmContext';
+import { useLayout } from './context/LayoutContext';
 import { useFitPageSize } from './hooks/useFitPageSize';
 import { usePagedItems } from './hooks/usePagedItems';
 import { api } from './lib/api';
@@ -31,6 +32,7 @@ function tripCounts(trip) {
 
 function App() {
   const confirm = useConfirm();
+  const layout = useLayout();
   const [session, setSession] = useState(() => getStoredAuth());
   const [authReady, setAuthReady] = useState(!getStoredAuth());
   const [screen, setScreen] = useState('trips');
@@ -132,9 +134,10 @@ function App() {
       setWhatsappOpen(true);
       return;
     }
-    const chat = window.open(tripWhatsappUrl(whatsapp, trip), '_blank');
+    const url = tripWhatsappUrl(whatsapp, trip, { inBrowser: layout === 'desktop' });
+    const chat = window.open(url, '_blank');
     if (!chat) {
-      window.location.assign(tripWhatsappUrl(whatsapp, trip));
+      window.location.assign(url);
     }
   };
 

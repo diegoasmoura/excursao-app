@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { foldText, titleCaseName } from '../lib/format';
+import { foldText } from '../lib/format';
 import {
   DOC_TYPES,
   documentPlaceholder,
@@ -40,11 +40,11 @@ export default function PersonForm({
     onChange({
       ...value,
       id: person.id,
-      name: titleCaseName(person.name),
+      name: person.name || '',
       phone: maskPhone(person.phone || ''),
       rg: maskDocument(person.rg || '', person.doc_type || inferDocType(person.rg)),
       doc_type: person.doc_type || inferDocType(person.rg),
-      reference_point: titleCaseName(person.reference_point),
+      reference_point: person.reference_point || '',
       picked: true,
       pickedName: person.name,
     });
@@ -52,7 +52,7 @@ export default function PersonForm({
   };
 
   const changeName = (raw) => {
-    const name = titleCaseName(raw);
+    const name = raw;
     const patch = { name };
     if (value.picked && foldText(name) !== foldText(value.pickedName)) {
       patch.id = null;
@@ -87,14 +87,12 @@ export default function PersonForm({
   };
 
   const pickReference = (label) => {
-    set({ reference_point: titleCaseName(label) });
+    set({ reference_point: label });
     setRefActiveIndex(-1);
   };
 
   const changeReference = (raw) => {
-    const trailing = /\s$/.test(raw);
-    const next = titleCaseName(raw);
-    set({ reference_point: trailing && next ? `${next} ` : next });
+    set({ reference_point: raw });
     setRefActiveIndex(-1);
   };
 
@@ -153,7 +151,7 @@ export default function PersonForm({
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => pickPerson(person)}
                 >
-                  <strong>{titleCaseName(person.name)}</strong>
+                  <strong>{person.name}</strong>
                   <span className="person-form__suggest-meta">
                     <span>{already ? 'Já nesta viagem' : formatPassengerPhone(person.phone)}</span>
                     {document ? <span>{document}</span> : null}
@@ -229,7 +227,7 @@ export default function PersonForm({
                 onMouseDown={(event) => event.preventDefault()}
                 onClick={() => pickReference(label)}
               >
-                <strong>{titleCaseName(label)}</strong>
+                <strong>{label}</strong>
               </button>
             ))}
           </div>
