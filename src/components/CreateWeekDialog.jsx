@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ChoiceField from './ChoiceField';
 import DialogPortal from './DialogPortal';
 import { api } from '../lib/api';
 import {
@@ -101,21 +102,18 @@ export default function CreateWeekDialog({ trip, onClose, onCreated, onUpdated }
           </div>
           <div className="form-group week-dialog__route">
             <label className="form-label">Rota</label>
-            <select
-              className="form-input"
-              required
+            <ChoiceField
+              layout="stack"
               value={routeKey(draft.origin, draft.destination)}
-              onChange={(event) => {
-                const next = ROUTES.find((route) => routeKey(route.origin, route.destination) === event.target.value);
+              options={ROUTES.map((route) => ({
+                value: routeKey(route.origin, route.destination),
+                label: routeLabel(route.origin, route.destination),
+              }))}
+              onChange={(key) => {
+                const next = ROUTES.find((route) => routeKey(route.origin, route.destination) === key);
                 if (next) setDraft({ ...draft, origin: next.origin, destination: next.destination });
               }}
-            >
-              {ROUTES.map((route) => (
-                <option key={routeKey(route.origin, route.destination)} value={routeKey(route.origin, route.destination)}>
-                  {routeLabel(route.origin, route.destination)}
-                </option>
-              ))}
-            </select>
+            />
           </div>
           <div className="form-group">
             <label className="form-label">Vagas</label>

@@ -9,6 +9,7 @@ import {
   maskPhone,
 } from '../lib/passengerDisplay';
 import { filterPeopleSuggestions, filterReferenceSuggestions } from '../lib/peopleSuggest';
+import ChoiceField from './ChoiceField';
 
 export const emptyPersonForm = { name: '', phone: '', rg: '', doc_type: 'CPF', reference_point: '' };
 
@@ -179,20 +180,11 @@ export default function PersonForm({
         </div>
         <div className="form-group">
           <label className="form-label">Tipo de documento</label>
-          <select
-            className="form-input"
+          <ChoiceField
             value={value.doc_type || 'CPF'}
-            onChange={(event) => {
-              const doc_type = event.target.value;
-              set({ doc_type, rg: maskDocument(value.rg, doc_type) });
-            }}
-          >
-            {DOC_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+            options={DOC_TYPES}
+            onChange={(doc_type) => set({ doc_type, rg: maskDocument(value.rg, doc_type) })}
+          />
         </div>
         <div className="form-group">
           <label className="form-label">Número</label>
