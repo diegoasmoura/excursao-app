@@ -5,6 +5,7 @@ import { api } from '../lib/api';
 import { placeKey } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
+import OccupancyMeter from './OccupancyMeter';
 import PassengerTable from './PassengerTable';
 import DialogPortal from './DialogPortal';
 import PersonForm, { emptyPersonForm } from './PersonForm';
@@ -194,9 +195,14 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
           />
         </div>
         <div className="trip-toolbar__meta">
-          <span>
-            Vagas {passengers.length} / {current.capacity}
-          </span>
+          <div className="trip-toolbar__occupancy">
+            <span>Vagas</span>
+            <OccupancyMeter
+              count={passengers.length}
+              capacity={current.capacity}
+              label={`Vagas ${passengers.length} de ${current.capacity}`}
+            />
+          </div>
           <span>{paid} pagos</span>
         </div>
       </div>
@@ -274,6 +280,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
         ) : passengers.length > 0 && !showDirectory ? (
           <PassengerTable
             passengers={passengerMatches}
+            orderSource={passengers}
             highlightPersonId={highlightPersonId}
             onTogglePaid={togglePaid}
             onRemove={removeSeat}

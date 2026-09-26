@@ -678,7 +678,7 @@ app.get('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
       FROM passengers p
       JOIN people pe ON pe.id = p.person_id
       WHERE p.trip_id = ?
-      ORDER BY pe.name COLLATE NOCASE ASC
+      ORDER BY p.created_at ASC, p.id ASC
     `,
     [req.params.tripId],
   );

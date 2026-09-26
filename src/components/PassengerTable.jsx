@@ -29,10 +29,26 @@ function sortIndicator(column) {
   );
 }
 
-export default function PassengerTable({ passengers, onTogglePaid, onRemove, onEdit, highlightPersonId }) {
+export default function PassengerTable({
+  passengers,
+  orderSource,
+  onTogglePaid,
+  onRemove,
+  onEdit,
+  highlightPersonId,
+}) {
+  const numbers = useMemo(
+    () => Object.fromEntries((orderSource ?? passengers).map((seat, index) => [seat.id, index + 1])),
+    [orderSource, passengers],
+  );
   const columns = useMemo(
     () =>
       helper.columns([
+        helper.accessor((row) => numbers[row.id] ?? 0, {
+          id: 'number',
+          header: 'N.',
+          cell: (info) => info.getValue() || '—',
+        }),
         helper.accessor('name', {
           header: 'Nome',
           cell: (info) => info.getValue() || '—',
@@ -114,7 +130,7 @@ export default function PassengerTable({ passengers, onTogglePaid, onRemove, onE
           ),
         }),
       ]),
-    [onTogglePaid, onRemove, onEdit],
+    [numbers, onTogglePaid, onRemove, onEdit],
   );
 
   useEffect(() => {
@@ -143,6 +159,7 @@ export default function PassengerTable({ passengers, onTogglePaid, onRemove, onE
                     className={[
                       canSort ? 'is-sortable' : '',
                       ICON_COLUMNS.has(header.column.id) ? 'grid-table__icon' : '',
+                      header.column.id === 'number' ? 'passengers-table__number' : '',
                     ]
                       .filter(Boolean)
                       .join(' ') || undefined}
@@ -178,9 +195,11 @@ export default function PassengerTable({ passengers, onTogglePaid, onRemove, onE
                         ? 'payment-cell'
                         : ICON_COLUMNS.has(cell.column.id)
                           ? 'grid-table__icon'
-                          : cell.column.id === 'name'
-                            ? 'name-cell'
-                            : undefined
+                          : cell.column.id === 'number'
+                            ? 'passengers-table__number'
+                            : cell.column.id === 'name'
+                              ? 'name-cell'
+                              : undefined
                     }
                   >
                     <table.FlexRender cell={cell} />

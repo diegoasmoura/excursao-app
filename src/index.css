@@ -173,6 +173,42 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
+.occupancy-meter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 72px;
+  width: 100%;
+}
+
+.occupancy-meter__label {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-black);
+}
+
+.occupancy-meter__track {
+  display: block;
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--color-gray-lightest);
+  overflow: hidden;
+}
+
+.occupancy-meter__fill {
+  display: block;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+.occupancy-meter.is-warn .occupancy-meter__fill {
+  background: var(--color-orange);
+}
+
 .choice-field {
   display: flex;
   flex-wrap: wrap;
@@ -650,7 +686,7 @@ html[data-layout='desktop'] .nav-label--long {
 .trips-table .col-date { width: 11%; }
 .trips-table .col-weekday { width: 6%; }
 .trips-table .col-place { width: 12%; }
-.trips-table .col-occupancy { width: 9%; }
+.trips-table .col-occupancy { width: 13%; }
 .trips-table .col-paid { width: 7%; }
 .trips-table .col-icon { width: 10.75%; }
 
@@ -768,6 +804,14 @@ html[data-layout='desktop'] .nav-label--long {
   width: auto;
   padding: 6px 10px;
   text-align: center;
+}
+
+.passengers-table th.passengers-table__number,
+.passengers-table td.passengers-table__number {
+  width: 44px;
+  min-width: 44px;
+  text-align: center;
+  font-weight: 700;
 }
 
 .icon-action {
@@ -904,9 +948,21 @@ html[data-layout='desktop'] .nav-label--long {
 .trip-toolbar__meta {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 8px 16px;
   color: var(--color-gray-dark);
   font-weight: 600;
+}
+
+.trip-toolbar__occupancy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trip-toolbar__occupancy .occupancy-meter {
+  min-width: 88px;
+  width: 88px;
 }
 
 .trip-workspace {
@@ -1323,7 +1379,7 @@ html[data-layout='mobile'] .grid-table td {
 html[data-layout='mobile'] .trips-table .col-date { width: auto; min-width: 78px; }
 html[data-layout='mobile'] .trips-table .col-weekday { width: auto; min-width: 40px; }
 html[data-layout='mobile'] .trips-table .col-place { width: auto; min-width: 72px; }
-html[data-layout='mobile'] .trips-table .col-occupancy { width: auto; min-width: 64px; }
+html[data-layout='mobile'] .trips-table .col-occupancy { width: auto; min-width: 88px; }
 html[data-layout='mobile'] .trips-table .col-paid { width: auto; min-width: 48px; }
 html[data-layout='mobile'] .people-table .col-icon,
 html[data-layout='mobile'] .people-table td.trips-table__icon {

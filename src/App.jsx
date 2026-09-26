@@ -8,6 +8,7 @@ import PdfColumnsDialog from './components/PdfColumnsDialog';
 import PeopleScreen from './components/PeopleScreen';
 import WhatsappDialog from './components/WhatsappDialog';
 import WhatsappIcon from './components/WhatsappIcon';
+import OccupancyMeter from './components/OccupancyMeter';
 import { placeCellClass } from './components/PlaceChip';
 import SortableTh, { compareNumber, compareText, nextSort } from './components/SortableTh';
 import TripDetails from './components/TripDetails';
@@ -358,7 +359,7 @@ function App() {
                             <td className={placeCellClass(trip.origin)}>{displayPlace(trip.origin)}</td>
                             <td className={placeCellClass(trip.destination)}>{displayPlace(trip.destination)}</td>
                             <td>
-                              {passengerCount} / {trip.capacity}
+                              <OccupancyMeter count={passengerCount} capacity={trip.capacity} />
                             </td>
                             <td>{paidCount}</td>
                             <td className="trips-table__icon" onClick={(event) => event.stopPropagation()}>
