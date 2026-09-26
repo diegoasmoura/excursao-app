@@ -6,6 +6,7 @@ import { placeKey } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import PassengerTable from './PassengerTable';
+import DialogPortal from './DialogPortal';
 import PersonForm, { emptyPersonForm } from './PersonForm';
 import TripHighlights from './TripHighlights';
 
@@ -282,6 +283,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
       </div>
 
       {draft && (
+        <DialogPortal>
         <div className="confirm-overlay" onClick={() => setDraft(null)}>
           <form
             className="confirm-dialog confirm-dialog--wide"
@@ -309,6 +311,7 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
             />
           </form>
         </div>
+        </DialogPortal>
       )}
     </div>
   );

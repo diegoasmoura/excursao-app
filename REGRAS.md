@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.1.3` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.1.4` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
 

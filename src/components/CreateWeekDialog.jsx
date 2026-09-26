@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import DialogPortal from './DialogPortal';
 import { api } from '../lib/api';
 import {
   ROUTES,
@@ -70,6 +71,7 @@ export default function CreateWeekDialog({ trip, onClose, onCreated, onUpdated }
   };
 
   return (
+    <DialogPortal>
     <div className="confirm-overlay" onClick={onClose}>
       <form
         className="confirm-dialog confirm-dialog--wide"
@@ -143,5 +145,6 @@ export default function CreateWeekDialog({ trip, onClose, onCreated, onUpdated }
         </div>
       </form>
     </div>
+    </DialogPortal>
   );
 }

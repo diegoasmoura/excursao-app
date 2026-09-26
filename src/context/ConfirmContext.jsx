@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import DialogPortal from '../components/DialogPortal';
 
 const ConfirmContext = createContext(null);
 
@@ -41,6 +42,7 @@ export function ConfirmProvider({ children }) {
     <ConfirmContext.Provider value={confirm}>
       {children}
       {dialog && (
+        <DialogPortal>
         <div className="confirm-overlay" onClick={() => close(false)}>
           <div
             className="confirm-dialog"
@@ -66,6 +68,7 @@ export function ConfirmProvider({ children }) {
             </div>
           </div>
         </div>
+        </DialogPortal>
       )}
     </ConfirmContext.Provider>
   );

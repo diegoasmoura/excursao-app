@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import DialogPortal from './DialogPortal';
 
 const STORAGE_KEY = 'excursao-pdf-columns';
 
@@ -71,6 +72,7 @@ export default function PdfColumnsDialog({ onClose, onConfirm }) {
   };
 
   return (
+    <DialogPortal>
     <div className="confirm-overlay" onClick={onClose}>
       <form
         className="confirm-dialog"
@@ -112,5 +114,6 @@ export default function PdfColumnsDialog({ onClose, onConfirm }) {
         </div>
       </form>
     </div>
+    </DialogPortal>
   );
 }

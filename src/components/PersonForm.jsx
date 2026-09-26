@@ -23,6 +23,7 @@ export default function PersonForm({
 }) {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [refActiveIndex, setRefActiveIndex] = useState(-1);
+  const [refTyping, setRefTyping] = useState(false);
   const set = (patch) => onChange({ ...value, ...patch });
   const editingOnly = Boolean(value.id && !value.picked);
   const suggestions = useMemo(
@@ -30,8 +31,8 @@ export default function PersonForm({
     [editingOnly, people, value.name],
   );
   const refSuggestions = useMemo(
-    () => filterReferenceSuggestions(people, value.reference_point),
-    [people, value.reference_point],
+    () => (refTyping ? filterReferenceSuggestions(people, value.reference_point) : []),
+    [refTyping, people, value.reference_point],
   );
   const taken = takenIds instanceof Set ? takenIds : new Set(takenIds || []);
 
@@ -88,10 +89,12 @@ export default function PersonForm({
 
   const pickReference = (label) => {
     set({ reference_point: label });
+    setRefTyping(false);
     setRefActiveIndex(-1);
   };
 
   const changeReference = (raw) => {
+    setRefTyping(true);
     set({ reference_point: raw });
     setRefActiveIndex(-1);
   };
@@ -214,6 +217,7 @@ export default function PersonForm({
           placeholder="Ex.: Rodoviária, em frente à praça"
           value={value.reference_point || ''}
           onChange={(event) => changeReference(event.target.value)}
+          onBlur={() => setRefTyping(false)}
           onKeyDown={onReferenceKeyDown}
         />
         {refSuggestions.length > 0 && (

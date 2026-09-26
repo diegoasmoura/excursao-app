@@ -8,6 +8,7 @@ import { formatTripDate, routeLabel } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import PaginationBar from './PaginationBar';
+import DialogPortal from './DialogPortal';
 import PersonForm, { emptyPersonForm } from './PersonForm';
 import SortableTh, { compareNumber, compareText, nextSort } from './SortableTh';
 
@@ -279,6 +280,7 @@ export default function PeopleScreen({ onOpenTrip }) {
       </div>
 
       {history && (
+        <DialogPortal>
         <div className="confirm-overlay" onClick={() => setHistory(null)}>
           <div className="confirm-dialog confirm-dialog--wide" onClick={(event) => event.stopPropagation()}>
             <h2>Viagens de {history.name}</h2>
@@ -318,9 +320,11 @@ export default function PeopleScreen({ onOpenTrip }) {
             </div>
           </div>
         </div>
+        </DialogPortal>
       )}
 
       {form && (
+        <DialogPortal>
         <div className="confirm-overlay" onClick={() => setForm(null)}>
           <form
             className="confirm-dialog confirm-dialog--wide"
@@ -345,6 +349,7 @@ export default function PeopleScreen({ onOpenTrip }) {
             />
           </form>
         </div>
+        </DialogPortal>
       )}
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import DialogPortal from './DialogPortal';
 import { api } from '../lib/api';
 import { maskPhone } from '../lib/passengerDisplay';
 
@@ -21,6 +22,7 @@ export default function WhatsappDialog({ initialPhone = '', onClose, onSaved }) 
   };
 
   return (
+    <DialogPortal>
     <div className="confirm-overlay" onClick={onClose}>
       <form
         className="confirm-dialog confirm-dialog--settings"
@@ -56,5 +58,6 @@ export default function WhatsappDialog({ initialPhone = '', onClose, onSaved }) 
         </div>
       </form>
     </div>
+    </DialogPortal>
   );
 }

@@ -224,7 +224,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .app-nav__brand {
-  display: flex;
+  display: none;
   align-items: center;
   gap: 8px;
   color: #fff;
@@ -1370,6 +1370,7 @@ html[data-layout='mobile'] .people-pick {
   }
 
   .app-nav__brand {
+    display: flex;
     gap: 10px;
     padding: 4px 10px 16px;
     margin-bottom: 12px;
