@@ -363,6 +363,12 @@ html[data-layout='desktop'] .nav-label--long {
   gap: 8px;
 }
 
+.page-title__count {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-gray-dark);
+}
+
 .page-header p,
 .page-hint {
   color: var(--color-gray-dark);

@@ -130,6 +130,7 @@ export default function PeopleScreen({ onOpenTrip }) {
           <h1 className="page-title">
             <Users size={26} aria-hidden />
             Pessoas
+            <span className="page-title__count">{filtered.length}</span>
           </h1>
           <p>Cadastro geral. Quem entrar numa viagem também fica nesta lista.</p>
         </div>
