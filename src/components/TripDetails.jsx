@@ -1,19 +1,29 @@
-import { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, UserPlus } from 'lucide-react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ArrowLeft, Ban, RotateCcw, Save, StickyNote, Trash2, UserPlus } from 'lucide-react';
 import { useConfirm } from '../context/ConfirmContext';
 import { api } from '../lib/api';
 import { placeKey } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
+import NotesEditor from './NotesEditor';
 import OccupancyMeter from './OccupancyMeter';
 import PassengerTable from './PassengerTable';
 import DialogPortal from './DialogPortal';
 import PersonForm, { emptyPersonForm } from './PersonForm';
 import TripHighlights from './TripHighlights';
 
-export default function TripDetails({ trip, highlightPersonId, onBack, onPassengersChange }) {
+export default function TripDetails({
+  trip,
+  highlightPersonId,
+  alert,
+  onBack,
+  onPassengersChange,
+  onCancelTrip,
+  onRestoreTrip,
+  onDeleteTrip,
+}) {
   const confirm = useConfirm();
-  const [current] = useState(trip);
+  const [current, setCurrent] = useState(trip);
   const [passengers, setPassengers] = useState([]);
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -21,6 +31,25 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
   const [query, setQuery] = useState('');
   const [draft, setDraft] = useState(null);
   const [saving, setSaving] = useState(false);
+  // O texto mora no editor; aqui fica só o que precisa para saber se mudou.
+  // Guardar em ref evita redesenhar a tabela de pessoas a cada tecla.
+  const notesRef = useRef(trip.notes ?? '');
+  const savedNotesRef = useRef(trip.notes ?? '');
+  const [notesDirty, setNotesDirty] = useState(false);
+  const [savingNotes, setSavingNotes] = useState(false);
+  const cancelled = current.status === 'cancelled';
+
+  const handleNotesReady = useCallback((html) => {
+    notesRef.current = html;
+    savedNotesRef.current = html;
+    setNotesDirty(false);
+  }, []);
+
+  const handleNotesChange = useCallback((html) => {
+    notesRef.current = html;
+    const dirty = html !== savedNotesRef.current;
+    setNotesDirty((current2) => (current2 === dirty ? current2 : dirty));
+  }, []);
 
   const showFeedback = (type, text) => {
     setFeedback({ type, text });
@@ -157,6 +186,22 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
     setPassengers(passengers.map((item) => (item.id === seat.id ? { ...item, is_paid: next } : item)));
   };
 
+  const toggleGoing = async (seat) => {
+    const next = !seat.is_cancelled;
+    const { error } = await api.setPassengerCancelled(seat.id, next);
+    if (error) {
+      showFeedback('warning', error.message);
+      return;
+    }
+    setPassengers(passengers.map((item) => (item.id === seat.id ? { ...item, is_cancelled: next } : item)));
+    showFeedback(
+      'success',
+      next
+        ? `${seat.name} não vai nesta viagem. A vaga ficou livre.`
+        : `${seat.name} vai viajar de novo.`,
+    );
+  };
+
   const removeSeat = async (seat) => {
     const ok = await confirm({
       title: 'Tirar desta viagem',
@@ -172,18 +217,61 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
     setPassengers(passengers.filter((item) => item.id !== seat.id));
   };
 
-  const paid = passengers.filter((seat) => seat.is_paid).length;
+  const saveNotes = async () => {
+    if (!notesDirty || savingNotes) return;
+    const sent = notesRef.current;
+    setSavingNotes(true);
+    const { data, error } = await api.saveTripNotes(current.id, sent);
+    setSavingNotes(false);
+    if (error) {
+      showFeedback('warning', error.message);
+      return;
+    }
+    const stored = data?.notes ?? sent;
+    savedNotesRef.current = stored;
+    // Se o pai continuou escrevendo enquanto gravava, continua como "Falta gravar".
+    setNotesDirty(notesRef.current !== stored);
+    if (data) setCurrent((value) => ({ ...value, ...data }));
+    showFeedback('success', 'Anotações gravadas.');
+  };
+
+  const handleBack = async () => {
+    if (notesDirty) {
+      const ok = await confirm({
+        title: 'Anotações sem gravar',
+        message: 'Você escreveu e ainda não gravou. Se sair agora, este texto se perde.',
+        confirmLabel: 'Sair sem gravar',
+        cancelLabel: 'Ficar e gravar',
+      });
+      if (!ok) return;
+    }
+    onBack();
+  };
+
+  const handleCancelTrip = async () => {
+    const updated = await onCancelTrip?.(current);
+    if (updated) setCurrent(updated);
+  };
+
+  const handleRestoreTrip = async () => {
+    const updated = await onRestoreTrip?.(current);
+    if (updated) setCurrent(updated);
+  };
+
+  const going = passengers.filter((seat) => !seat.is_cancelled);
+  const dropped = passengers.length - going.length;
+  const paid = going.filter((seat) => seat.is_paid).length;
 
   useEffect(() => {
     if (loading) return;
-    onPassengersChange?.(current.id, passengers.length, paid);
-  }, [loading, current.id, passengers, paid, onPassengersChange]);
+    onPassengersChange?.(current.id, going.length, paid, dropped);
+  }, [loading, current.id, going.length, paid, dropped, onPassengersChange]);
 
   return (
     <div className="page-container page-container--trip">
-      <div className={`trip-toolbar trip-toolbar--${placeKey(current.origin)}`}>
+      <div className={`trip-toolbar trip-toolbar--${placeKey(current.origin)} ${cancelled ? 'trip-toolbar--cancelled' : ''}`}>
         <div className="trip-toolbar__line">
-          <button type="button" className="btn btn-secondary trip-toolbar__back" onClick={onBack} title="Voltar" aria-label="Voltar">
+          <button type="button" className="btn btn-secondary trip-toolbar__back" onClick={handleBack} title="Voltar" aria-label="Voltar">
             <ArrowLeft size={18} aria-hidden />
             <span className="trip-toolbar__back-label">Voltar</span>
           </button>
@@ -198,14 +286,47 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
           <div className="trip-toolbar__occupancy">
             <span>Vagas</span>
             <OccupancyMeter
-              count={passengers.length}
+              count={going.length}
               capacity={current.capacity}
-              label={`Vagas ${passengers.length} de ${current.capacity}`}
+              label={`Vagas ${going.length} de ${current.capacity}`}
             />
           </div>
           <span>{paid} pagos</span>
+          {dropped > 0 && <span className="trip-toolbar__dropped">{dropped} não vão</span>}
+        </div>
+        <div className="trip-toolbar__actions">
+          {cancelled ? (
+            <>
+              <button type="button" className="btn btn-primary" onClick={handleRestoreTrip}>
+                <RotateCcw size={18} color="#fff" aria-hidden />
+                Voltar viagem
+              </button>
+              <button type="button" className="btn btn-danger" onClick={() => onDeleteTrip?.(current)}>
+                <Trash2 size={18} color="#fff" aria-hidden />
+                Excluir de vez
+              </button>
+            </>
+          ) : (
+            <button type="button" className="btn btn-secondary btn-cancel-trip" onClick={handleCancelTrip}>
+              <Ban size={18} aria-hidden />
+              Cancelar viagem
+            </button>
+          )}
         </div>
       </div>
+
+      {alert && (
+        <div className="feedback-warning">
+          <strong>{alert}</strong>
+        </div>
+      )}
+
+      {cancelled && (
+        <div className="feedback-warning">
+          <strong>Esta viagem está cancelada.</strong> As pessoas continuam na lista e ninguém conta na lotação.
+          Use <strong>Voltar viagem</strong> para desfazer.
+        </div>
+      )}
 
       {feedback && (
         <div className={feedback.type === 'success' ? 'feedback-success' : 'feedback-warning'}>
@@ -278,15 +399,57 @@ export default function TripDetails({ trip, highlightPersonId, onBack, onPasseng
         ) : passengers.length === 0 && !term ? (
           <p style={{ color: 'var(--color-gray-dark)' }}>Ninguém nesta viagem ainda.</p>
         ) : passengers.length > 0 && !showDirectory ? (
-          <PassengerTable
-            passengers={passengerMatches}
-            orderSource={passengers}
-            highlightPersonId={highlightPersonId}
-            onTogglePaid={togglePaid}
-            onRemove={removeSeat}
-            onEdit={startEdit}
-          />
+          <>
+            <PassengerTable
+              passengers={passengerMatches}
+              orderSource={passengers}
+              highlightPersonId={highlightPersonId}
+              onTogglePaid={togglePaid}
+              onToggleGoing={toggleGoing}
+              onRemove={removeSeat}
+              onEdit={startEdit}
+            />
+            {dropped > 0 && (
+              <p className="trip-people-note">
+                {dropped} {dropped === 1 ? 'pessoa está marcada' : 'pessoas estão marcadas'} como{' '}
+                <strong>não vai</strong>: fica na lista em cinza, mas não conta nas vagas nem no PDF.
+              </p>
+            )}
+          </>
         ) : null}
+      </div>
+
+      <div className="panel trip-notes">
+        <div className="trip-notes__head">
+          <h2>
+            <StickyNote size={18} aria-hidden />
+            Anotações desta viagem
+          </h2>
+          <span className={`trip-notes__status ${notesDirty ? 'is-dirty' : ''}`}>
+            {savingNotes ? 'Gravando…' : notesDirty ? 'Falta gravar' : 'Gravado'}
+          </span>
+        </div>
+        <p className="trip-notes__hint">
+          Escreva o que precisar lembrar desta viagem. Dá para pôr título, negrito, itálico, sublinhado,
+          lista, realce e cor. Cada viagem tem o seu próprio texto.
+        </p>
+        <NotesEditor
+          initialHtml={trip.notes ?? ''}
+          onChange={handleNotesChange}
+          onReady={handleNotesReady}
+          placeholder="Ex.: João paga no dia. Levar 2 caixas de água. Saída às 6h na praça."
+        />
+        <div className="trip-notes__actions">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={saveNotes}
+            disabled={!notesDirty || savingNotes}
+          >
+            <Save size={18} color="#fff" aria-hidden />
+            Salvar anotações
+          </button>
+        </div>
       </div>
 
       {draft && (

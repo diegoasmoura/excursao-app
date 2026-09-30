@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.1.5`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.1.5`, função nova `1.2.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.4.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.4.1`, função nova `1.5.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -88,15 +88,45 @@ Uma viagem é **uma data + uma rota + um número de vagas**. Nova viagem abre co
 
 Rotas: Uberlândia → Pirapora ou Pirapora → Uberlândia. Um campo só (**Rota**). Mesma cidade nos dois lados não existe.
 
-Alterar ou excluir só muda **aquela** viagem. Excluir pede confirmação no centro. Quem estava sentado **não é apagado**.
+Alterar só muda **aquela** viagem. Quem estava sentado **não é apagado**.
 
-Abas **Próximas** e **Realizadas**. A viagem muda de aba quando a data passa (hoje ainda é próxima).
+Abas **Próximas**, **Realizadas** e **Canceladas**. Entre Próximas e Realizadas a viagem muda sozinha quando a data passa (hoje ainda é próxima). Para Canceladas só vai o que o pai cancelar.
 
-Colunas: Data, **Dia** (Dom, Seg, Ter, Qua, Qui, Sex, Sáb), Origem, Destino, Lotação (`ocupados / vagas`), Pagos, Baixar, Abrir, Alterar, Excluir. Sem pendentes. Sem preço. A lista pagina: só as linhas que cabem na tela.
+Colunas: Data, **Dia** (Dom, Seg, Ter, Qua, Qui, Sex, Sáb), Origem, Destino, Lotação (`ocupados / vagas`), Pagos, Baixar, Abrir, Alterar e **Cancelar**. Na aba Canceladas as duas últimas viram **Voltar** e **Excluir de vez**. Sem pendentes. Sem preço. A lista pagina: só as linhas que cabem na tela.
 
 No desktop, Origem e Destino ficam justas; os ícones de ação têm área maior no celular (dedo).
 
-Alterar e excluir ficam na lista. Na tela da viagem há **Voltar** (no celular, só a seta) na mesma linha da data e da rota. Clicar na linha abre os passageiros.
+Alterar fica na lista. Na tela da viagem há **Voltar** (no celular, só a seta) na mesma linha da data e da rota. Clicar na linha abre os passageiros.
+
+Quem tem anotação mostra um bloquinho ao lado da data. Linha cancelada fica cinza, com a data riscada e o selo **Cancelada**.
+
+#### Cancelar viagem
+
+Cancelar existe em dois lugares: no ícone da linha e no botão **Cancelar viagem** dentro da tela da viagem. No celular o botão de dentro é grande — não precisa arrastar a tabela até a última coluna.
+
+A confirmação diz quantas pessoas vão, quantas pagas e quantas não vão. Cancelar **não apaga nada**: a viagem muda de aba, as pessoas continuam sentadas e a lista continua lá. Dentro da viagem cancelada aparecem **Voltar viagem** e **Excluir de vez**.
+
+**Voltar** devolve para Próximas ou Realizadas conforme a data. **Excluir de vez** só existe em viagem cancelada, pede confirmação e apaga a viagem e os lugares — as pessoas continuam na lista geral.
+
+#### Anotações da viagem
+
+Cada viagem tem **um** texto livre no painel **Anotações desta viagem**, abaixo da lista de pessoas.
+
+O texto é **formatado, tipo Word**. A barra de botões tem **Título**, **Negrito**, **Itálico**, **Sublinhado**, **Lista**, **Lista numerada**, **Realce** (marca-texto amarelo), **3 cores** de texto (marrom, verde, azul) e **Limpar formatação**. O botão do formato ligado fica aceso; Título e Realce desligam no segundo clique. Selecione o texto e toque no botão — no celular o botão segura a seleção, então ela não some. Colar entra como texto puro.
+
+Grava só no botão **Salvar anotações**; o selo ao lado do título diz **Gravado**, **Falta gravar** ou **Gravando…**. Sair com texto sem gravar pergunta antes.
+
+É só daquela viagem: não aparece nas outras, não vai no PDF e não mexe em pessoa nenhuma. Na lista de viagens, quem tem anotação ganha uma **barra âmbar** na borda da data, e passar o mouse mostra o começo do texto. Limite de 20000 caracteres.
+
+Sem biblioteca de editor: é um `contentEditable` e tudo que entra passa por uma lista branca (`src/lib/richText.js`). O servidor recusa marcação perigosa como segunda barreira.
+
+#### Nome repetido na lista de pessoas
+
+Duplicata aqui é **mesmo nome**, ignorando acento, maiúscula e espaços sobrando: `JOSE DA SILVA`, `josé da silva` e `Jose  Da   Silva` são o mesmo.
+
+Cada grupo ganha **uma cor pastel** na linha (6 cores, que se repetem se houver mais grupos) e um selo **N×** antes do nome dizendo quantos cadastros existem com ele. O título da tela mostra **M repetidas** e o botão **Só nomes repetidos** filtra.
+
+Só **avisa**: o app não junta, não escolhe e não apaga nada sozinho. Documento igual com nome diferente não é marcado — o critério escolhido foi o nome.
 
 ### Pessoa (cadastro geral)
 
@@ -114,17 +144,30 @@ Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cada
 
 Na tabela de Pessoas:
 
-- **Viagens**: quantas viagens (próximas e realizadas). Número maior que zero abre o histórico.
+- **Viagens**: quantas viagens (próximas e realizadas). Número maior que zero abre o histórico. Lugar marcado como **não vai** não conta.
 - **Última**: data da mais recente (também a que ainda vai acontecer). Clique abre a viagem e **destaca** a pessoa.
 - No desktop a tabela cabe na tela. No celular, rola para o lado. Pagina sozinha.
+- No histórico, linha cinza com o selo **Não foi** ou **Viagem cancelada** não conta na coluna **Viagens**.
 
 ### Passageiro
 
 - Busca filtra quem já está sentado. Se não achar, oferece Colocar da lista geral ou cadastrar.
 - Cadastro novo entra como **Pendente**.
-- Tirar tira só desta viagem. Colunas: Nome, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar.
+- Tirar tira só desta viagem. Colunas: N., Nome, **Vai?**, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar.
 - Pagamento: **Pago** (verde) ou **Pendente** (âmbar). Sem reais.
 - Não cabe mais gente que as vagas.
+
+#### Não vai (passageiro que desistiu)
+
+**Vai?** marca que a pessoa não vai mais nesta viagem. É um toque, sem confirmação, e o mesmo botão desfaz.
+
+A linha fica **cinza**, o nome **riscado**, o botão vira **Não vai** e o pagamento fica cinza. Quem não vai **não conta em nada**: sai das Vagas, da Lotação, dos Pagos, da numeração e do PDF. A **vaga fica livre** para outra pessoa.
+
+A pessoa **não é apagada** e o lugar continua guardado, só marcado. O N. numera quem vai; quem não vai fica com **—** mas mantém o lugar na ordem.
+
+Voltar a viajar precisa de vaga livre — sem vaga, o app avisa para aumentar as vagas. Colocar de novo quem tinha desistido reativa o mesmo lugar e mantém o pagamento já marcado.
+
+O topo da viagem mostra **Vagas x de y**, **n pagos** e, quando houver, **m não vão**.
 
 ### Popups
 
@@ -139,7 +182,7 @@ Cancelar, clique fora ou Esc fecha.
 ### WhatsApp e PDF
 
 - Ajustes grava **um** número.
-- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`).
+- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`). Quem está marcado como **não vai** fica de fora da lista impressa; o cabeçalho mostra quantos são.
 - **Abrir** só abre o WhatsApp. Não baixa o PDF.
 - Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
 
@@ -149,12 +192,22 @@ Cancelar, clique fora ou Esc fecha.
 - Pirapora: `#F1E0C8` / `#6B3A12`
 - Data, Lotação, Pagos: `#F3F1EC`
 - Pessoa destacada: `#F3E6CF`
+- Linha cancelada ou **não vai**: `#E3E6EA` com texto `#6B7280`
+- Selo Cancelada / Não vai / Não foi: `#FEE2E2` / `#991B1B`
+- Anotações: **Gravado** `#F0FDF4` / `#1F5B38`; **Falta gravar** `#FFFBEB` / `#92400E`
+- Barra de "tem anotação" na lista: `#D97706`. Realce no texto: `#FDE68A`
+- Cores de texto das anotações: marrom `#B45309`, verde `#1F5B38`, azul `#1A3F7A`
+- Nome repetido, 6 cores pastel: `#FBE4E6`, `#E2F0E4`, `#E6E6F8`, `#FDF0D9`, `#DCF0F2`, `#F8E6D8`
 
 ### O que o sistema não faz
 
 - Não cobra, não soma dinheiro, não tem preço.
 - Não muda viagens antigas ao criar uma nova.
 - Não apaga pessoa ao excluir viagem ou ao tirar o assento.
+- Não apaga nada ao **cancelar viagem**: só muda o estado e a aba. **Voltar** desfaz.
+- Não tira a pessoa da viagem ao marcar **não vai**: só marca, e a vaga fica livre.
+- Anotações são de cada viagem. Não aparecem em outra tela nem no PDF.
+- Nome repetido só **avisa**, com cor e selo. Não junta nem apaga cadastro sozinho.
 - Ajustes só grava o WhatsApp.
 - Não cria ida e volta no mesmo clique. Não gera a semana na tela.
 
@@ -163,9 +216,15 @@ Cancelar, clique fora ou Esc fecha.
 ## Dados
 
 - **people** — nome, telefone, tipo e número, ponto de referência
-- **trips** — data, origem, destino, vagas (padrão 45 nas novas)
-- **passengers** — pessoa + viagem + pago/pendente
+- **trips** — data, origem, destino, vagas (padrão 45 nas novas), `status` (`upcoming` ou `cancelled`) e `notes` (HTML já limpo pela lista branca; texto puro de versão antiga continua abrindo certo)
+- **passengers** — pessoa + viagem + pago/pendente + `is_cancelled` (não vai)
 - **users** — administrador (`Gomoura`); senha em hash
 - **sessions** — token até Sair ou expirar
 
-`GET /api/people` devolve `trip_count`, `last_trip_date` e `last_trip_id`.
+As colunas novas entram sozinhas na subida do servidor (`ALTER TABLE` no `setupDatabase`). Banco antigo não precisa de migração manual.
+
+`GET /api/trips` devolve `passenger_count`, `paid_count` e `dropped_count` — os dois primeiros já descontam quem marcou **não vai**.
+
+`GET /api/people` devolve `trip_count`, `last_trip_date` e `last_trip_id`, contando só lugares de quem vai.
+
+Rotas novas: `PATCH /api/trips/:id/cancel`, `PATCH /api/trips/:id/restore`, `PATCH /api/trips/:id/notes`, `PATCH /api/passengers/:id/cancel`.

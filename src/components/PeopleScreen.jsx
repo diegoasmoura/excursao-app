@@ -6,6 +6,7 @@ import { usePagedItems } from '../hooks/usePagedItems';
 import { api } from '../lib/api';
 import { formatTripDate, routeLabel } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
+import { findDuplicates } from '../lib/peopleDuplicates';
 import DocumentCell from './DocumentCell';
 import PaginationBar from './PaginationBar';
 import DialogPortal from './DialogPortal';
@@ -22,8 +23,12 @@ export default function PeopleScreen({ onOpenTrip }) {
   const [saving, setSaving] = useState(false);
   const [sort, setSort] = useState({ key: 'name', dir: 'asc' });
   const [history, setHistory] = useState(null);
+  const [onlyDuplicates, setOnlyDuplicates] = useState(false);
   const [listArea, setListArea] = useState(null);
   const pageSize = useFitPageSize(listArea);
+
+  // Nome repetido: cada grupo ganha uma cor pastel e um selo com quantos são.
+  const duplicates = useMemo(() => findDuplicates(people), [people]);
 
   const load = async () => {
     setLoading(true);
@@ -44,11 +49,12 @@ export default function PeopleScreen({ onOpenTrip }) {
 
   const filtered = useMemo(() => {
     const term = query.trim().toLowerCase();
-    const list = term
+    let list = term
       ? people.filter((person) =>
           [person.name, person.phone, person.rg, person.reference_point].some((value) => (value || '').toLowerCase().includes(term)),
         )
       : [...people];
+    if (onlyDuplicates) list = list.filter((person) => duplicates.color.has(person.id));
     return [...list].sort((a, b) => {
       if (sort.key === 'phone') return compareText(a.phone, b.phone, sort.dir);
       if (sort.key === 'docType') return compareText(a.doc_type || inferDocType(a.rg), b.doc_type || inferDocType(b.rg), sort.dir);
@@ -58,9 +64,9 @@ export default function PeopleScreen({ onOpenTrip }) {
       if (sort.key === 'last') return compareText(a.last_trip_date, b.last_trip_date, sort.dir);
       return compareText(a.name, b.name, sort.dir);
     });
-  }, [people, query, sort]);
+  }, [people, query, sort, onlyDuplicates, duplicates]);
 
-  const paged = usePagedItems(filtered, pageSize, `${query}|${sort.key}|${sort.dir}`);
+  const paged = usePagedItems(filtered, pageSize, `${query}|${onlyDuplicates}|${sort.key}|${sort.dir}`);
 
   const startEdit = (person, event) => {
     event?.stopPropagation();
@@ -131,6 +137,14 @@ export default function PeopleScreen({ onOpenTrip }) {
             <Users size={26} aria-hidden />
             Pessoas
             <span className="page-title__count">{filtered.length}</span>
+            {duplicates.duplicatedPeople > 0 && (
+              <span
+                className="page-title__dupes"
+                title={`${duplicates.duplicatedPeople} cadastros em ${duplicates.groupCount} nomes repetidos`}
+              >
+                {duplicates.duplicatedPeople} repetidas
+              </span>
+            )}
           </h1>
           <p>Cadastro geral. Quem entrar numa viagem também fica nesta lista.</p>
         </div>
@@ -158,6 +172,26 @@ export default function PeopleScreen({ onOpenTrip }) {
             value={query}
             onChange={(event) => setQuery(event.target.value)}
           />
+
+          {duplicates.duplicatedPeople > 0 && (
+            <div className="people-dupes">
+              <button
+                type="button"
+                className={`filter-chip ${onlyDuplicates ? 'is-on' : ''}`}
+                onClick={() => setOnlyDuplicates((value) => !value)}
+                aria-pressed={onlyDuplicates}
+                title="Mostrar só quem tem outro cadastro com o mesmo nome"
+              >
+                Só nomes repetidos
+                <span className="filter-chip__count">{duplicates.duplicatedPeople}</span>
+              </button>
+              <p className="people-dupes__hint">
+                {onlyDuplicates
+                  ? 'Estes são os cadastros com nome repetido. Toque no botão de novo para ver todos.'
+                  : 'Cada nome repetido tem uma cor. O número antes do nome diz quantos cadastros existem com ele.'}
+              </p>
+            </div>
+          )}
 
           {loading ? (
             <p>Carregando pessoas...</p>
@@ -209,9 +243,22 @@ export default function PeopleScreen({ onOpenTrip }) {
                   </tr>
                 </thead>
                 <tbody>
-                  {paged.slice.map((person) => (
-                    <tr key={person.id}>
-                      <td className="name-cell">{person.name}</td>
+                  {paged.slice.map((person) => {
+                    const dupColor = duplicates.color.get(person.id);
+                    const dupCount = duplicates.count.get(person.id) ?? 0;
+                    return (
+                    <tr key={person.id} className={dupColor === undefined ? undefined : `is-dup-${dupColor}`}>
+                      <td
+                        className="name-cell"
+                        title={dupCount > 1 ? `Existem ${dupCount} cadastros com este nome` : undefined}
+                      >
+                        {dupCount > 1 && (
+                          <span className="dup-badge" aria-label={`${dupCount} cadastros com este nome`}>
+                            {dupCount}×
+                          </span>
+                        )}
+                        {person.name}
+                      </td>
                       <td>{formatPassengerPhone(person.phone)}</td>
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="type" />
@@ -262,7 +309,8 @@ export default function PeopleScreen({ onOpenTrip }) {
                     </button>
                   </td>
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -299,19 +347,30 @@ export default function PeopleScreen({ onOpenTrip }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {[...history.trips].reverse().map((trip) => (
-                      <tr
-                        key={trip.seat_id || trip.id}
-                        className="is-clickable"
-                        onClick={() => openTripFromHistory(trip.id, history.id)}
-                      >
-                        <td>{formatTripDate(trip.trip_date)}</td>
-                        <td>{routeLabel(trip.origin, trip.destination)}</td>
-                        <td>{trip.is_paid ? 'Pago' : 'Pendente'}</td>
-                      </tr>
-                    ))}
+                    {[...history.trips].reverse().map((trip) => {
+                      const dropped = Boolean(trip.is_cancelled);
+                      const tripCancelled = trip.trip_status === 'cancelled';
+                      return (
+                        <tr
+                          key={trip.seat_id || trip.id}
+                          className={dropped || tripCancelled ? 'is-clickable is-cancelled' : 'is-clickable'}
+                          onClick={() => openTripFromHistory(trip.id, history.id)}
+                        >
+                          <td>{formatTripDate(trip.trip_date)}</td>
+                          <td>
+                            {routeLabel(trip.origin, trip.destination)}
+                            {dropped && <span className="chip-cancelled chip-cancelled--inline">Não foi</span>}
+                            {!dropped && tripCancelled && (
+                              <span className="chip-cancelled chip-cancelled--inline">Viagem cancelada</span>
+                            )}
+                          </td>
+                          <td>{trip.is_paid ? 'Pago' : 'Pendente'}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
+                <p className="dialog-note">Linhas em cinza não contam na coluna Viagens.</p>
               </div>
             )}
             <div className="confirm-dialog__actions">

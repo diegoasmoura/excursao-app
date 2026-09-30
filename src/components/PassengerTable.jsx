@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { Pencil, UserMinus } from 'lucide-react';
+import { Pencil, UserCheck, UserMinus, UserX } from 'lucide-react';
 import {
   createColumnHelper,
   createSortedRowModel,
@@ -33,25 +33,61 @@ export default function PassengerTable({
   passengers,
   orderSource,
   onTogglePaid,
+  onToggleGoing,
   onRemove,
   onEdit,
   highlightPersonId,
 }) {
-  const numbers = useMemo(
-    () => Object.fromEntries((orderSource ?? passengers).map((seat, index) => [seat.id, index + 1])),
-    [orderSource, passengers],
-  );
+  // `order` guarda a posição real (para ordenar). `shown` numera só quem vai viajar.
+  const { order, shown } = useMemo(() => {
+    const source = orderSource ?? passengers;
+    const orderMap = {};
+    const shownMap = {};
+    let going = 0;
+    source.forEach((seat, index) => {
+      orderMap[seat.id] = index + 1;
+      if (!seat.is_cancelled) {
+        going += 1;
+        shownMap[seat.id] = going;
+      }
+    });
+    return { order: orderMap, shown: shownMap };
+  }, [orderSource, passengers]);
+
   const columns = useMemo(
     () =>
       helper.columns([
-        helper.accessor((row) => numbers[row.id] ?? 0, {
+        helper.accessor((row) => order[row.id] ?? 0, {
           id: 'number',
           header: 'N.',
-          cell: (info) => info.getValue() || '—',
+          cell: (info) => shown[info.row.original.id] ?? '—',
         }),
         helper.accessor('name', {
           header: 'Nome',
           cell: (info) => info.getValue() || '—',
+        }),
+        helper.accessor((row) => (row.is_cancelled ? 'Não vai' : 'Vai'), {
+          id: 'going',
+          header: 'Vai?',
+          enableSorting: false,
+          cell: (info) => {
+            const seat = info.row.original;
+            return (
+              <button
+                type="button"
+                className={`going-toggle going-toggle--${seat.is_cancelled ? 'dropped' : 'going'}`}
+                title={
+                  seat.is_cancelled
+                    ? `${seat.name} não vai. Toque para colocar de volta.`
+                    : `Toque se ${seat.name} não for mais viajar.`
+                }
+                onClick={() => onToggleGoing(seat)}
+              >
+                {seat.is_cancelled ? <UserX size={14} aria-hidden /> : <UserCheck size={14} aria-hidden />}
+                {seat.is_cancelled ? 'Não vai' : 'Vai'}
+              </button>
+            );
+          },
         }),
         helper.accessor((row) => row.doc_type || '', {
           id: 'docType',
@@ -89,7 +125,14 @@ export default function PassengerTable({
             return (
               <button
                 type="button"
-                className={`payment-toggle payment-toggle--${seat.is_paid ? 'paid' : 'pending'}`}
+                className={[
+                  'payment-toggle',
+                  `payment-toggle--${seat.is_paid ? 'paid' : 'pending'}`,
+                  seat.is_cancelled ? 'payment-toggle--off' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                title={seat.is_cancelled ? 'Não entra na conta enquanto estiver marcado como não vai.' : undefined}
                 onClick={() => onTogglePaid(seat)}
               >
                 {seat.is_paid ? 'Pago' : 'Pendente'}
@@ -130,7 +173,7 @@ export default function PassengerTable({
           ),
         }),
       ]),
-    [numbers, onTogglePaid, onRemove, onEdit],
+    [order, shown, onTogglePaid, onToggleGoing, onRemove, onEdit],
   );
 
   useEffect(() => {
@@ -181,32 +224,39 @@ export default function PassengerTable({
               </td>
             </tr>
           ) : (
-            table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                data-person-id={row.original.person_id}
-                className={row.original.person_id === highlightPersonId ? 'is-highlighted' : undefined}
-              >
-                {row.getAllCells().map((cell) => (
-                  <td
-                    key={cell.id}
-                    className={
-                      cell.column.id === 'payment'
-                        ? 'payment-cell'
-                        : ICON_COLUMNS.has(cell.column.id)
-                          ? 'grid-table__icon'
-                          : cell.column.id === 'number'
-                            ? 'passengers-table__number'
-                            : cell.column.id === 'name'
-                              ? 'name-cell'
-                              : undefined
-                    }
-                  >
-                    <table.FlexRender cell={cell} />
-                  </td>
-                ))}
-              </tr>
-            ))
+            table.getRowModel().rows.map((row) => {
+              const seat = row.original;
+              const rowClass = [
+                seat.is_cancelled ? 'is-cancelled' : '',
+                seat.person_id === highlightPersonId ? 'is-highlighted' : '',
+              ]
+                .filter(Boolean)
+                .join(' ');
+              return (
+                <tr key={row.id} data-person-id={seat.person_id} className={rowClass || undefined}>
+                  {row.getAllCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className={
+                        cell.column.id === 'payment'
+                          ? 'payment-cell'
+                          : cell.column.id === 'going'
+                            ? 'going-cell'
+                            : ICON_COLUMNS.has(cell.column.id)
+                              ? 'grid-table__icon'
+                              : cell.column.id === 'number'
+                                ? 'passengers-table__number'
+                                : cell.column.id === 'name'
+                                  ? 'name-cell'
+                                  : undefined
+                      }
+                    >
+                      <table.FlexRender cell={cell} />
+                    </td>
+                  ))}
+                </tr>
+              );
+            })
           )}
         </tbody>
       </table>

@@ -75,8 +75,23 @@ function dateForWeekday(weekday, from) {
 
 function mapSeat(row) {
   if (!row) return row;
-  return { ...row, is_paid: row.is_paid === 1 || row.is_paid === true };
+  return {
+    ...row,
+    is_paid: row.is_paid === 1 || row.is_paid === true,
+    is_cancelled: row.is_cancelled === 1 || row.is_cancelled === true,
+  };
 }
+
+/**
+ * Quem marcou "não vai" não conta na lotação nem nos pagos.
+ * `dropped_count` é só para a tela mostrar quantos desistiram.
+ */
+const TRIP_COUNTS_SQL = `COUNT(CASE WHEN p.is_cancelled = 0 THEN p.id END) AS passenger_count,
+             SUM(CASE WHEN p.is_paid = 1 AND p.is_cancelled = 0 THEN 1 ELSE 0 END) AS paid_count,
+             SUM(CASE WHEN p.is_cancelled = 1 THEN 1 ELSE 0 END) AS dropped_count`;
+
+const SEAT_COLUMNS = `p.id, p.trip_id, p.person_id, p.is_paid, p.is_cancelled, p.created_at,
+             pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point`;
 
 function asyncRoute(handler) {
   return (req, res) => {
@@ -232,6 +247,14 @@ async function setupDatabase() {
   if (!columns.some((column) => column.name === 'person_id')) {
     await run('ALTER TABLE passengers ADD COLUMN person_id TEXT');
   }
+  if (!columns.some((column) => column.name === 'is_cancelled')) {
+    await run('ALTER TABLE passengers ADD COLUMN is_cancelled INTEGER NOT NULL DEFAULT 0');
+  }
+
+  const tripColumns = await all('PRAGMA table_info(trips)');
+  if (!tripColumns.some((column) => column.name === 'notes')) {
+    await run("ALTER TABLE trips ADD COLUMN notes TEXT NOT NULL DEFAULT ''");
+  }
 
   const peopleColumns = await all('PRAGMA table_info(people)');
   if (!peopleColumns.some((column) => column.name === 'reference_point')) {
@@ -315,10 +338,13 @@ function mapTrip(row) {
   if (!row) return null;
   const passengerCount = Number(row.passenger_count ?? 0);
   const paidCount = Number(row.paid_count ?? 0);
+  const droppedCount = Number(row.dropped_count ?? 0);
   return {
     ...row,
+    notes: row.notes ?? '',
     passenger_count: passengerCount,
     paid_count: paidCount,
+    dropped_count: droppedCount,
     passengers: [{ count: passengerCount }],
   };
 }
@@ -327,8 +353,7 @@ async function tripWithCount(id) {
   const row = await get(
     `
       SELECT t.*,
-             COUNT(p.id) AS passenger_count,
-             SUM(CASE WHEN p.is_paid = 1 THEN 1 ELSE 0 END) AS paid_count
+${TRIP_COUNTS_SQL}
       FROM trips t
       LEFT JOIN passengers p ON t.id = p.trip_id
       WHERE t.id = ?
@@ -347,7 +372,10 @@ async function assertSeatAvailable(tripId, personId) {
     throw error;
   }
 
-  const occupied = await get('SELECT COUNT(*) AS count FROM passengers WHERE trip_id = ?', [tripId]);
+  const occupied = await get(
+    'SELECT COUNT(*) AS count FROM passengers WHERE trip_id = ? AND is_cancelled = 0',
+    [tripId],
+  );
   if (occupied.count >= trip.capacity) {
     const error = new Error('Esta excursão já atingiu a lotação máxima.');
     error.status = 400;
@@ -356,7 +384,7 @@ async function assertSeatAvailable(tripId, personId) {
 
   if (personId) {
     const existing = await get(
-      'SELECT id FROM passengers WHERE trip_id = ? AND person_id = ?',
+      'SELECT id FROM passengers WHERE trip_id = ? AND person_id = ? AND is_cancelled = 0',
       [tripId, personId],
     );
     if (existing) {
@@ -372,8 +400,7 @@ async function assertSeatAvailable(tripId, personId) {
 async function seatById(id) {
   const row = await get(
     `
-      SELECT p.id, p.trip_id, p.person_id, p.is_paid, p.created_at,
-             pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point
+      SELECT ${SEAT_COLUMNS}
       FROM passengers p
       JOIN people pe ON pe.id = p.person_id
       WHERE p.id = ?
@@ -420,8 +447,7 @@ app.use('/api', (req, res, next) => {
 app.get('/api/trips', asyncRoute(async (_req, res) => {
   const rows = await all(`
     SELECT t.*,
-           COUNT(p.id) AS passenger_count,
-           SUM(CASE WHEN p.is_paid = 1 THEN 1 ELSE 0 END) AS paid_count
+           ${TRIP_COUNTS_SQL}
     FROM trips t
     LEFT JOIN passengers p ON t.id = p.trip_id
     GROUP BY t.id
@@ -448,7 +474,10 @@ app.put('/api/trips/:id', asyncRoute(async (req, res) => {
   if (!origin?.trim() || !destination?.trim() || !trip_date) {
     return res.status(400).json({ error: 'Origem, destino e data são obrigatórios.' });
   }
-  const seats = await get('SELECT COUNT(*) AS count FROM passengers WHERE trip_id = ?', [req.params.id]);
+  const seats = await get(
+    'SELECT COUNT(*) AS count FROM passengers WHERE trip_id = ? AND is_cancelled = 0',
+    [req.params.id],
+  );
   const nextCapacity = Number(capacity) || 45;
   if (seats.count > nextCapacity) {
     return res.status(400).json({ error: 'A lotação não pode ficar menor que o número de pessoas já colocadas.' });
@@ -461,9 +490,57 @@ app.put('/api/trips/:id', asyncRoute(async (req, res) => {
   res.json(await tripWithCount(req.params.id));
 }));
 
-app.delete('/api/trips/:id', asyncRoute(async (req, res) => {
-  const trip = await get('SELECT id FROM trips WHERE id = ?', [req.params.id]);
+app.patch('/api/trips/:id/cancel', asyncRoute(async (req, res) => {
+  const trip = await get('SELECT id, status FROM trips WHERE id = ?', [req.params.id]);
   if (!trip) return res.status(404).json({ error: 'Viagem não encontrada.' });
+  if (trip.status === 'cancelled') {
+    return res.status(400).json({ error: 'Esta viagem já está cancelada.' });
+  }
+  await run("UPDATE trips SET status = 'cancelled' WHERE id = ?", [req.params.id]);
+  res.json(await tripWithCount(req.params.id));
+}));
+
+app.patch('/api/trips/:id/restore', asyncRoute(async (req, res) => {
+  const trip = await get('SELECT id, status FROM trips WHERE id = ?', [req.params.id]);
+  if (!trip) return res.status(404).json({ error: 'Viagem não encontrada.' });
+  if (trip.status !== 'cancelled') {
+    return res.status(400).json({ error: 'Só é possível voltar viagens canceladas.' });
+  }
+  await run("UPDATE trips SET status = 'upcoming' WHERE id = ?", [req.params.id]);
+  res.json(await tripWithCount(req.params.id));
+}));
+
+const NOTES_MAX = 20000;
+
+/**
+ * Rede de segurança. A limpeza de verdade é a lista branca que roda no
+ * navegador (src/lib/richText.js); aqui só barra o que nunca deveria chegar.
+ */
+const FORBIDDEN_NOTES = /<\s*(script|iframe|object|embed|link|meta|style|svg|form|input|button|textarea)\b|\son[a-z-]+\s*=|javascript\s*:/i;
+
+app.patch('/api/trips/:id/notes', asyncRoute(async (req, res) => {
+  const notes = String(req.body?.notes ?? '').replace(/\r\n/g, '\n').trim();
+  if (notes.length > NOTES_MAX) {
+    return res.status(400).json({ error: `Anotação grande demais. O limite é ${NOTES_MAX} caracteres.` });
+  }
+  if (FORBIDDEN_NOTES.test(notes)) {
+    return res.status(400).json({
+      error: 'O texto tem marcação que o app não aceita. Use os botões de formatação ou cole só o texto.',
+    });
+  }
+  const result = await run('UPDATE trips SET notes = ? WHERE id = ?', [notes, req.params.id]);
+  if (!result.changes) return res.status(404).json({ error: 'Viagem não encontrada.' });
+  res.json(await tripWithCount(req.params.id));
+}));
+
+app.delete('/api/trips/:id', asyncRoute(async (req, res) => {
+  const trip = await get('SELECT id, status FROM trips WHERE id = ?', [req.params.id]);
+  if (!trip) return res.status(404).json({ error: 'Viagem não encontrada.' });
+  if (trip.status !== 'cancelled') {
+    return res.status(400).json({
+      error: 'Cancele a viagem primeiro. Só é possível excluir de vez em Canceladas.',
+    });
+  }
   await run('DELETE FROM passengers WHERE trip_id = ?', [req.params.id]);
   await run('DELETE FROM trips WHERE id = ?', [req.params.id]);
   res.json({ ok: true });
@@ -597,6 +674,7 @@ app.get('/api/people', asyncRoute(async (_req, res) => {
             ) AS rn
           FROM passengers p
           JOIN trips t ON t.id = p.trip_id
+          WHERE p.is_cancelled = 0
         ) ranked
         WHERE rn = 1
       ) s ON s.person_id = pe.id
@@ -615,7 +693,8 @@ app.get('/api/people/:id', asyncRoute(async (req, res) => {
   if (!person) return res.status(404).json({ error: 'Pessoa não encontrada.' });
   const trips = await all(
     `
-      SELECT t.id, t.origin, t.destination, t.trip_date, p.is_paid, p.id AS seat_id
+      SELECT t.id, t.origin, t.destination, t.trip_date, t.status AS trip_status,
+             p.is_paid, p.is_cancelled, p.id AS seat_id
       FROM passengers p
       JOIN trips t ON t.id = p.trip_id
       WHERE p.person_id = ?
@@ -673,8 +752,7 @@ app.delete('/api/people/:id', asyncRoute(async (req, res) => {
 app.get('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
   const rows = await all(
     `
-      SELECT p.id, p.trip_id, p.person_id, p.is_paid, p.created_at,
-             pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point
+      SELECT ${SEAT_COLUMNS}
       FROM passengers p
       JOIN people pe ON pe.id = p.person_id
       WHERE p.trip_id = ?
@@ -713,11 +791,21 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
     return res.status(error.status || 500).json({ error: error.message });
   }
 
+  const dropped = await get(
+    'SELECT id FROM passengers WHERE trip_id = ? AND person_id = ? AND is_cancelled = 1',
+    [tripId, personId],
+  );
+  if (dropped) {
+    // Quem tinha desistido e voltou: reativa o mesmo lugar e mantém o pagamento já marcado.
+    await run('UPDATE passengers SET is_cancelled = 0 WHERE id = ?', [dropped.id]);
+    return res.json(await seatById(dropped.id));
+  }
+
   const person = await get('SELECT * FROM people WHERE id = ?', [personId]);
   const seatId = uuidv4();
   await run(
-    `INSERT INTO passengers (id, trip_id, person_id, name, rg, phone, is_paid)
-     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    `INSERT INTO passengers (id, trip_id, person_id, name, rg, phone, is_paid, is_cancelled)
+     VALUES (?, ?, ?, ?, ?, ?, ?, 0)`,
     [seatId, tripId, personId, person.name, person.rg || '', person.phone || '', isPaid],
   );
   res.json(await seatById(seatId));
@@ -730,6 +818,35 @@ app.patch('/api/passengers/:id/payment', asyncRoute(async (req, res) => {
   ]);
   if (!result.changes) return res.status(404).json({ error: 'Lugar não encontrado.' });
   res.json({ success: true });
+}));
+
+app.patch('/api/passengers/:id/cancel', asyncRoute(async (req, res) => {
+  const seat = await get(
+    'SELECT id, trip_id, is_cancelled FROM passengers WHERE id = ?',
+    [req.params.id],
+  );
+  if (!seat) return res.status(404).json({ error: 'Lugar não encontrado.' });
+
+  const isCancelled = req.body?.is_cancelled ? 1 : 0;
+  if (isCancelled === seat.is_cancelled) {
+    return res.json({ success: true, is_cancelled: Boolean(isCancelled) });
+  }
+
+  // Voltar a viajar precisa de vaga livre, igual a colocar uma pessoa nova.
+  if (!isCancelled) {
+    try {
+      await assertSeatAvailable(seat.trip_id, null);
+    } catch (error) {
+      const message =
+        error.status === 400
+          ? 'Não há vaga livre. Aumente as vagas da viagem para colocar esta pessoa de volta.'
+          : error.message;
+      return res.status(error.status || 500).json({ error: message });
+    }
+  }
+
+  await run('UPDATE passengers SET is_cancelled = ? WHERE id = ?', [isCancelled, req.params.id]);
+  res.json({ success: true, is_cancelled: Boolean(isCancelled) });
 }));
 
 app.delete('/api/passengers/:id', asyncRoute(async (req, res) => {

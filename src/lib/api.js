@@ -34,6 +34,10 @@ export const api = {
   getTrips: () => request('/api/trips'),
   createTrip: (trip) => request('/api/trips', { method: 'POST', body: JSON.stringify(trip) }),
   updateTrip: (id, trip) => request(`/api/trips/${id}`, { method: 'PUT', body: JSON.stringify(trip) }),
+  cancelTrip: (id) => request(`/api/trips/${id}/cancel`, { method: 'PATCH', body: '{}' }),
+  restoreTrip: (id) => request(`/api/trips/${id}/restore`, { method: 'PATCH', body: '{}' }),
+  saveTripNotes: (id, notes) =>
+    request(`/api/trips/${id}/notes`, { method: 'PATCH', body: JSON.stringify({ notes }) }),
   deleteTrip: (id) => request(`/api/trips/${id}`, { method: 'DELETE' }),
   generateWeek: () => request('/api/trips/generate-week', { method: 'POST', body: '{}' }),
   getSchedule: () => request('/api/schedule'),
@@ -52,6 +56,11 @@ export const api = {
     request(`/api/passengers/${id}/payment`, {
       method: 'PATCH',
       body: JSON.stringify({ is_paid: isPaid }),
+    }),
+  setPassengerCancelled: (id, isCancelled) =>
+    request(`/api/passengers/${id}/cancel`, {
+      method: 'PATCH',
+      body: JSON.stringify({ is_cancelled: isCancelled }),
     }),
   deletePassenger: (id) => request(`/api/passengers/${id}`, { method: 'DELETE' }),
   getWhatsapp: () => request('/api/settings/whatsapp'),

@@ -24,6 +24,10 @@ function oneLine(value) {
     .trim();
 }
 
+function countWord(count, one, many) {
+  return `${count} ${Number(count) === 1 ? one : many}`;
+}
+
 const PDF_COLUMNS = [
   {
     key: 'number',
@@ -77,7 +81,7 @@ function widthsFor(columns) {
   return rounded;
 }
 
-function buildPdf(trip, passengers, columns) {
+function buildPdf(trip, passengers, columns, { dropped = 0 } = {}) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const paid = passengers.filter((seat) => seat.is_paid).length;
@@ -98,9 +102,13 @@ function buildPdf(trip, passengers, columns) {
   doc.text(formatTripDateLong(trip.trip_date) || formatTripDate(trip.trip_date), pageWidth - 14, 12, {
     align: 'right',
   });
-  doc.text(`${passengers.length} pessoas   ·   ${paid} pagos   ·   ${passengers.length - paid} pendentes`, pageWidth - 14, 20, {
-    align: 'right',
-  });
+  const summary = [
+    countWord(passengers.length, 'pessoa', 'pessoas'),
+    `${paid} pagos`,
+    countWord(passengers.length - paid, 'pendente', 'pendentes'),
+  ];
+  if (dropped > 0) summary.push(countWord(dropped, 'não vai', 'não vão'));
+  doc.text(summary.join('   ·   '), pageWidth - 14, 20, { align: 'right' });
 
   autoTable(doc, {
     startY: 34,
@@ -186,5 +194,8 @@ export function tripWhatsappUrl(phone, trip, { inBrowser = false } = {}) {
 export async function downloadTripPdf(trip, columns) {
   const { data, error } = await api.getPassengers(trip.id);
   if (error) throw new Error(error.message);
-  buildPdf(trip, data ?? [], columns).save(tripPdfFileName(trip));
+  const seats = data ?? [];
+  // Quem marcou "não vai" fica de fora da lista impressa.
+  const going = seats.filter((seat) => !seat.is_cancelled);
+  buildPdf(trip, going, columns, { dropped: seats.length - going.length }).save(tripPdfFileName(trip));
 }
