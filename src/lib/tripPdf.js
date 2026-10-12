@@ -175,6 +175,21 @@ function whatsappGreeting(now = new Date()) {
   return 'Boa noite, Cumpadre.';
 }
 
+export function passengerWhatsappUrl(phone, { name = '', trip, inBrowser = false } = {}) {
+  const digits = String(phone || '').replace(/\D/g, '');
+  if (digits.length < 10) return '';
+  const full = digits.length <= 11 ? `55${digits}` : digits;
+  const first = String(name || '').trim().split(/\s+/)[0];
+  const hello = first ? `Olá, ${first}.` : 'Olá.';
+  const text = trip
+    ? [hello, '', `Viagem de ${formatTripDate(trip.trip_date)}, ${displayPlace(trip.origin)} - ${displayPlace(trip.destination)}.`].join('\n')
+    : hello;
+  if (inBrowser) {
+    return `https://web.whatsapp.com/send?phone=${full}&text=${encodeURIComponent(text)}`;
+  }
+  return `https://wa.me/${full}?text=${encodeURIComponent(text)}`;
+}
+
 export function tripWhatsappUrl(phone, trip, { inBrowser = false } = {}) {
   const digits = String(phone || '').replace(/\D/g, '');
   const full = digits.length <= 11 ? `55${digits}` : digits;

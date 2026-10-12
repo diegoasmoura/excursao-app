@@ -8,8 +8,11 @@ import {
   tableFeatures,
   useTable,
 } from '@tanstack/react-table';
+import { useLayout } from '../context/LayoutContext';
 import { formatPassengerPhone } from '../lib/passengerDisplay';
+import { passengerWhatsappUrl } from '../lib/tripPdf';
 import DocumentCell from './DocumentCell';
+import WhatsappIcon from './WhatsappIcon';
 
 const features = tableFeatures({
   rowSortingFeature,
@@ -18,7 +21,7 @@ const features = tableFeatures({
 });
 
 const helper = createColumnHelper();
-const ICON_COLUMNS = new Set(['edit', 'remove']);
+const ICON_COLUMNS = new Set(['whatsapp', 'edit', 'remove']);
 
 function sortIndicator(column) {
   const sorted = column.getIsSorted();
@@ -30,6 +33,7 @@ function sortIndicator(column) {
 }
 
 export default function PassengerTable({
+  trip,
   passengers,
   orderSource,
   onTogglePaid,
@@ -38,6 +42,7 @@ export default function PassengerTable({
   onEdit,
   highlightPersonId,
 }) {
+  const layout = useLayout();
   // `order` guarda a posição real (para ordenar). `shown` numera só quem vai viajar.
   const { order, shown } = useMemo(() => {
     const source = orderSource ?? passengers;
@@ -116,6 +121,35 @@ export default function PassengerTable({
           header: 'Telefone',
           enableSorting: false,
         }),
+        helper.display({
+          id: 'whatsapp',
+          header: 'WhatsApp',
+          enableSorting: false,
+          cell: (info) => {
+            const seat = info.row.original;
+            const url = passengerWhatsappUrl(seat.phone, {
+              name: seat.name,
+              trip,
+              inBrowser: layout === 'desktop',
+            });
+            return (
+              <button
+                type="button"
+                className="icon-action"
+                title={url ? `WhatsApp de ${seat.name}` : 'Sem telefone'}
+                aria-label={url ? `WhatsApp de ${seat.name}` : 'Sem telefone'}
+                disabled={!url}
+                onClick={() => {
+                  if (!url) return;
+                  const chat = window.open(url, '_blank');
+                  if (!chat) window.location.assign(url);
+                }}
+              >
+                <WhatsappIcon />
+              </button>
+            );
+          },
+        }),
         helper.accessor((row) => (row.is_paid ? 'Pago' : 'Pendente'), {
           id: 'payment',
           header: 'Pagamento',
@@ -173,7 +207,7 @@ export default function PassengerTable({
           ),
         }),
       ]),
-    [order, shown, onTogglePaid, onToggleGoing, onRemove, onEdit],
+    [order, shown, trip, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
   );
 
   useEffect(() => {

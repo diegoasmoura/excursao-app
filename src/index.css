@@ -863,6 +863,11 @@ html[data-layout='desktop'] .nav-label--long {
   cursor: pointer;
 }
 
+.icon-action:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 .icon-action--danger {
   color: var(--color-orange);
 }
@@ -1738,16 +1743,26 @@ html[data-layout='mobile'] .period-tabs {
 }
 
 html[data-layout='mobile'] .period-tabs button {
+  container-type: inline-size;
   flex-direction: column;
   flex-wrap: nowrap;
-  gap: 2px;
-  min-height: 52px;
-  padding: 8px 2px;
-  font-size: clamp(11px, 3.4vw, 14px);
+  gap: 0;
+  min-height: 56px;
+  padding: 6px 2px;
+  line-height: 1.05;
+}
+
+html[data-layout='mobile'] .period-tabs__label,
+html[data-layout='mobile'] .period-tabs__count {
+  font-size: clamp(16px, 19.5cqi, 22px);
+}
+
+html[data-layout='mobile'] .period-tabs__label {
+  overflow: visible;
+  text-overflow: unset;
 }
 
 html[data-layout='mobile'] .period-tabs__count {
-  font-size: 0.95em;
   font-weight: 800;
 }
 

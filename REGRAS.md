@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.4.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.5.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
 
@@ -82,7 +82,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 
 - Busca filtra quem já está na viagem. Se não achar, oferece Colocar ou cadastrar.
 - Cadastro novo senta como **Pendente**. Tirar tira só desta viagem.
-- Colunas: N., Nome, **Vai?**, Tipo, Número, Ref., Telefone, Pagamento, Editar, Tirar.
+- Colunas: N., Nome, **Vai?**, Tipo, Número, Ref., Telefone, **WhatsApp**, Pagamento, Editar, Tirar.
 - Pagamento: Pago (verde) ou Pendente (âmbar). Sem valor. Não cabe mais gente que as vagas.
 
 ### Não vai (passageiro que desistiu)
@@ -125,10 +125,11 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 
 ## WhatsApp
 
-- Ajustes grava **um** número.
+- Ajustes grava **um** número. Esse número só serve para enviar a lista da viagem.
 - **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
-- **Abrir** só abre o WhatsApp. Não baixa o PDF.
-- Mensagem: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
+- **Abrir**, na lista de viagens, só abre o WhatsApp do número dos Ajustes. Não baixa o PDF.
+- Mensagem da lista: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
+- Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro. A mensagem já vem com o primeiro nome, a data e o trajeto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
 
 ## O que não muda sozinho
 
@@ -138,5 +139,5 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 - Marcar **não vai** não tira a pessoa da viagem nem apaga o cadastro.
 - Anotações são de cada viagem. Não aparecem em nenhuma outra tela nem no PDF.
 - Nome repetido só **avisa**, com cor e selo. O app não junta nem apaga cadastros sozinho.
-- Não há preço. Ajustes só grava o WhatsApp.
+- Não há preço. Ajustes só grava o WhatsApp da lista. O botão de cada passageiro usa o telefone do cadastro.
 - A tela não gera a semana.

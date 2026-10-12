@@ -401,6 +401,7 @@ export default function TripDetails({
         ) : passengers.length > 0 && !showDirectory ? (
           <>
             <PassengerTable
+              trip={current}
               passengers={passengerMatches}
               orderSource={passengers}
               highlightPersonId={highlightPersonId}
