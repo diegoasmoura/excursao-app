@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.5.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.5.1` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
 
@@ -129,7 +129,7 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 - **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
 - **Abrir**, na lista de viagens, só abre o WhatsApp do número dos Ajustes. Não baixa o PDF.
 - Mensagem da lista: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
-- Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro. A mensagem já vem com o primeiro nome, a data e o trajeto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
+- Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro, sem texto pronto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
 
 ## O que não muda sozinho
 

@@ -33,7 +33,6 @@ function sortIndicator(column) {
 }
 
 export default function PassengerTable({
-  trip,
   passengers,
   orderSource,
   onTogglePaid,
@@ -128,8 +127,6 @@ export default function PassengerTable({
           cell: (info) => {
             const seat = info.row.original;
             const url = passengerWhatsappUrl(seat.phone, {
-              name: seat.name,
-              trip,
               inBrowser: layout === 'desktop',
             });
             return (
@@ -207,7 +204,7 @@ export default function PassengerTable({
           ),
         }),
       ]),
-    [order, shown, trip, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
+    [order, shown, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
   );
 
   useEffect(() => {

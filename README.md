@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.5.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.5.1`, função nova `1.6.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.5.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.5.2`, função nova `1.6.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -185,7 +185,7 @@ Cancelar, clique fora ou Esc fecha.
 - **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`). Quem está marcado como **não vai** fica de fora da lista impressa; o cabeçalho mostra quantos são.
 - **Abrir**, na lista de viagens, só abre o WhatsApp do número dos Ajustes. Não baixa o PDF.
 - Mensagem da lista: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
-- Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro. A mensagem já vem com o primeiro nome, a data e o trajeto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
+- Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro, sem texto pronto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
 
 ### Cores das cidades
 
