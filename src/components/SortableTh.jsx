@@ -1,8 +1,8 @@
-export default function SortableTh({ column, sort, onSort, children }) {
+export default function SortableTh({ column, sort, onSort, className, children }) {
   const active = sort.key === column;
   return (
     <th
-      className="is-sortable"
+      className={['is-sortable', className].filter(Boolean).join(' ')}
       onClick={() => onSort(column)}
       aria-sort={active ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none'}
     >

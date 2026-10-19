@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Ban, RotateCcw, Save, StickyNote, Trash2, UserPlus } from 'lucide-react';
 import { useConfirm } from '../context/ConfirmContext';
 import { api } from '../lib/api';
-import { placeKey } from '../lib/format';
+import { placeKey, referenceForRoute } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import NotesEditor from './NotesEditor';
@@ -114,6 +114,7 @@ export default function TripDetails({
       rg: seat.rg || '',
       doc_type: seat.doc_type || inferDocType(seat.rg),
       reference_point: seat.reference_point || '',
+      reference_point_back: seat.reference_point_back || '',
     });
   };
 
@@ -126,6 +127,7 @@ export default function TripDetails({
       rg: draft.rg,
       doc_type: draft.doc_type,
       reference_point: draft.reference_point,
+      reference_point_back: draft.reference_point_back,
     };
 
     if (draft.picked && draft.id) {
@@ -154,7 +156,15 @@ export default function TripDetails({
       setPassengers(
         passengers.map((seat) =>
           seat.person_id === data.id
-            ? { ...seat, name: data.name, phone: data.phone, rg: data.rg, doc_type: data.doc_type, reference_point: data.reference_point }
+            ? {
+                ...seat,
+                name: data.name,
+                phone: data.phone,
+                rg: data.rg,
+                doc_type: data.doc_type,
+                reference_point: data.reference_point,
+                reference_point_back: data.reference_point_back,
+              }
             : seat,
         ),
       );
@@ -170,7 +180,15 @@ export default function TripDetails({
       return;
     }
     setPassengers([...passengers, data]);
-    setPeople([...people, { id: data.person_id, name: data.name, phone: data.phone, rg: data.rg, doc_type: data.doc_type }]);
+    setPeople([...people, {
+      id: data.person_id,
+      name: data.name,
+      phone: data.phone,
+      rg: data.rg,
+      doc_type: data.doc_type,
+      reference_point: data.reference_point,
+      reference_point_back: data.reference_point_back,
+    }]);
     setDraft(null);
     setQuery('');
     showFeedback('success', 'Pessoa cadastrada e colocada nesta viagem.');
@@ -375,7 +393,7 @@ export default function TripDetails({
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                       </td>
-                      <td>{person.reference_point || '—'}</td>
+                      <td>{referenceForRoute(person, current.origin, current.destination) || '—'}</td>
                       <td>
                         <button type="button" className="table-link" onClick={() => addExisting(person)}>
                           Colocar
@@ -402,6 +420,8 @@ export default function TripDetails({
           <>
             <PassengerTable
               passengers={passengerMatches}
+              origin={current.origin}
+              destination={current.destination}
               orderSource={passengers}
               highlightPersonId={highlightPersonId}
               onTogglePaid={togglePaid}

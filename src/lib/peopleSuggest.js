@@ -18,13 +18,13 @@ export function filterPeopleSuggestions(people, query, { limit = 8 } = {}) {
     .map((item) => item.person);
 }
 
-export function filterReferenceSuggestions(people, query, { limit = 8 } = {}) {
+export function filterReferenceSuggestions(people, query, field = 'reference_point', { limit = 8 } = {}) {
   const term = foldText(query);
   if (term.length < 1) return [];
 
   const unique = new Map();
   for (const person of people) {
-    const label = String(person.reference_point || '').replace(/\s+/g, ' ').trim();
+    const label = String(person[field] || '').replace(/\s+/g, ' ').trim();
     const key = foldText(label);
     if (!key || unique.has(key)) continue;
     unique.set(key, label);

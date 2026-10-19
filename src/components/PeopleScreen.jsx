@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Pencil, Trash2, UserPlus, Users } from 'lucide-react';
+import { ArrowLeftRight, Pencil, Trash2, UserPlus, Users } from 'lucide-react';
 import { useConfirm } from '../context/ConfirmContext';
 import { useFitPageSize } from '../hooks/useFitPageSize';
 import { usePagedItems } from '../hooks/usePagedItems';
@@ -51,7 +51,7 @@ export default function PeopleScreen({ onOpenTrip }) {
     const term = query.trim().toLowerCase();
     let list = term
       ? people.filter((person) =>
-          [person.name, person.phone, person.rg, person.reference_point].some((value) => (value || '').toLowerCase().includes(term)),
+          [person.name, person.phone, person.rg, person.reference_point, person.reference_point_back].some((value) => (value || '').toLowerCase().includes(term)),
         )
       : [...people];
     if (onlyDuplicates) list = list.filter((person) => duplicates.color.has(person.id));
@@ -60,6 +60,7 @@ export default function PeopleScreen({ onOpenTrip }) {
       if (sort.key === 'docType') return compareText(a.doc_type || inferDocType(a.rg), b.doc_type || inferDocType(b.rg), sort.dir);
       if (sort.key === 'document') return compareText(a.rg, b.rg, sort.dir);
       if (sort.key === 'reference') return compareText(a.reference_point, b.reference_point, sort.dir);
+      if (sort.key === 'referenceBack') return compareText(a.reference_point_back, b.reference_point_back, sort.dir);
       if (sort.key === 'past') return compareNumber(a.trip_count ?? a.past_count, b.trip_count ?? b.past_count, sort.dir);
       if (sort.key === 'last') return compareText(a.last_trip_date, b.last_trip_date, sort.dir);
       return compareText(a.name, b.name, sort.dir);
@@ -77,6 +78,7 @@ export default function PeopleScreen({ onOpenTrip }) {
       phone: person.phone || '',
       doc_type: person.doc_type || inferDocType(person.rg),
       reference_point: person.reference_point || '',
+      reference_point_back: person.reference_point_back || '',
     });
   };
 
@@ -98,10 +100,50 @@ export default function PeopleScreen({ onOpenTrip }) {
     if (form?.id === person.id) setForm(null);
   };
 
+  const moveReference = async (person, event) => {
+    event?.stopPropagation();
+    const going = String(person.reference_point || '').trim();
+    const back = String(person.reference_point_back || '').trim();
+    if (!going && !back) return;
+    const message = going && back
+      ? `Trocar os pontos de ${person.name}? «${going}» passa para Pirapora → Uberlândia e «${back}» passa para Uberlândia → Pirapora.`
+      : going
+        ? `Mover «${going}» de Uberlândia → Pirapora para Pirapora → Uberlândia?`
+        : `Mover «${back}» de Pirapora → Uberlândia para Uberlândia → Pirapora?`;
+    const ok = await confirm({
+      title: going && back ? 'Trocar pontos' : 'Mover ponto',
+      message,
+      confirmLabel: going && back ? 'Trocar' : 'Mover',
+      cancelLabel: 'Não',
+      danger: false,
+    });
+    if (!ok) return;
+    const { data, error: moveError } = await api.updatePerson(person.id, {
+      name: person.name,
+      rg: person.rg,
+      phone: person.phone,
+      doc_type: person.doc_type || inferDocType(person.rg),
+      reference_point: back,
+      reference_point_back: going,
+    });
+    if (moveError) {
+      setError(moveError.message);
+      return;
+    }
+    setPeople((current) => current.map((item) => (item.id === data.id ? { ...item, ...data } : item)));
+  };
+
   const savePerson = async (event) => {
     event.preventDefault();
     setSaving(true);
-    const payload = { name: form.name, rg: form.rg, phone: form.phone, doc_type: form.doc_type, reference_point: form.reference_point };
+    const payload = {
+      name: form.name,
+      rg: form.rg,
+      phone: form.phone,
+      doc_type: form.doc_type,
+      reference_point: form.reference_point,
+      reference_point_back: form.reference_point_back,
+    };
     const { data, error: saveError } = form.id
       ? await api.updatePerson(form.id, payload)
       : await api.createPerson(payload);
@@ -210,8 +252,10 @@ export default function PeopleScreen({ onOpenTrip }) {
                   <col className="col-type" />
                   <col className="col-document" />
                   <col className="col-ref" />
+                  <col className="col-ref" />
                   <col className="col-count" />
                   <col className="col-last" />
+                  <col className="col-icon" />
                   <col className="col-icon" />
                   <col className="col-icon" />
                 </colgroup>
@@ -229,8 +273,11 @@ export default function PeopleScreen({ onOpenTrip }) {
                 <SortableTh column="document" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   Número
                 </SortableTh>
-                <SortableTh column="reference" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
-                  Ref.
+                <SortableTh className="people-table__ref" column="reference" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
+                  <span className="ref-head">UDI<span>→ Pira</span></span>
+                </SortableTh>
+                <SortableTh className="people-table__ref" column="referenceBack" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
+                  <span className="ref-head">Pira<span>→ UDI</span></span>
                 </SortableTh>
                 <SortableTh column="past" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   Viagens
@@ -238,6 +285,7 @@ export default function PeopleScreen({ onOpenTrip }) {
                 <SortableTh column="last" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   Última
                 </SortableTh>
+                <th>Mover</th>
                 <th>Editar</th>
                 <th>Excluir</th>
                   </tr>
@@ -266,7 +314,8 @@ export default function PeopleScreen({ onOpenTrip }) {
                   <td>
                     <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                   </td>
-                  <td>{person.reference_point || '—'}</td>
+                  <td title={person.reference_point || undefined}>{person.reference_point || '—'}</td>
+                  <td title={person.reference_point_back || undefined}>{person.reference_point_back || '—'}</td>
                   <td className="people-table__count" onClick={(event) => event.stopPropagation()}>
                     {(person.trip_count ?? person.past_count) > 0 ? (
                       <button type="button" className="table-link" onClick={(event) => openHistory(person, event)}>
@@ -291,6 +340,18 @@ export default function PeopleScreen({ onOpenTrip }) {
                     ) : (
                       '—'
                     )}
+                  </td>
+                  <td className="trips-table__icon" onClick={(event) => event.stopPropagation()}>
+                    <button
+                      type="button"
+                      className="icon-action"
+                      title={person.reference_point || person.reference_point_back ? 'Mover ponto para o outro itinerário' : 'Nada para mover'}
+                      aria-label="Mover ponto para o outro itinerário"
+                      disabled={!person.reference_point && !person.reference_point_back}
+                      onClick={(event) => moveReference(person, event)}
+                    >
+                      <ArrowLeftRight size={16} />
+                    </button>
                   </td>
                   <td className="trips-table__icon" onClick={(event) => event.stopPropagation()}>
                         <button type="button" className="icon-action" title="Editar" aria-label="Editar" onClick={(event) => startEdit(person, event)}>

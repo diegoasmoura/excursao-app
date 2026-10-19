@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-table';
 import { useLayout } from '../context/LayoutContext';
 import { formatPassengerPhone } from '../lib/passengerDisplay';
+import { referenceForRoute } from '../lib/format';
 import { passengerWhatsappUrl } from '../lib/tripPdf';
 import DocumentCell from './DocumentCell';
 import WhatsappIcon from './WhatsappIcon';
@@ -34,6 +35,8 @@ function sortIndicator(column) {
 
 export default function PassengerTable({
   passengers,
+  origin,
+  destination,
   orderSource,
   onTogglePaid,
   onToggleGoing,
@@ -109,7 +112,7 @@ export default function PassengerTable({
             <DocumentCell rg={info.row.original.rg} docType={info.row.original.doc_type} part="number" />
           ),
         }),
-        helper.accessor((row) => row.reference_point || '', {
+        helper.accessor((row) => referenceForRoute(row, origin, destination), {
           id: 'reference',
           header: 'Ref.',
           enableSorting: false,
@@ -204,7 +207,7 @@ export default function PassengerTable({
           ),
         }),
       ]),
-    [order, shown, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
+    [order, shown, origin, destination, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
   );
 
   useEffect(() => {

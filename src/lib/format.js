@@ -43,6 +43,13 @@ export function routeLabel(origin, destination) {
   return `${displayPlace(origin)} → ${displayPlace(destination)}`;
 }
 
+/** Ponto de espera do itinerário. O campo antigo é Uberlândia → Pirapora. */
+export function referenceForRoute(person, origin, destination) {
+  if (!person) return '';
+  if (routeKey(origin, destination) === 'pirapora-uberlandia') return person.reference_point_back || '';
+  return person.reference_point || '';
+}
+
 function parseTripDate(dateStr) {
   if (!dateStr) return null;
   const [y, m, d] = dateStr.split('T')[0].split('-').map(Number);

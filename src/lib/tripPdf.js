@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { api } from './api';
-import { displayPlace, formatTripDate, formatTripDateLong, placeKey } from './format';
+import { displayPlace, formatTripDate, formatTripDateLong, placeKey, referenceForRoute } from './format';
 import { maskDocument } from './passengerDisplay';
 
 const NAVY = [15, 23, 42];
@@ -85,7 +85,14 @@ function buildPdf(trip, passengers, columns, { dropped = 0 } = {}) {
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
   const pageWidth = doc.internal.pageSize.getWidth();
   const paid = passengers.filter((seat) => seat.is_paid).length;
-  const selected = selectedPdfColumns(columns);
+  const selected = selectedPdfColumns(columns).map((column) => (
+    column.key === 'ref'
+      ? {
+          ...column,
+          value: (seat) => oneLine(referenceForRoute(seat, trip.origin, trip.destination)) || '—',
+        }
+      : column
+  ));
   const widths = widthsFor(selected);
   const paymentIndex = selected.findIndex((column) => column.key === 'payment');
 

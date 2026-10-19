@@ -138,7 +138,7 @@ Campos:
 - Telefone
 - Tipo de documento: CPF, RG, Certidão ou Outro
 - Número (tipo e número separados)
-- Ponto de referência (linha inteira; na tabela, **Ref.**). Ao digitar, sugere até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref. Só tira espaços sobrando.
+- Ponto de espera, um para cada itinerário. **Uberlândia → Pirapora** guarda o que já estava cadastrado. **Pirapora → Uberlândia** começa vazio. Na tabela: **UDI → Pira** e **Pira → UDI**. No computador as duas dividem o espaço da antiga Ref. e a tabela continua cabendo na tela. No celular, rola para o lado, com largura mínima em cada ponto. Ao digitar, sugere até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**). **Mover** passa o ponto para o outro itinerário; se os dois estiverem preenchidos, troca. A confirmação diz o texto e os dois sentidos. Só tira espaços sobrando.
 
 Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar). Na viagem o botão vira **Colocar nesta viagem**. Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 
@@ -153,7 +153,7 @@ Na tabela de Pessoas:
 
 - Busca filtra quem já está sentado. Se não achar, oferece Colocar da lista geral ou cadastrar.
 - Cadastro novo entra como **Pendente**.
-- Tirar tira só desta viagem. Colunas: N., Nome, **Vai?**, Tipo, Número, Ref., Telefone, **WhatsApp**, Pagamento, Editar, Tirar.
+- Tirar tira só desta viagem. Colunas: N., Nome, **Vai?**, Tipo, Número, Ref. do itinerário da viagem, Telefone, **WhatsApp**, Pagamento, Editar, Tirar.
 - Pagamento: **Pago** (verde) ou **Pendente** (âmbar). Sem reais.
 - Não cabe mais gente que as vagas.
 
@@ -174,7 +174,7 @@ O topo da viagem mostra **Vagas x de y**, **n pagos** e, quando houver, **m não
 Tudo abre no **centro**. No celular o fundo fica desfocado.
 
 - Nova / alterar viagem — Data, Rota, Vagas
-- Nova / editar pessoa — Nome, Telefone, Tipo, Número, Ref.
+- Nova / editar pessoa — Nome, Telefone, Tipo, Número, ponto de Uberlândia → Pirapora e ponto de Pirapora → Uberlândia
 - Histórico, excluir viagem, excluir pessoa, tirar da viagem, Ajustes (WhatsApp)
 
 Cancelar, clique fora ou Esc fecha.
@@ -182,7 +182,7 @@ Cancelar, clique fora ou Esc fecha.
 ### WhatsApp e PDF
 
 - Ajustes grava **um** número. Esse número só serve para enviar a lista da viagem.
-- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`). Quem está marcado como **não vai** fica de fora da lista impressa; o cabeçalho mostra quantos são.
+- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. **Ref.** sai com o ponto do itinerário daquela viagem. Documento junta tipo e número. Sem Tipo e Telefone soltos. Uma linha, sem quebra (`lista-25-09-2026-uberlandia-pirapora.pdf`). Quem está marcado como **não vai** fica de fora da lista impressa; o cabeçalho mostra quantos são.
 - **Abrir**, na lista de viagens, só abre o WhatsApp do número dos Ajustes. Não baixa o PDF.
 - Mensagem da lista: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
 - Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro, sem texto pronto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.
@@ -216,7 +216,7 @@ Cancelar, clique fora ou Esc fecha.
 
 ## Dados
 
-- **people** — nome, telefone, tipo e número, ponto de referência
+- **people** — nome, telefone, tipo e número, ponto de Uberlândia → Pirapora (`reference_point`) e ponto de Pirapora → Uberlândia (`reference_point_back`)
 - **trips** — data, origem, destino, vagas (padrão 45 nas novas), `status` (`upcoming` ou `cancelled`) e `notes` (HTML já limpo pela lista branca; texto puro de versão antiga continua abrindo certo)
 - **passengers** — pessoa + viagem + pago/pendente + `is_cancelled` (não vai)
 - **users** — administrador (`Gomoura`); senha em hash

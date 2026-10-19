@@ -11,7 +11,92 @@ import {
 import { filterPeopleSuggestions, filterReferenceSuggestions } from '../lib/peopleSuggest';
 import ChoiceField from './ChoiceField';
 
-export const emptyPersonForm = { name: '', phone: '', rg: '', doc_type: 'CPF', reference_point: '' };
+export const emptyPersonForm = {
+  name: '',
+  phone: '',
+  rg: '',
+  doc_type: 'CPF',
+  reference_point: '',
+  reference_point_back: '',
+};
+
+function ReferenceField({ label, field, listId, value, people, onChange }) {
+  const [typing, setTyping] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const suggestions = useMemo(
+    () => (typing ? filterReferenceSuggestions(people, value, field) : []),
+    [typing, people, value, field],
+  );
+
+  const pick = (labelText) => {
+    onChange(labelText);
+    setTyping(false);
+    setActiveIndex(-1);
+  };
+
+  const onKeyDown = (event) => {
+    if (!suggestions.length) return;
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveIndex((current) => (current + 1) % suggestions.length);
+      return;
+    }
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveIndex((current) => (current <= 0 ? suggestions.length - 1 : current - 1));
+      return;
+    }
+    if (event.key === 'Enter' && activeIndex >= 0) {
+      event.preventDefault();
+      pick(suggestions[activeIndex]);
+      return;
+    }
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      setActiveIndex(-1);
+    }
+  };
+
+  return (
+    <div className="form-group person-form__reference">
+      <label className="form-label" htmlFor={listId}>{label}</label>
+      <input
+        id={listId}
+        className="form-input"
+        autoComplete="off"
+        role="combobox"
+        aria-expanded={suggestions.length > 0}
+        aria-controls={`${listId}-list`}
+        aria-autocomplete="list"
+        placeholder="Ex.: Rodoviária, em frente à praça"
+        value={value || ''}
+        onChange={(event) => {
+          setTyping(true);
+          onChange(event.target.value);
+          setActiveIndex(-1);
+        }}
+        onBlur={() => setTyping(false)}
+        onKeyDown={onKeyDown}
+      />
+      {suggestions.length > 0 && (
+        <div className="person-form__suggest" id={`${listId}-list`}>
+          <p className="person-form__suggest-hint">Já usado — escolher para padronizar</p>
+          {suggestions.map((item, index) => (
+            <button
+              key={item}
+              type="button"
+              className={`person-form__suggest-item ${index === activeIndex ? 'is-active' : ''}`}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() => pick(item)}
+            >
+              <strong>{item}</strong>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function PersonForm({
   value,
@@ -23,17 +108,11 @@ export default function PersonForm({
   takenIds,
 }) {
   const [activeIndex, setActiveIndex] = useState(-1);
-  const [refActiveIndex, setRefActiveIndex] = useState(-1);
-  const [refTyping, setRefTyping] = useState(false);
   const set = (patch) => onChange({ ...value, ...patch });
   const editingOnly = Boolean(value.id && !value.picked);
   const suggestions = useMemo(
     () => (editingOnly ? [] : filterPeopleSuggestions(people, value.name)),
     [editingOnly, people, value.name],
-  );
-  const refSuggestions = useMemo(
-    () => (refTyping ? filterReferenceSuggestions(people, value.reference_point) : []),
-    [refTyping, people, value.reference_point],
   );
   const taken = takenIds instanceof Set ? takenIds : new Set(takenIds || []);
 
@@ -47,6 +126,7 @@ export default function PersonForm({
       rg: maskDocument(person.rg || '', person.doc_type || inferDocType(person.rg)),
       doc_type: person.doc_type || inferDocType(person.rg),
       reference_point: person.reference_point || '',
+      reference_point_back: person.reference_point_back || '',
       picked: true,
       pickedName: person.name,
     });
@@ -85,41 +165,6 @@ export default function PersonForm({
     if (event.key === 'Escape') {
       event.preventDefault();
       setActiveIndex(-1);
-    }
-  };
-
-  const pickReference = (label) => {
-    set({ reference_point: label });
-    setRefTyping(false);
-    setRefActiveIndex(-1);
-  };
-
-  const changeReference = (raw) => {
-    setRefTyping(true);
-    set({ reference_point: raw });
-    setRefActiveIndex(-1);
-  };
-
-  const onReferenceKeyDown = (event) => {
-    if (!refSuggestions.length) return;
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setRefActiveIndex((current) => (current + 1) % refSuggestions.length);
-      return;
-    }
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setRefActiveIndex((current) => (current <= 0 ? refSuggestions.length - 1 : current - 1));
-      return;
-    }
-    if (event.key === 'Enter' && refActiveIndex >= 0) {
-      event.preventDefault();
-      pickReference(refSuggestions[refActiveIndex]);
-      return;
-    }
-    if (event.key === 'Escape') {
-      event.preventDefault();
-      setRefActiveIndex(-1);
     }
   };
 
@@ -197,38 +242,22 @@ export default function PersonForm({
           />
         </div>
       </div>
-      <div className="form-group person-form__reference">
-        <label className="form-label">Ponto de referência</label>
-        <input
-          className="form-input"
-          autoComplete="off"
-          role="combobox"
-          aria-expanded={refSuggestions.length > 0}
-          aria-controls="person-ref-suggest-list"
-          aria-autocomplete="list"
-          placeholder="Ex.: Rodoviária, em frente à praça"
-          value={value.reference_point || ''}
-          onChange={(event) => changeReference(event.target.value)}
-          onBlur={() => setRefTyping(false)}
-          onKeyDown={onReferenceKeyDown}
-        />
-        {refSuggestions.length > 0 && (
-          <div className="person-form__suggest" id="person-ref-suggest-list">
-            <p className="person-form__suggest-hint">Já usado — escolher para padronizar</p>
-            {refSuggestions.map((label, index) => (
-              <button
-                key={label}
-                type="button"
-                className={`person-form__suggest-item ${index === refActiveIndex ? 'is-active' : ''}`}
-                onMouseDown={(event) => event.preventDefault()}
-                onClick={() => pickReference(label)}
-              >
-                <strong>{label}</strong>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
+      <ReferenceField
+        label="Ponto em Uberlândia → Pirapora"
+        field="reference_point"
+        listId="person-ref-going"
+        value={value.reference_point}
+        people={people}
+        onChange={(reference_point) => set({ reference_point })}
+      />
+      <ReferenceField
+        label="Ponto em Pirapora → Uberlândia"
+        field="reference_point_back"
+        listId="person-ref-back"
+        value={value.reference_point_back}
+        people={people}
+        onChange={(reference_point_back) => set({ reference_point_back })}
+      />
       <div className="confirm-dialog__actions">
         <button type="button" className="btn btn-secondary" onClick={onCancel} disabled={saving}>
           Cancelar

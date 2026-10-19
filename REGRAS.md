@@ -59,10 +59,12 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 ## Pessoa
 
 - Cadastro geral. Quem entra numa viagem também entra nesta lista.
-- Campos: Nome (obrigatório), Telefone, Tipo (CPF por padrão, RG, Certidão, Outro), Número, Ponto de referência. Telefone `(34) 98886-1577`. CPF `000.000.000-00`, RG `00.000.000-0`, Certidão em blocos.
-- **Nome** e **Ref.** ficam como o pai escrever. Só tira espaços sobrando.
-- Ao digitar a Ref., até 8 textos já usados (**Já usado — escolher para padronizar**). Escolher só preenche a Ref.
-- Na lista, Ref. No desktop a tabela cabe na tela. No celular, rola para o lado.
+- Campos: Nome (obrigatório), Telefone, Tipo (CPF por padrão, RG, Certidão, Outro), Número, ponto de **Uberlândia → Pirapora** e ponto de **Pirapora → Uberlândia**. Telefone `(34) 98886-1577`. CPF `000.000.000-00`, RG `00.000.000-0`, Certidão em blocos.
+- **Nome** e os dois pontos ficam como o pai escrever. Só tira espaços sobrando.
+- O ponto que já existia continua em **Uberlândia → Pirapora**. O outro começa vazio.
+- Ao digitar um ponto, até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**).
+- Na lista: **UDI → Pira** e **Pira → UDI**. No desktop a tabela cabe na tela. No celular, rola para o lado.
+- **Mover** passa o ponto preenchido para o outro itinerário. Se os dois tiverem texto, troca. A confirmação diz o que vai acontecer.
 - Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
 - Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 - **Viagens** (número) abre o histórico. **Última** abre a viagem e destaca a pessoa. Lugar marcado como **não vai** não conta aqui.
@@ -82,7 +84,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 
 - Busca filtra quem já está na viagem. Se não achar, oferece Colocar ou cadastrar.
 - Cadastro novo senta como **Pendente**. Tirar tira só desta viagem.
-- Colunas: N., Nome, **Vai?**, Tipo, Número, Ref., Telefone, **WhatsApp**, Pagamento, Editar, Tirar.
+- Colunas: N., Nome, **Vai?**, Tipo, Número, Ref. do itinerário da viagem, Telefone, **WhatsApp**, Pagamento, Editar, Tirar.
 - Pagamento: Pago (verde) ou Pendente (âmbar). Sem valor. Não cabe mais gente que as vagas.
 
 ### Não vai (passageiro que desistiu)
@@ -104,7 +106,7 @@ Tudo abre no centro, com fundo escuro. No celular o fundo fica **desfocado**.
 | Popup | Campos |
 | --- | --- |
 | Nova / alterar viagem | Data, Rota, Vagas |
-| Nova / editar pessoa | Nome; Telefone, Tipo e Número; Ponto de referência na linha de baixo |
+| Nova / editar pessoa | Nome; Telefone, Tipo e Número; ponto de Uberlândia → Pirapora e ponto de Pirapora → Uberlândia |
 | Histórico | Tabela de viagens |
 | Excluir / tirar / cancelar viagem / voltar viagem / anotações sem gravar / Ajustes | Texto + ações |
 
@@ -126,7 +128,7 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 ## WhatsApp
 
 - Ajustes grava **um** número. Esse número só serve para enviar a lista da viagem.
-- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
+- **Baixar** abre um popup para marcar as colunas do PDF (Número, Nome, Documento, Ref., Pagamento). A escolha fica lembrada. **Ref.** sai com o ponto do itinerário daquela viagem. Documento junta tipo e número. Sem Tipo e Telefone soltos. Sem quebra de linha.
 - **Abrir**, na lista de viagens, só abre o WhatsApp do número dos Ajustes. Não baixa o PDF.
 - Mensagem da lista: Bom dia / Boa tarde / Boa noite, Cumpadre; cita a viagem; Abraço. No computador abre o WhatsApp no navegador.
 - Na lista de pessoas da viagem, a coluna **WhatsApp** abre a conversa **daquela pessoa**, com o telefone do cadastro, sem texto pronto. Sem telefone válido, o botão fica desativado. No celular abre o app; no computador, o WhatsApp no navegador.

@@ -91,7 +91,7 @@ const TRIP_COUNTS_SQL = `COUNT(CASE WHEN p.is_cancelled = 0 THEN p.id END) AS pa
              SUM(CASE WHEN p.is_cancelled = 1 THEN 1 ELSE 0 END) AS dropped_count`;
 
 const SEAT_COLUMNS = `p.id, p.trip_id, p.person_id, p.is_paid, p.is_cancelled, p.created_at,
-             pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point`;
+             pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point, pe.reference_point_back`;
 
 function asyncRoute(handler) {
   return (req, res) => {
@@ -259,6 +259,9 @@ async function setupDatabase() {
   const peopleColumns = await all('PRAGMA table_info(people)');
   if (!peopleColumns.some((column) => column.name === 'reference_point')) {
     await run("ALTER TABLE people ADD COLUMN reference_point TEXT NOT NULL DEFAULT ''");
+  }
+  if (!peopleColumns.some((column) => column.name === 'reference_point_back')) {
+    await run("ALTER TABLE people ADD COLUMN reference_point_back TEXT NOT NULL DEFAULT ''");
   }
 
   if (!peopleColumns.some((column) => column.name === 'doc_type')) {
@@ -709,28 +712,36 @@ app.post('/api/people', asyncRoute(async (req, res) => {
   const name = trimText(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
   const id = uuidv4();
-  await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
-    id,
-    name,
-    req.body.rg || '',
-    req.body.phone || '',
-    req.body.doc_type || inferDocType(req.body.rg),
-    trimText(req.body.reference_point),
-  ]);
+  await run(
+    'INSERT INTO people (id, name, rg, phone, doc_type, reference_point, reference_point_back) VALUES (?, ?, ?, ?, ?, ?, ?)',
+    [
+      id,
+      name,
+      req.body.rg || '',
+      req.body.phone || '',
+      req.body.doc_type || inferDocType(req.body.rg),
+      trimText(req.body.reference_point),
+      trimText(req.body.reference_point_back),
+    ],
+  );
   res.json(await get('SELECT * FROM people WHERE id = ?', [id]));
 }));
 
 app.put('/api/people/:id', asyncRoute(async (req, res) => {
   const name = trimText(req.body?.name);
   if (!name) return res.status(400).json({ error: 'O nome é obrigatório.' });
-  const result = await run('UPDATE people SET name = ?, rg = ?, phone = ?, doc_type = ?, reference_point = ? WHERE id = ?', [
-    name,
-    req.body.rg || '',
-    req.body.phone || '',
-    req.body.doc_type || inferDocType(req.body.rg),
-    trimText(req.body.reference_point),
-    req.params.id,
-  ]);
+  const result = await run(
+    'UPDATE people SET name = ?, rg = ?, phone = ?, doc_type = ?, reference_point = ?, reference_point_back = ? WHERE id = ?',
+    [
+      name,
+      req.body.rg || '',
+      req.body.phone || '',
+      req.body.doc_type || inferDocType(req.body.rg),
+      trimText(req.body.reference_point),
+      trimText(req.body.reference_point_back),
+      req.params.id,
+    ],
+  );
   if (!result.changes) return res.status(404).json({ error: 'Pessoa não encontrada.' });
   await run('UPDATE passengers SET name = ?, rg = ?, phone = ? WHERE person_id = ?', [
     name,
@@ -772,14 +783,18 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
     const name = trimText(req.body?.name);
     if (!name) return res.status(400).json({ error: 'Escolha uma pessoa ou informe o nome.' });
     personId = uuidv4();
-    await run('INSERT INTO people (id, name, rg, phone, doc_type, reference_point) VALUES (?, ?, ?, ?, ?, ?)', [
-      personId,
-      name,
-      req.body.rg || '',
-      req.body.phone || '',
-      req.body.doc_type || inferDocType(req.body.rg),
-      trimText(req.body.reference_point),
-    ]);
+    await run(
+      'INSERT INTO people (id, name, rg, phone, doc_type, reference_point, reference_point_back) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [
+        personId,
+        name,
+        req.body.rg || '',
+        req.body.phone || '',
+        req.body.doc_type || inferDocType(req.body.rg),
+        trimText(req.body.reference_point),
+        trimText(req.body.reference_point_back),
+      ],
+    );
   } else {
     const person = await get('SELECT id FROM people WHERE id = ?', [personId]);
     if (!person) return res.status(404).json({ error: 'Pessoa não encontrada.' });
