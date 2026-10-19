@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.7.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.7.1` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), Referências (azul-claro), detalhe (sálvia), Ajustes (lavanda).
 
@@ -81,8 +81,8 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 
 ## Referências
 
-- Aba ao lado de Pessoas. No celular a barra mostra **Pontos**.
-- Cada ponto aparece **uma vez**, no itinerário em que está. Toque mostra os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
+- Aba ao lado de Pessoas, no mesmo formato da lista: busca, tabela e paginação. No celular a barra mostra **Pontos**.
+- Colunas: **Ponto**, **Itinerário**, **Pessoas**, **Corrigir** e **Mudar**. Cada ponto aparece **uma vez**. O número em Pessoas abre os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
 - **Mudar itinerário** passa o ponto para o outro sentido e vale para todas as pessoas daquele ponto. A confirmação diz quantas mudam. Se alguém já tiver outro ponto no destino, avisa que esse ponto será trocado.
 - **Corrigir nome** troca o texto do grupo inteiro.
 - O cadastro da pessoa continua com texto livre. A lista de Pessoas não tem botão de mover uma pessoa só.

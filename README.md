@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.7.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.7.1`, função nova `1.8.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.7.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.7.2`, função nova `1.8.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -151,7 +151,7 @@ Na tabela de Pessoas:
 
 ### Referências
 
-Aba ao lado de Pessoas. No celular o rótulo da barra é **Pontos**. Cada ponto aparece **uma vez**, no itinerário em que está cadastrado. Toque mostra os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
+Aba ao lado de Pessoas, no mesmo formato da lista: busca, tabela e paginação. No celular o rótulo da barra é **Pontos**. Colunas: **Ponto**, **Itinerário**, **Pessoas**, **Corrigir** e **Mudar**. Cada ponto aparece **uma vez**. O número em Pessoas abre os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
 
 **Mudar itinerário** passa aquele ponto para o outro sentido e vale para todas as pessoas do grupo. A confirmação diz o texto, os dois itinerários e quantas pessoas mudam. Se alguém já tiver outro ponto no destino, avisa que esse ponto será trocado.
 

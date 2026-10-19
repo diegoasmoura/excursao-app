@@ -396,87 +396,6 @@ html[data-layout='desktop'] .nav-label--long {
   background: var(--color-bg-references);
 }
 
-.ref-board {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-  align-items: start;
-}
-
-.ref-group h2 {
-  margin: 0 0 12px;
-  font-size: 20px;
-}
-
-.ref-group__empty {
-  margin: 0;
-  color: var(--color-gray-dark);
-}
-
-.ref-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ref-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 10px;
-  border: 1px solid var(--color-border);
-  background: #fff;
-}
-
-.ref-item__main {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  width: 100%;
-  padding: 4px 2px;
-  border: none;
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: 18px;
-  text-align: left;
-  cursor: pointer;
-  color: var(--color-black);
-}
-
-.ref-item__main span {
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--color-gray-dark);
-}
-
-.ref-item__names {
-  margin: 0;
-  padding: 0 0 0 18px;
-  color: var(--color-black);
-}
-
-.ref-item__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.ref-item__actions .btn {
-  min-height: 44px;
-}
-
-html[data-layout='desktop'] .ref-board {
-  grid-template-columns: 1fr 1fr;
-}
-
-html[data-layout='desktop'] .ref-item__actions .btn {
-  min-height: 40px;
-}
-
 .main-content--detail {
   background: var(--color-bg-detail);
 }
@@ -839,6 +758,8 @@ html[data-layout='desktop'] .ref-item__actions .btn {
 
 .people-table th,
 .people-table td,
+.references-table th,
+.references-table td,
 .passengers-table th,
 .passengers-table td {
   padding: 6px 10px;
@@ -846,12 +767,14 @@ html[data-layout='desktop'] .ref-item__actions .btn {
   white-space: nowrap;
 }
 
-.people-table td {
+.people-table td,
+.references-table td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .people-table .icon-action,
+.references-table .icon-action,
 .passengers-table .icon-action {
   width: 28px;
   height: 28px;
@@ -901,6 +824,35 @@ html[data-layout='desktop'] .ref-item__actions .btn {
 .grid-table tbody tr.is-highlighted:hover td,
 .grid-table tbody tr:nth-child(even).is-highlighted td {
   background: #F3E6CF;
+}
+
+.references-table {
+  width: 100%;
+  table-layout: auto;
+}
+
+.references-table .col-name { width: 28%; }
+.references-table .col-route { width: 1%; }
+.references-table .col-count { width: 1%; }
+.references-table .col-icon { width: 1%; }
+
+.references-table th:nth-child(2),
+.references-table td:nth-child(2) {
+  min-width: 108px;
+}
+
+.references-table th:nth-child(3),
+.references-table td.people-table__count {
+  text-align: center;
+  min-width: 88px;
+}
+
+.references-table th:nth-child(4),
+.references-table th:nth-child(5),
+.references-table td.trips-table__icon {
+  text-align: center;
+  padding: 6px 4px;
+  white-space: nowrap;
 }
 
 .people-table th:nth-child(9),
@@ -2066,6 +2018,7 @@ html[data-layout='mobile'] .grid-table-wrap {
 html[data-layout='mobile'] .grid-table,
 html[data-layout='mobile'] .trips-table .grid-table,
 html[data-layout='mobile'] .people-table,
+html[data-layout='mobile'] .references-table,
 html[data-layout='mobile'] .passengers-table,
 html[data-layout='mobile'] .people-pick-table,
 html[data-layout='mobile'] .history-table {
@@ -2077,6 +2030,7 @@ html[data-layout='mobile'] .history-table {
 html[data-layout='mobile'] .grid-table th,
 html[data-layout='mobile'] .grid-table td,
 html[data-layout='mobile'] .people-table td,
+html[data-layout='mobile'] .references-table td,
 html[data-layout='mobile'] .trips-table td {
   white-space: nowrap;
   overflow: visible;
@@ -2100,9 +2054,20 @@ html[data-layout='mobile'] .people-table td.trips-table__icon {
   white-space: nowrap;
 }
 
-html[data-layout='mobile'] .people-table .icon-action {
+html[data-layout='mobile'] .people-table .icon-action,
+html[data-layout='mobile'] .references-table .icon-action {
   width: 44px;
   height: 44px;
+}
+
+html[data-layout='mobile'] .references-table .col-name { width: auto; min-width: 140px; }
+html[data-layout='mobile'] .references-table .col-route { width: auto; min-width: 108px; }
+html[data-layout='mobile'] .references-table .col-count { width: auto; min-width: 0; }
+html[data-layout='mobile'] .references-table .col-icon,
+html[data-layout='mobile'] .references-table td.trips-table__icon {
+  width: 1%;
+  padding: 6px 8px;
+  white-space: nowrap;
 }
 
 html[data-layout='mobile'] .trips-table .col-icon,
