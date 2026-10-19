@@ -8,15 +8,15 @@ Painel interno para controlar ônibus Uberlândia ↔ Pirapora. Leitor mais velh
 
 Login: `Gomoura` / `Gomoura#`. Na primeira subida do banco o usuário é criado sozinho. **Lembrar neste computador** mantém logado até **Sair**.
 
-Barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**. No celular, Ajustes fica marcado enquanto o popup está aberto.
+Barra: **Viagens**, **Pessoas**, **Referências** (no celular, **Pontos**), Ajustes (WhatsApp) e **Sair**. No celular, Ajustes fica marcado enquanto o popup está aberto.
 
 Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com.br) (túnel Cloudflare `dihan-nas` → `http://192.168.0.2:3005`). Na rede da casa: `http://IP-DO-NAS:3005`.
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.6.2` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.7.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
-O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
+O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), Referências (azul-claro), detalhe (sálvia), Ajustes (lavanda).
 
 ## Viagem
 
@@ -78,6 +78,14 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 - Uma legenda embaixo do botão explica a cor e o selo.
 - Só **avisa**. O app não junta, não escolhe e não apaga nada sozinho — quem decide é o pai, em Editar ou Excluir.
 - Documento igual com nome diferente **não** é marcado. É de propósito: o critério escolhido foi o nome.
+
+## Referências
+
+- Aba ao lado de Pessoas. No celular a barra mostra **Pontos**.
+- Cada ponto aparece **uma vez**, no itinerário em que está. Toque mostra os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
+- **Mudar itinerário** passa o ponto para o outro sentido e vale para todas as pessoas daquele ponto. A confirmação diz quantas mudam. Se alguém já tiver outro ponto no destino, avisa que esse ponto será trocado.
+- **Corrigir nome** troca o texto do grupo inteiro.
+- O cadastro da pessoa continua com texto livre. A lista de Pessoas não tem botão de mover uma pessoa só.
 
 ## Passageiro
 

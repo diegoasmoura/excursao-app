@@ -44,6 +44,55 @@ function trimText(value) {
     .replace(/\s+/g, ' ');
 }
 
+function foldKey(value) {
+  return trimText(value)
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+const REFERENCE_SIDES = {
+  going: { field: 'reference_point', other: 'reference_point_back' },
+  back: { field: 'reference_point_back', other: 'reference_point' },
+};
+
+function referenceSide(name) {
+  return REFERENCE_SIDES[name] || null;
+}
+
+function groupReferenceSide(rows, field, other) {
+  const groups = new Map();
+  for (const row of rows) {
+    const label = trimText(row[field]);
+    const key = foldKey(label);
+    if (!key) continue;
+    if (!groups.has(key)) {
+      groups.set(key, { label, count: 0, names: [], conflicts: 0, spellings: new Map() });
+    }
+    const group = groups.get(key);
+    group.count += 1;
+    group.names.push(row.name);
+    group.spellings.set(label, (group.spellings.get(label) || 0) + 1);
+    const otherLabel = trimText(row[other]);
+    if (otherLabel && foldKey(otherLabel) !== key) group.conflicts += 1;
+  }
+  return [...groups.values()]
+    .map((group) => {
+      const label = [...group.spellings.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'pt'))[0][0];
+      return {
+        label,
+        count: group.count,
+        names: group.names,
+        conflicts: group.conflicts,
+      };
+    })
+    .sort((a, b) => a.label.localeCompare(b.label, 'pt'));
+}
+
+async function referenceRows() {
+  return all('SELECT id, name, reference_point, reference_point_back FROM people ORDER BY name COLLATE NOCASE ASC');
+}
+
 function inferDocType(docStr) {
   const digits = (docStr || '').replace(/\D/g, '');
   if (digits.length === 11 && !/[a-zA-Z]/.test(docStr || '')) return 'CPF';
@@ -689,6 +738,48 @@ app.get('/api/people', asyncRoute(async (_req, res) => {
     trip_count: Number(row.trip_count) || 0,
     past_count: Number(row.trip_count) || 0,
   })));
+}));
+
+app.get('/api/references', asyncRoute(async (_req, res) => {
+  const rows = await referenceRows();
+  res.json({
+    going: groupReferenceSide(rows, 'reference_point', 'reference_point_back'),
+    back: groupReferenceSide(rows, 'reference_point_back', 'reference_point'),
+  });
+}));
+
+app.patch('/api/references', asyncRoute(async (req, res) => {
+  const side = referenceSide(req.body?.side);
+  const fromKey = foldKey(req.body?.label);
+  const nextLabel = trimText(req.body?.to);
+  if (!side) return res.status(400).json({ error: 'Escolha o itinerário.' });
+  if (!fromKey) return res.status(400).json({ error: 'Escolha o ponto.' });
+  if (!nextLabel) return res.status(400).json({ error: 'Informe o ponto.' });
+  const rows = await referenceRows();
+  const matches = rows.filter((row) => foldKey(row[side.field]) === fromKey);
+  if (!matches.length) return res.status(404).json({ error: 'Ponto não encontrado.' });
+  for (const row of matches) {
+    await run(`UPDATE people SET ${side.field} = ? WHERE id = ?`, [nextLabel, row.id]);
+  }
+  res.json({ count: matches.length, label: nextLabel });
+}));
+
+app.post('/api/references/move', asyncRoute(async (req, res) => {
+  const side = referenceSide(req.body?.side);
+  const fromKey = foldKey(req.body?.label);
+  if (!side) return res.status(400).json({ error: 'Escolha o itinerário.' });
+  if (!fromKey) return res.status(400).json({ error: 'Escolha o ponto.' });
+  const rows = await referenceRows();
+  const matches = rows.filter((row) => foldKey(row[side.field]) === fromKey);
+  if (!matches.length) return res.status(404).json({ error: 'Ponto não encontrado.' });
+  const label = trimText(req.body.label);
+  let conflicts = 0;
+  for (const row of matches) {
+    const otherLabel = trimText(row[side.other]);
+    if (otherLabel && foldKey(otherLabel) !== fromKey) conflicts += 1;
+    await run(`UPDATE people SET ${side.field} = '', ${side.other} = ? WHERE id = ?`, [label, row.id]);
+  }
+  res.json({ count: matches.length, conflicts, label });
 }));
 
 app.get('/api/people/:id', asyncRoute(async (req, res) => {

@@ -1,15 +1,17 @@
-import { Bus, CalendarDays, LogOut, Settings, Users } from 'lucide-react';
+import { Bus, CalendarDays, LogOut, MapPin, Settings, Users } from 'lucide-react';
 import { APP_VERSION } from '../lib/appVersion';
 
 const MAIN_ITEMS = [
   { id: 'trips', icon: CalendarDays, short: 'Viagens', long: 'Viagens' },
   { id: 'people', icon: Users, short: 'Pessoas', long: 'Pessoas' },
+  { id: 'references', icon: MapPin, short: 'Pontos', long: 'Referências' },
 ];
 
 function screenTone(view, settingsOpen, mainClassName) {
   if (settingsOpen) return 'main-content--settings';
   if (mainClassName.includes('main-content--detail')) return 'main-content--detail';
   if (view === 'people') return 'main-content--people';
+  if (view === 'references') return 'main-content--references';
   return 'main-content--trips';
 }
 

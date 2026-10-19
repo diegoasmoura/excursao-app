@@ -6,6 +6,7 @@ import LoginScreen from './components/LoginScreen';
 import PaginationBar from './components/PaginationBar';
 import PdfColumnsDialog from './components/PdfColumnsDialog';
 import PeopleScreen from './components/PeopleScreen';
+import ReferencesScreen from './components/ReferencesScreen';
 import WhatsappDialog from './components/WhatsappDialog';
 import WhatsappIcon from './components/WhatsappIcon';
 import OccupancyMeter from './components/OccupancyMeter';
@@ -378,6 +379,7 @@ function App() {
       mainClassName={selectedTrip ? 'main-content--detail' : ''}
     >
       {screen === 'people' && <PeopleScreen onOpenTrip={openPersonTrip} />}
+      {screen === 'references' && <ReferencesScreen />}
       {screen === 'trips' && selectedTrip && (
         <TripDetails
           key={selectedTrip.id}

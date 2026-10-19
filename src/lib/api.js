@@ -44,6 +44,11 @@ export const api = {
   saveSchedule: (rules) =>
     request('/api/schedule', { method: 'PUT', body: JSON.stringify({ rules }) }),
   getPeople: () => request('/api/people'),
+  getReferences: () => request('/api/references'),
+  renameReference: ({ side, label, to }) =>
+    request('/api/references', { method: 'PATCH', body: JSON.stringify({ side, label, to }) }),
+  moveReference: ({ side, label }) =>
+    request('/api/references/move', { method: 'POST', body: JSON.stringify({ side, label }) }),
   getPerson: (id) => request(`/api/people/${id}`),
   createPerson: (person) => request('/api/people', { method: 'POST', body: JSON.stringify(person) }),
   updatePerson: (id, person) =>

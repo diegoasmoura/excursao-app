@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.6.2`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.6.3`, função nova `1.7.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.7.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.7.1`, função nova `1.8.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -74,9 +74,9 @@ O HTTPS fica no Cloudflare. No celular, com esse endereço, o Chrome deixa **Ins
 
 Uso interno. Leitor mais velho: botão grande, confirmação no centro, sem jargão.
 
-Na barra: **Viagens**, **Pessoas**, Ajustes (WhatsApp) e **Sair**. No celular, **Ajustes** fica marcado enquanto o popup está aberto.
+Na barra: **Viagens**, **Pessoas**, **Referências** (no celular, **Pontos**), Ajustes (WhatsApp) e **Sair**. No celular, **Ajustes** fica marcado enquanto o popup está aberto.
 
-O quadro ao lado da barra muda de cor, suave: Viagens (azul-cinza), Pessoas (areia), detalhe da viagem (sálvia), Ajustes (lavanda).
+O quadro ao lado da barra muda de cor, suave: Viagens (azul-cinza), Pessoas (areia), Referências (azul-claro), detalhe da viagem (sálvia), Ajustes (lavanda).
 
 ---
 
@@ -148,6 +148,14 @@ Na tabela de Pessoas:
 - **Última**: data da mais recente (também a que ainda vai acontecer). Clique abre a viagem e **destaca** a pessoa.
 - No desktop a tabela cabe na tela. No celular, rola para o lado. Pagina sozinha.
 - No histórico, linha cinza com o selo **Não foi** ou **Viagem cancelada** não conta na coluna **Viagens**.
+
+### Referências
+
+Aba ao lado de Pessoas. No celular o rótulo da barra é **Pontos**. Cada ponto aparece **uma vez**, no itinerário em que está cadastrado. Toque mostra os nomes. Textos iguais, ignorando maiúscula, acento e espaço sobrando, ficam juntos.
+
+**Mudar itinerário** passa aquele ponto para o outro sentido e vale para todas as pessoas do grupo. A confirmação diz o texto, os dois itinerários e quantas pessoas mudam. Se alguém já tiver outro ponto no destino, avisa que esse ponto será trocado.
+
+**Corrigir nome** troca o texto do grupo inteiro. O cadastro da pessoa continua aceitando texto livre. A lista de Pessoas não tem botão de mover uma pessoa só.
 
 ### Passageiro
 
