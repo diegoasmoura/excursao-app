@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.5.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.5.2`, função nova `1.6.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.6.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.6.1`, função nova `1.7.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
