@@ -773,22 +773,42 @@ html[data-layout='desktop'] .nav-label--long {
 
 .people-table {
   width: 100%;
-  table-layout: fixed;
+  table-layout: auto;
 }
 
-.people-table .col-name { width: 18%; }
-.people-table .col-phone { width: 12%; }
-.people-table .col-type { width: 7%; }
-.people-table .col-document { width: 12%; }
-.people-table .col-ref { width: 11%; }
-.people-table .col-count { width: 7%; }
-.people-table .col-last { width: 9%; }
-.people-table .col-icon { width: 6.5%; }
+.people-table .col-name { width: 28%; }
+.people-table .col-phone { width: 1%; }
+.people-table .col-type { width: 1%; }
+.people-table .col-document { width: 1%; }
+.people-table .col-ref { width: 16%; }
+.people-table .col-count { width: 1%; }
+.people-table .col-last { width: 1%; }
+.people-table .col-icon { width: 1%; }
+
+.people-table th:nth-child(2),
+.people-table td:nth-child(2) {
+  min-width: 132px;
+}
+
+.people-table th:nth-child(3),
+.people-table td:nth-child(3) {
+  min-width: 88px;
+}
+
+.people-table th:nth-child(4),
+.people-table td:nth-child(4) {
+  min-width: 128px;
+}
 
 .people-table th:nth-child(7),
 .people-table th:nth-child(8),
 .people-table td.people-table__count {
   text-align: center;
+}
+
+.people-table th:nth-child(8),
+.people-table td:nth-child(8) {
+  min-width: 104px;
 }
 
 .grid-table tbody tr.is-highlighted td,
