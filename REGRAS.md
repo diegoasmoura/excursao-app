@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.6.0` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.6.1` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), detalhe (sálvia), Ajustes (lavanda).
 
@@ -63,8 +63,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 - **Nome** e os dois pontos ficam como o pai escrever. Só tira espaços sobrando.
 - O ponto que já existia continua em **Uberlândia → Pirapora**. O outro começa vazio.
 - Ao digitar um ponto, até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**).
-- Na lista: **UDI → Pira** e **Pira → UDI**. No desktop a tabela cabe na tela. No celular, rola para o lado.
-- **Mover** passa o ponto preenchido para o outro itinerário. Se os dois tiverem texto, troca. A confirmação diz o que vai acontecer.
+- Na lista: **UDI x Pira** e **Pira x UDI**, na mesma linha. No desktop a tabela cabe na tela. No celular, rola para o lado.
 - Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
 - Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 - **Viagens** (número) abre o histórico. **Última** abre a viagem e destaca a pessoa. Lugar marcado como **não vai** não conta aqui.

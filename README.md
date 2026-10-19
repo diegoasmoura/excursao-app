@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.6.0`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.6.1`, função nova `1.7.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.6.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.6.2`, função nova `1.7.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -138,7 +138,7 @@ Campos:
 - Telefone
 - Tipo de documento: CPF, RG, Certidão ou Outro
 - Número (tipo e número separados)
-- Ponto de espera, um para cada itinerário. **Uberlândia → Pirapora** guarda o que já estava cadastrado. **Pirapora → Uberlândia** começa vazio. Na tabela: **UDI → Pira** e **Pira → UDI**. No computador as duas dividem o espaço da antiga Ref. e a tabela continua cabendo na tela. No celular, rola para o lado, com largura mínima em cada ponto. Ao digitar, sugere até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**). **Mover** passa o ponto para o outro itinerário; se os dois estiverem preenchidos, troca. A confirmação diz o texto e os dois sentidos. Só tira espaços sobrando.
+- Ponto de espera, um para cada itinerário. **Uberlândia → Pirapora** guarda o que já estava cadastrado. **Pirapora → Uberlândia** começa vazio. Na tabela: **UDI x Pira** e **Pira x UDI**, na mesma linha. No computador as duas dividem o espaço da antiga Ref. e a tabela continua cabendo na tela. No celular, rola para o lado, com largura mínima em cada ponto. Ao digitar, sugere até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**). Só tira espaços sobrando.
 
 Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar). Na viagem o botão vira **Colocar nesta viagem**. Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 

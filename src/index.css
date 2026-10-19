@@ -780,24 +780,10 @@ html[data-layout='desktop'] .nav-label--long {
 .people-table .col-phone { width: 12%; }
 .people-table .col-type { width: 7%; }
 .people-table .col-document { width: 12%; }
-.people-table .col-ref { width: 9%; }
+.people-table .col-ref { width: 11%; }
 .people-table .col-count { width: 7%; }
 .people-table .col-last { width: 9%; }
-.people-table .col-icon { width: 5.6%; }
-
-.people-table th.people-table__ref {
-  white-space: normal;
-  line-height: 1.05;
-  vertical-align: bottom;
-}
-
-.ref-head {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.05;
-  vertical-align: middle;
-}
+.people-table .col-icon { width: 6.5%; }
 
 .people-table th:nth-child(7),
 .people-table th:nth-child(8),
@@ -813,7 +799,6 @@ html[data-layout='desktop'] .nav-label--long {
 
 .people-table th:nth-child(9),
 .people-table th:nth-child(10),
-.people-table th:nth-child(11),
 .trips-table th:nth-child(7),
 .trips-table th:nth-child(8),
 .trips-table th:nth-child(9),
@@ -825,8 +810,7 @@ html[data-layout='desktop'] .nav-label--long {
 .trips-table td.trips-table__icon,
 .people-table td.trips-table__icon,
 .people-table th:nth-child(9),
-.people-table th:nth-child(10),
-.people-table th:nth-child(11) {
+.people-table th:nth-child(10) {
   text-align: center;
   padding: 6px 4px;
   white-space: nowrap;
@@ -2013,10 +1997,6 @@ html[data-layout='mobile'] .people-table td.trips-table__icon {
 html[data-layout='mobile'] .people-table .icon-action {
   width: 44px;
   height: 44px;
-}
-
-html[data-layout='mobile'] .people-table th.people-table__ref {
-  white-space: normal;
 }
 
 html[data-layout='mobile'] .trips-table .col-icon,
