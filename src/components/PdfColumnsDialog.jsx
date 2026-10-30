@@ -9,6 +9,7 @@ export const DEFAULT_PDF_COLUMNS = {
   document: true,
   ref: true,
   payment: false,
+  annotations: false,
 };
 
 const OPTIONS = [
@@ -17,6 +18,7 @@ const OPTIONS = [
   { key: 'document', label: 'Documento' },
   { key: 'ref', label: 'Ref.' },
   { key: 'payment', label: 'Pagamento' },
+  { key: 'annotations', label: 'Anotações' },
 ];
 
 export function loadPdfColumns() {

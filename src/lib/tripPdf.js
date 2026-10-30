@@ -72,6 +72,10 @@ function selectedPdfColumns(columns) {
   return picked.length ? picked : PDF_COLUMNS.filter((column) => column.key === 'name');
 }
 
+function selectedAnnotationColumns(columns) {
+  return columns?.annotations ? ['notes'] : [];
+}
+
 function widthsFor(columns) {
   const total = columns.reduce((sum, column) => sum + column.width, 0);
   const raw = columns.map((column) => (column.width / total) * 277);
@@ -171,6 +175,46 @@ function buildPdf(trip, passengers, columns, { dropped = 0 } = {}) {
       );
     },
   });
+
+  // Include annotations/notes if selected - position after the table
+  const annotationColumns = selectedAnnotationColumns(columns);
+  if (annotationColumns.includes('notes') && trip.notes) {
+    // Extract text from HTML notes - get plain text content
+    const notesHtml = trip.notes;
+    let notesText = notesHtml;
+    // Simple HTML tag removal for browser environment
+    if (notesHtml && typeof notesHtml === 'string') {
+      notesText = notesHtml
+        .replace(/<br\s*?>/gi, '\n')
+        .replace(/<[/]?([a-zA-Z]+)[^>]*>/g, '')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/&[a-z]+;/g, ' ')
+        .replace(/<[^>]+>/g, '')
+        .trim();
+    }
+    if (notesText.trim()) {
+      doc.setFontSize(8);
+      doc.setTextColor(30, 41, 59);
+      doc.setFont('helvetica', 'italic');
+      const startY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 5 : 210;
+      doc.text('Anotações:', 14, startY);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      // Split by sentences/newlines and add text
+      const textLines = notesText.replace(/\n/g, ' ').split('. ');
+      let currentY = startY + 4;
+      for (const line of textLines) {
+        if (currentY > doc.internal.pageSize.getHeight() - 10) {
+          doc.addPage();
+          currentY = 10;
+        }
+        if (line.trim()) {
+          doc.text(line + '. ', 14, currentY);
+          currentY += 5;
+        }
+      }
+    }
+  }
 
   return doc;
 }
