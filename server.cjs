@@ -128,6 +128,7 @@ function mapSeat(row) {
     ...row,
     is_paid: row.is_paid === 1 || row.is_paid === true,
     is_cancelled: row.is_cancelled === 1 || row.is_cancelled === true,
+    is_flagged: row.is_flagged === 1 || row.is_flagged === true,
   };
 }
 
@@ -139,7 +140,7 @@ const TRIP_COUNTS_SQL = `COUNT(CASE WHEN p.is_cancelled = 0 THEN p.id END) AS pa
              SUM(CASE WHEN p.is_paid = 1 AND p.is_cancelled = 0 THEN 1 ELSE 0 END) AS paid_count,
              SUM(CASE WHEN p.is_cancelled = 1 THEN 1 ELSE 0 END) AS dropped_count`;
 
-const SEAT_COLUMNS = `p.id, p.trip_id, p.person_id, p.is_paid, p.is_cancelled, p.created_at,
+const SEAT_COLUMNS = `p.id, p.trip_id, p.person_id, p.is_paid, p.is_cancelled, p.is_flagged, p.created_at,
              pe.name, pe.rg, pe.phone, pe.doc_type, pe.reference_point, pe.reference_point_back`;
 
 function asyncRoute(handler) {
@@ -298,6 +299,9 @@ async function setupDatabase() {
   }
   if (!columns.some((column) => column.name === 'is_cancelled')) {
     await run('ALTER TABLE passengers ADD COLUMN is_cancelled INTEGER NOT NULL DEFAULT 0');
+  }
+  if (!columns.some((column) => column.name === 'is_flagged')) {
+    await run('ALTER TABLE passengers ADD COLUMN is_flagged INTEGER NOT NULL DEFAULT 0');
   }
 
   const tripColumns = await all('PRAGMA table_info(trips)');
@@ -920,6 +924,15 @@ app.post('/api/trips/:tripId/passengers', asyncRoute(async (req, res) => {
 app.patch('/api/passengers/:id/payment', asyncRoute(async (req, res) => {
   const result = await run('UPDATE passengers SET is_paid = ? WHERE id = ?', [
     req.body?.is_paid ? 1 : 0,
+    req.params.id,
+  ]);
+  if (!result.changes) return res.status(404).json({ error: 'Lugar não encontrado.' });
+  res.json({ success: true });
+}));
+
+app.patch('/api/passengers/:id/flag', asyncRoute(async (req, res) => {
+  const result = await run('UPDATE passengers SET is_flagged = ? WHERE id = ?', [
+    req.body?.is_flagged ? 1 : 0,
     req.params.id,
   ]);
   if (!result.changes) return res.status(404).json({ error: 'Lugar não encontrado.' });

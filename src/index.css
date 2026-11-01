@@ -826,6 +826,21 @@ html[data-layout='desktop'] .nav-label--long {
   background: #F3E6CF;
 }
 
+/* Destaque manual (flag): persistente, marcado pelo usuário na própria linha.
+   Vem depois de is-highlighted para ganhar no empate com o destaque de navegação. */
+.grid-table tbody tr.is-flagged-row td,
+.grid-table tbody tr.is-flagged-row:hover td,
+.grid-table tbody tr:nth-child(even).is-flagged-row td {
+  background: #FDE68A;
+}
+
+.grid-table .flag-toggle {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #D97706;
+}
+
 .references-table {
   width: 100%;
   table-layout: auto;

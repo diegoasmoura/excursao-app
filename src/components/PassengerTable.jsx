@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { Pencil, UserCheck, UserMinus, UserX } from 'lucide-react';
+import { Pencil, Star, UserCheck, UserMinus, UserX } from 'lucide-react';
 import {
   createColumnHelper,
   createSortedRowModel,
@@ -22,7 +22,7 @@ const features = tableFeatures({
 });
 
 const helper = createColumnHelper();
-const ICON_COLUMNS = new Set(['whatsapp', 'edit', 'remove']);
+const ICON_COLUMNS = new Set(['whatsapp', 'flag', 'edit', 'remove']);
 
 function sortIndicator(column) {
   const sorted = column.getIsSorted();
@@ -40,6 +40,7 @@ export default function PassengerTable({
   orderSource,
   onTogglePaid,
   onToggleGoing,
+  onToggleFlag,
   onRemove,
   onEdit,
   highlightPersonId,
@@ -150,6 +151,24 @@ export default function PassengerTable({
             );
           },
         }),
+        helper.display({
+          id: 'flag',
+          header: () => <Star size={14} aria-hidden />,
+          enableSorting: false,
+          cell: (info) => {
+            const seat = info.row.original;
+            return (
+              <input
+                type="checkbox"
+                className="flag-toggle"
+                checked={Boolean(seat.is_flagged)}
+                title={`Destacar ${seat.name}`}
+                aria-label={`Destacar ${seat.name}`}
+                onChange={() => onToggleFlag(seat)}
+              />
+            );
+          },
+        }),
         helper.accessor((row) => (row.is_paid ? 'Pago' : 'Pendente'), {
           id: 'payment',
           header: 'Pagamento',
@@ -207,7 +226,7 @@ export default function PassengerTable({
           ),
         }),
       ]),
-    [order, shown, origin, destination, layout, onTogglePaid, onToggleGoing, onRemove, onEdit],
+    [order, shown, origin, destination, layout, onTogglePaid, onToggleGoing, onToggleFlag, onRemove, onEdit],
   );
 
   useEffect(() => {
@@ -262,6 +281,7 @@ export default function PassengerTable({
               const seat = row.original;
               const rowClass = [
                 seat.is_cancelled ? 'is-cancelled' : '',
+                seat.is_flagged ? 'is-flagged-row' : '',
                 seat.person_id === highlightPersonId ? 'is-highlighted' : '',
               ]
                 .filter(Boolean)

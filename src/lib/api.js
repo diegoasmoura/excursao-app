@@ -67,6 +67,11 @@ export const api = {
       method: 'PATCH',
       body: JSON.stringify({ is_cancelled: isCancelled }),
     }),
+  setPassengerFlagged: (id, isFlagged) =>
+    request(`/api/passengers/${id}/flag`, {
+      method: 'PATCH',
+      body: JSON.stringify({ is_flagged: isFlagged }),
+    }),
   deletePassenger: (id) => request(`/api/passengers/${id}`, { method: 'DELETE' }),
   getWhatsapp: () => request('/api/settings/whatsapp'),
   saveWhatsapp: (phone) =>

@@ -220,6 +220,16 @@ export default function TripDetails({
     );
   };
 
+  const toggleFlag = async (seat) => {
+    const next = !seat.is_flagged;
+    const { error } = await api.setPassengerFlagged(seat.id, next);
+    if (error) {
+      showFeedback('warning', error.message);
+      return;
+    }
+    setPassengers(passengers.map((item) => (item.id === seat.id ? { ...item, is_flagged: next } : item)));
+  };
+
   const removeSeat = async (seat) => {
     const ok = await confirm({
       title: 'Tirar desta viagem',
@@ -426,6 +436,7 @@ export default function TripDetails({
               highlightPersonId={highlightPersonId}
               onTogglePaid={togglePaid}
               onToggleGoing={toggleGoing}
+              onToggleFlag={toggleFlag}
               onRemove={removeSeat}
               onEdit={startEdit}
             />
