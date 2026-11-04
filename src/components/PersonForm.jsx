@@ -20,7 +20,7 @@ export const emptyPersonForm = {
   reference_point_back: '',
 };
 
-function ReferenceField({ label, field, listId, value, people, onChange }) {
+function ReferenceField({ label, field, listId, value, people, onChange, tone }) {
   const [typing, setTyping] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const suggestions = useMemo(
@@ -58,7 +58,7 @@ function ReferenceField({ label, field, listId, value, people, onChange }) {
   };
 
   return (
-    <div className="form-group person-form__reference">
+    <div className={`form-group person-form__reference ${tone ? `person-form__reference--${tone}` : ''}`}>
       <label className="form-label" htmlFor={listId}>{label}</label>
       <input
         id={listId}
@@ -244,6 +244,7 @@ export default function PersonForm({
       </div>
       <ReferenceField
         label="Ponto em Uberlândia → Pirapora"
+        tone="going"
         field="reference_point"
         listId="person-ref-going"
         value={value.reference_point}
@@ -252,6 +253,7 @@ export default function PersonForm({
       />
       <ReferenceField
         label="Ponto em Pirapora → Uberlândia"
+        tone="back"
         field="reference_point_back"
         listId="person-ref-back"
         value={value.reference_point_back}

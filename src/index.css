@@ -603,6 +603,46 @@ html[data-layout='desktop'] .nav-label--long {
   color: var(--color-place-other-text);
 }
 
+.grid-table th.route-going,
+.grid-table td.route-going,
+.grid-table tbody tr:nth-child(even) td.route-going,
+.grid-table tbody tr:hover td.route-going,
+.grid-table tbody tr.is-highlighted td.route-going,
+.grid-table tbody tr.is-highlighted:hover td.route-going,
+.grid-table th.is-sortable.route-going:hover {
+  background: var(--color-uberlandia-bg);
+  color: var(--color-uberlandia-text);
+}
+
+.grid-table th.route-back,
+.grid-table td.route-back,
+.grid-table tbody tr:nth-child(even) td.route-back,
+.grid-table tbody tr:hover td.route-back,
+.grid-table tbody tr.is-highlighted td.route-back,
+.grid-table tbody tr.is-highlighted:hover td.route-back,
+.grid-table th.is-sortable.route-back:hover {
+  background: var(--color-pirapora-bg);
+  color: var(--color-pirapora-text);
+}
+
+.person-form__reference--going,
+.person-form__reference--back {
+  border-left: 4px solid var(--color-uberlandia);
+  padding-left: 10px;
+}
+
+.person-form__reference--back {
+  border-left-color: var(--color-pirapora);
+}
+
+.person-form__reference--going .form-label {
+  color: var(--color-uberlandia-text);
+}
+
+.person-form__reference--back .form-label {
+  color: var(--color-pirapora-text);
+}
+
 .grid-table td.payment-cell {
   padding: 6px 10px;
 }

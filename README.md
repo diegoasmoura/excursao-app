@@ -43,7 +43,7 @@ docker compose ps
 
 Tem que aparecer **Up**. Conferir log: `docker compose logs --tail 20`.
 
-No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.7.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.7.2`, função nova `1.8.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
+No computador, na tela de Entrar e no menu, ao lado de Administração, aparece a versão (`V1.8.1`). No celular não aparece. O número fica em `package.json`. **Cada commit sobe essa versão** (correção `1.8.2`, função nova `1.9.0`, mudança grande `2.0.0`). Se mudou depois do update no NAS, o app novo entrou.
 
 Importar a lista de pessoas (360 cadastros, sem duplicar documento ou nome+telefone). Só entra na lista geral; não senta em viagem. Depois do build:
 
@@ -116,7 +116,7 @@ O texto é **formatado, tipo Word**. A barra de botões tem **Título**, **Negri
 
 Grava só no botão **Salvar anotações**; o selo ao lado do título diz **Gravado**, **Falta gravar** ou **Gravando…**. Sair com texto sem gravar pergunta antes.
 
-É só daquela viagem: não aparece nas outras, não vai no PDF e não mexe em pessoa nenhuma. Na lista de viagens, quem tem anotação ganha uma **barra âmbar** na borda da data, e passar o mouse mostra o começo do texto. Limite de 20000 caracteres.
+É só daquela viagem: não aparece nas outras e não mexe em pessoa nenhuma. No PDF entra só se **Anotações** estiver marcada em Colunas do PDF. Aí o texto vai depois da tabela, com título, negrito, itálico, sublinhado, listas, realce amarelo e as três cores. Na lista de viagens, quem tem anotação ganha uma **barra âmbar** na borda da data, e passar o mouse mostra o começo do texto. Limite de 20000 caracteres.
 
 Sem biblioteca de editor: é um `contentEditable` e tudo que entra passa por uma lista branca (`src/lib/richText.js`). O servidor recusa marcação perigosa como segunda barreira.
 
@@ -138,7 +138,7 @@ Campos:
 - Telefone
 - Tipo de documento: CPF, RG, Certidão ou Outro
 - Número (tipo e número separados)
-- Ponto de espera, um para cada itinerário. **Uberlândia → Pirapora** guarda o que já estava cadastrado. **Pirapora → Uberlândia** começa vazio. Na tabela: **UDI x Pira** e **Pira x UDI**, na mesma linha. No computador as duas dividem o espaço da antiga Ref. e a tabela continua cabendo na tela. No celular, rola para o lado, com largura mínima em cada ponto. Ao digitar, sugere até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**). Só tira espaços sobrando.
+- Ponto de espera, um para cada itinerário. **Uberlândia → Pirapora** guarda o que já estava cadastrado. **Pirapora → Uberlândia** começa vazio. Na tabela: **UDI x Pira** (azul) e **Pira x UDI** (bege), na mesma linha. A mesma cor aparece na coluna **Itinerário** de Referências, na **Ref.** da viagem e no rótulo do cadastro. No computador as duas dividem o espaço da antiga Ref. e a tabela continua cabendo na tela. No celular, rola para o lado, com largura mínima em cada ponto. Ao digitar, sugere até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**). Só tira espaços sobrando.
 
 Nova pessoa e Editar: **mesmo popup central**. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar). Na viagem o botão vira **Colocar nesta viagem**. Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 

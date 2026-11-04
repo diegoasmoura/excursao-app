@@ -239,10 +239,10 @@ export default function PeopleScreen({ onOpenTrip }) {
                 <SortableTh column="document" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   Número
                 </SortableTh>
-                <SortableTh column="reference" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
+                <SortableTh className="route-going" column="reference" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   UDI x Pira
                 </SortableTh>
-                <SortableTh column="referenceBack" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
+                <SortableTh className="route-back" column="referenceBack" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
                   Pira x UDI
                 </SortableTh>
                 <SortableTh column="past" sort={sort} onSort={(key) => setSort((current) => nextSort(current, key))}>
@@ -279,8 +279,8 @@ export default function PeopleScreen({ onOpenTrip }) {
                   <td>
                     <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                   </td>
-                  <td title={person.reference_point || undefined}>{person.reference_point || '—'}</td>
-                  <td title={person.reference_point_back || undefined}>{person.reference_point_back || '—'}</td>
+                  <td className="route-going" title={person.reference_point || undefined}>{person.reference_point || '—'}</td>
+                  <td className="route-back" title={person.reference_point_back || undefined}>{person.reference_point_back || '—'}</td>
                   <td className="people-table__count" onClick={(event) => event.stopPropagation()}>
                     {(person.trip_count ?? person.past_count) > 0 ? (
                       <button type="button" className="table-link" onClick={(event) => openHistory(person, event)}>

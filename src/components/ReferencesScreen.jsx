@@ -202,7 +202,7 @@ export default function ReferencesScreen() {
                     {paged.slice.map((item) => (
                       <tr key={item.key}>
                         <td className="name-cell" title={item.label}>{item.label}</td>
-                        <td>{item.side.short}</td>
+                        <td className={item.side.id === 'back' ? 'route-back' : 'route-going'}>{item.side.short}</td>
                         <td className="people-table__count">
                           <button type="button" className="table-link" onClick={() => setNames(item)}>
                             {item.count}

@@ -10,7 +10,7 @@ import {
 } from '@tanstack/react-table';
 import { useLayout } from '../context/LayoutContext';
 import { formatPassengerPhone } from '../lib/passengerDisplay';
-import { referenceForRoute } from '../lib/format';
+import { referenceForRoute, routeKey } from '../lib/format';
 import { passengerWhatsappUrl } from '../lib/tripPdf';
 import DocumentCell from './DocumentCell';
 import WhatsappIcon from './WhatsappIcon';
@@ -46,6 +46,7 @@ export default function PassengerTable({
   highlightPersonId,
 }) {
   const layout = useLayout();
+  const routeClass = routeKey(origin, destination) === 'pirapora-uberlandia' ? 'route-back' : 'route-going';
   // `order` guarda a posição real (para ordenar). `shown` numera só quem vai viajar.
   const { order, shown } = useMemo(() => {
     const source = orderSource ?? passengers;
@@ -256,6 +257,7 @@ export default function PassengerTable({
                       canSort ? 'is-sortable' : '',
                       ICON_COLUMNS.has(header.column.id) ? 'grid-table__icon' : '',
                       header.column.id === 'number' ? 'passengers-table__number' : '',
+                      header.column.id === 'reference' ? routeClass : '',
                     ]
                       .filter(Boolean)
                       .join(' ') || undefined}
@@ -302,7 +304,9 @@ export default function PassengerTable({
                                 ? 'passengers-table__number'
                                 : cell.column.id === 'name'
                                   ? 'name-cell'
-                                  : undefined
+                                  : cell.column.id === 'reference'
+                                    ? routeClass
+                                    : undefined
                       }
                     >
                       <table.FlexRender cell={cell} />

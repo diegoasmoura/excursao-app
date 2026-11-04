@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, Ban, RotateCcw, Save, StickyNote, Trash2, UserPlus } from 'lucide-react';
 import { useConfirm } from '../context/ConfirmContext';
 import { api } from '../lib/api';
-import { placeKey, referenceForRoute } from '../lib/format';
+import { placeKey, referenceForRoute, routeKey } from '../lib/format';
 import { formatPassengerPhone, inferDocType } from '../lib/passengerDisplay';
 import DocumentCell from './DocumentCell';
 import NotesEditor from './NotesEditor';
@@ -388,7 +388,7 @@ export default function TripDetails({
                     <th>Telefone</th>
                     <th>Tipo</th>
                     <th>Número</th>
-                    <th>Ref.</th>
+                    <th className={routeKey(current.origin, current.destination) === 'pirapora-uberlandia' ? 'route-back' : 'route-going'}>Ref.</th>
                     <th />
                   </tr>
                 </thead>
@@ -403,7 +403,7 @@ export default function TripDetails({
                       <td>
                         <DocumentCell rg={person.rg} docType={person.doc_type} part="number" />
                       </td>
-                      <td>{referenceForRoute(person, current.origin, current.destination) || '—'}</td>
+                      <td className={routeKey(current.origin, current.destination) === 'pirapora-uberlandia' ? 'route-back' : 'route-going'}>{referenceForRoute(person, current.origin, current.destination) || '—'}</td>
                       <td>
                         <button type="button" className="table-link" onClick={() => addExisting(person)}>
                           Colocar

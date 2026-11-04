@@ -14,7 +14,7 @@ Acesso: [https://excursao.questlyforms.com.br](https://excursao.questlyforms.com
 
 PWA: no iPhone, Compartilhar → Adicionar à Tela de Início. No Android, Instalar app (HTTPS do domínio público deixa instalar). No NAS o app sobe com Docker; os dados ficam em `data/database.sqlite` e não vão para o Git.
 
-Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.7.1` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
+Versão: o número em `package.json` sobe **em todo commit**. No computador a tela mostra `V1.8.1` (hoje). No celular não aparece. Correção = último número; função nova = do meio; mudança grande = o primeiro.
 
 O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (areia), Referências (azul-claro), detalhe (sálvia), Ajustes (lavanda).
 
@@ -52,7 +52,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 - Colar entra como **texto puro**: não vem formatação de fora.
 - Grava só no botão **Salvar anotações**. O selo ao lado do título diz **Gravado**, **Falta gravar** ou **Gravando…**.
 - Sair da viagem com texto sem gravar pergunta antes.
-- É só daquela viagem. Não aparece nas outras, não vai no PDF e não mexe em pessoa nenhuma.
+- É só daquela viagem. Não aparece nas outras e não mexe em pessoa nenhuma. No PDF entra só com **Anotações** marcado, depois da tabela, com título, negrito, itálico, sublinhado, listas, realce e as três cores.
 - Na lista de viagens, quem tem anotação ganha uma **barra âmbar** na borda da data. Passar o mouse mostra o começo do texto.
 - Limite de 20000 caracteres de HTML. Só entra o que a lista branca aceita (`src/lib/richText.js`); o servidor recusa o resto.
 
@@ -63,7 +63,7 @@ O quadro ao lado da barra muda de cor por tela: Viagens (azul-cinza), Pessoas (a
 - **Nome** e os dois pontos ficam como o pai escrever. Só tira espaços sobrando.
 - O ponto que já existia continua em **Uberlândia → Pirapora**. O outro começa vazio.
 - Ao digitar um ponto, até 8 textos já usados **naquele** itinerário (**Já usado — escolher para padronizar**).
-- Na lista: **UDI x Pira** e **Pira x UDI**, na mesma linha. No desktop a tabela cabe na tela. No celular, rola para o lado.
+- Na lista: **UDI x Pira** (azul) e **Pira x UDI** (bege), na mesma linha. A mesma cor vale na coluna **Itinerário** de Referências, na **Ref.** da viagem e no rótulo do cadastro. No desktop a tabela cabe na tela. No celular, rola para o lado.
 - Nova pessoa e Editar: popup no centro. Com 2 letras no nome, até 8 cadastros (**Já cadastrada — escolher para usar**, bloco âmbar).
 - Editar atualiza em **todas** as viagens. Excluir tira da lista e de todas as viagens.
 - **Viagens** (número) abre o histórico. **Última** abre a viagem e destaca a pessoa. Lugar marcado como **não vai** não conta aqui.
@@ -146,7 +146,7 @@ Cancelar, clique fora ou Esc fecha. O popup não passa da tela.
 - Excluir viagem ou tirar assento não apaga pessoa.
 - Cancelar viagem não apaga nada: só muda o estado e a aba. **Voltar** desfaz.
 - Marcar **não vai** não tira a pessoa da viagem nem apaga o cadastro.
-- Anotações são de cada viagem. Não aparecem em nenhuma outra tela nem no PDF.
+- Anotações são de cada viagem. Não aparecem em nenhuma outra tela. No PDF só entram se **Anotações** estiver marcado, e saem com a formatação da tela.
 - Nome repetido só **avisa**, com cor e selo. O app não junta nem apaga cadastros sozinho.
 - Não há preço. Ajustes só grava o WhatsApp da lista. O botão de cada passageiro usa o telefone do cadastro.
 - A tela não gera a semana.
